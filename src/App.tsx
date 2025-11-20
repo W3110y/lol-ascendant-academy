@@ -5,8 +5,14 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import Fundamentos from "./pages/Fundamentos";
+import PrimeraPartida from "./pages/fundamentos/PrimeraPartida";
+import ConceptosBasicos from "./pages/fundamentos/ConceptosBasicos";
 import Campeones from "./pages/Campeones";
+import ChampionDetail from "./pages/ChampionDetail";
 import Roles from "./pages/Roles";
+import Glosario from "./pages/Glosario";
+import Recursos from "./pages/Recursos";
+import Vision from "./pages/conceptos-intermedios/Vision";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -20,8 +26,14 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/fundamentos" element={<Fundamentos />} />
+          <Route path="/fundamentos/primera-partida" element={<PrimeraPartida />} />
+          <Route path="/fundamentos/conceptos-basicos" element={<ConceptosBasicos />} />
           <Route path="/campeones" element={<Campeones />} />
+          <Route path="/campeones/:id" element={<ChampionDetail />} />
           <Route path="/roles" element={<Roles />} />
+          <Route path="/glosario" element={<Glosario />} />
+          <Route path="/recursos" element={<Recursos />} />
+          <Route path="/conceptos-intermedios/vision" element={<Vision />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
