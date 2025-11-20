@@ -1,4 +1,5 @@
 import Navigation from "@/components/Navigation";
+import Breadcrumbs from "@/components/Breadcrumbs";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 
 const Roles = () => {
@@ -78,6 +79,7 @@ const Roles = () => {
   return (
     <div className="min-h-screen bg-background">
       <Navigation />
+      <Breadcrumbs />
       
       <main className="container mx-auto px-4 py-12">
         {/* Header */}

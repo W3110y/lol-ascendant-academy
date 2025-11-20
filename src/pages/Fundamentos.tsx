@@ -1,4 +1,6 @@
+import { Link } from "react-router-dom";
 import Navigation from "@/components/Navigation";
+import Breadcrumbs from "@/components/Breadcrumbs";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import mapImage from "@/assets/map-fundamentals.jpg";
 
@@ -26,9 +28,25 @@ const Fundamentos = () => {
     },
   ];
 
+  const modules = [
+    {
+      title: "Tu Primera Partida",
+      description: "Descarga, instalación y tu primer partido paso a paso",
+      icon: "🎮",
+      link: "/fundamentos/primera-partida",
+    },
+    {
+      title: "Conceptos Básicos",
+      description: "Súbditos, farmeo, oro, tienda, buffs y estructuras del mapa",
+      icon: "📖",
+      link: "/fundamentos/conceptos-basicos",
+    },
+  ];
+
   return (
     <div className="min-h-screen bg-background">
       <Navigation />
+      <Breadcrumbs />
       
       <main className="container mx-auto px-4 py-12">
         {/* Header */}
