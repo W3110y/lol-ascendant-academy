@@ -11,7 +11,7 @@ const Navigation = () => {
     { name: "Inicio", path: "/" },
     { name: "Fundamentos", path: "/fundamentos" },
     { name: "Campeones", path: "/campeones" },
-    { name: "Roles", path: "/roles" },
+    { name: "Conceptos", path: "/conceptos-intermedios" },
     { name: "Glosario", path: "/glosario" },
     { name: "Recursos", path: "/recursos" },
   ];

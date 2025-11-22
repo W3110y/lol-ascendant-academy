@@ -12,10 +12,12 @@ import ChampionDetail from "./pages/ChampionDetail";
 import Roles from "./pages/Roles";
 import Glosario from "./pages/Glosario";
 import Recursos from "./pages/Recursos";
+import ConceptosIntermedios from "./pages/ConceptosIntermedios";
 import Vision from "./pages/conceptos-intermedios/Vision";
 import ObjetivosNeutrales from "./pages/conceptos-intermedios/ObjetivosNeutrales";
 import FasesPartida from "./pages/conceptos-intermedios/FasesPartida";
 import Teamfights from "./pages/conceptos-intermedios/Teamfights";
+import QuizCampeones from "./pages/QuizCampeones";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -36,6 +38,8 @@ const App = () => (
           <Route path="/roles" element={<Roles />} />
           <Route path="/glosario" element={<Glosario />} />
           <Route path="/recursos" element={<Recursos />} />
+          <Route path="/quiz-campeones" element={<QuizCampeones />} />
+          <Route path="/conceptos-intermedios" element={<ConceptosIntermedios />} />
           <Route path="/conceptos-intermedios/vision" element={<Vision />} />
           <Route path="/conceptos-intermedios/objetivos-neutrales" element={<ObjetivosNeutrales />} />
           <Route path="/conceptos-intermedios/fases-partida" element={<FasesPartida />} />
