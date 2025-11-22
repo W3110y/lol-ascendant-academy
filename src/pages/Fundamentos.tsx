@@ -2,9 +2,28 @@ import { Link } from "react-router-dom";
 import Navigation from "@/components/Navigation";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 import mapImage from "@/assets/map-fundamentals.jpg";
+import { BookOpen, Gamepad2, Brain } from "lucide-react";
 
 const Fundamentos = () => {
+  const modules = [
+    {
+      title: "Tu Primera Partida",
+      description: "Descarga, instalación y tu primer partido paso a paso",
+      icon: Gamepad2,
+      link: "/fundamentos/primera-partida",
+      color: "text-blue-500",
+    },
+    {
+      title: "Conceptos Básicos",
+      description: "Súbditos, farmeo, oro, tienda, buffs y estructuras del mapa",
+      icon: BookOpen,
+      link: "/fundamentos/conceptos-basicos",
+      color: "text-purple-500",
+    },
+  ];
+
   const concepts = [
     {
       title: "Súbditos (Minions)",
@@ -28,20 +47,6 @@ const Fundamentos = () => {
     },
   ];
 
-  const modules = [
-    {
-      title: "Tu Primera Partida",
-      description: "Descarga, instalación y tu primer partido paso a paso",
-      icon: "🎮",
-      link: "/fundamentos/primera-partida",
-    },
-    {
-      title: "Conceptos Básicos",
-      description: "Súbditos, farmeo, oro, tienda, buffs y estructuras del mapa",
-      icon: "📖",
-      link: "/fundamentos/conceptos-basicos",
-    },
-  ];
 
   return (
     <div className="min-h-screen bg-background">
@@ -96,6 +101,31 @@ const Fundamentos = () => {
             </div>
           </CardContent>
         </Card>
+
+        {/* Learning Modules */}
+        <div className="mb-12">
+          <h2 className="text-3xl font-bold mb-8 text-center">Módulos de Aprendizaje</h2>
+          <div className="grid md:grid-cols-2 gap-6">
+            {modules.map((module, index) => (
+              <Link key={index} to={module.link}>
+                <Card className="border-accent/20 hover:border-accent/60 transition-all hover:shadow-lg h-full">
+                  <CardHeader>
+                    <div className="flex items-center gap-3 mb-3">
+                      <module.icon className={`w-10 h-10 ${module.color}`} />
+                      <CardTitle className="text-2xl">{module.title}</CardTitle>
+                    </div>
+                    <CardDescription className="text-base">{module.description}</CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <Button variant="outline" className="w-full">
+                      Comenzar Módulo →
+                    </Button>
+                  </CardContent>
+                </Card>
+              </Link>
+            ))}
+          </div>
+        </div>
 
         {/* Key Concepts */}
         <div>

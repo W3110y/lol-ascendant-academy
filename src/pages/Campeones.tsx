@@ -7,9 +7,27 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { championsData } from "@/data/champions";
-import { Search, Filter } from "lucide-react";
+import { Search } from "lucide-react";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 const Campeones = () => {
+  const [searchTerm, setSearchTerm] = useState("");
+  const [roleFilter, setRoleFilter] = useState("Todos");
+  const [difficultyFilter, setDifficultyFilter] = useState("Todos");
+
+  const filteredChampions = championsData.filter((champion) => {
+    const matchesSearch = champion.name.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesRole = roleFilter === "Todos" || champion.role.includes(roleFilter);
+    const matchesDifficulty = difficultyFilter === "Todos" || champion.difficulty === difficultyFilter;
+    return matchesSearch && matchesRole && matchesDifficulty;
+  });
+
   const beginnerChampions = [
     {
       role: "Top",
@@ -91,7 +109,88 @@ const Campeones = () => {
           </CardContent>
         </Card>
 
-        {/* Champions by Role */}
+        {/* Search and Filters */}
+        <Card className="mb-8 border-accent/20">
+          <CardHeader>
+            <CardTitle className="text-2xl">Buscar Campeones</CardTitle>
+            <CardDescription>Encuentra el campeón perfecto para ti</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="grid md:grid-cols-3 gap-4">
+              <div className="relative">
+                <Search className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+                <Input
+                  placeholder="Buscar por nombre..."
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  className="pl-10"
+                />
+              </div>
+              <Select value={roleFilter} onValueChange={setRoleFilter}>
+                <SelectTrigger>
+                  <SelectValue placeholder="Filtrar por rol" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="Todos">Todos los roles</SelectItem>
+                  <SelectItem value="Top">Top</SelectItem>
+                  <SelectItem value="Jungla">Jungla</SelectItem>
+                  <SelectItem value="Mid">Mid</SelectItem>
+                  <SelectItem value="ADC">ADC</SelectItem>
+                  <SelectItem value="Soporte">Soporte</SelectItem>
+                </SelectContent>
+              </Select>
+              <Select value={difficultyFilter} onValueChange={setDifficultyFilter}>
+                <SelectTrigger>
+                  <SelectValue placeholder="Filtrar por dificultad" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="Todos">Todas las dificultades</SelectItem>
+                  <SelectItem value="Fácil">Fácil</SelectItem>
+                  <SelectItem value="Medio">Medio</SelectItem>
+                  <SelectItem value="Difícil">Difícil</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* All Champions Grid */}
+        <div className="mb-12">
+          <h2 className="text-3xl font-bold mb-8 text-center">
+            Todos los Campeones ({filteredChampions.length})
+          </h2>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {filteredChampions.map((champion) => (
+              <Link key={champion.id} to={`/campeones/${champion.id}`}>
+                <Card className="border-accent/20 hover:border-accent/60 transition-all hover:shadow-lg h-full">
+                  <CardHeader>
+                    <div className="flex items-start justify-between mb-2">
+                      <CardTitle className="text-xl">{champion.name}</CardTitle>
+                      <Badge className={difficultyColor(champion.difficulty)}>
+                        {champion.difficulty}
+                      </Badge>
+                    </div>
+                    <CardDescription className="text-accent">
+                      {champion.role.join(", ")}
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-sm text-muted-foreground mb-3">{champion.description}</p>
+                  </CardContent>
+                </Card>
+              </Link>
+            ))}
+          </div>
+          {filteredChampions.length === 0 && (
+            <div className="text-center py-12">
+              <p className="text-muted-foreground text-lg">
+                No se encontraron campeones con los filtros seleccionados.
+              </p>
+            </div>
+          )}
+        </div>
+
+        {/* Beginner Champions Section */}
         <div>
           <h2 className="text-3xl font-bold mb-8 text-center">Campeones Recomendados para Principiantes</h2>
           <div className="space-y-6">
