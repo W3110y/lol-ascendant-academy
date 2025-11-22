@@ -13,6 +13,9 @@ import Roles from "./pages/Roles";
 import Glosario from "./pages/Glosario";
 import Recursos from "./pages/Recursos";
 import Vision from "./pages/conceptos-intermedios/Vision";
+import ObjetivosNeutrales from "./pages/conceptos-intermedios/ObjetivosNeutrales";
+import FasesPartida from "./pages/conceptos-intermedios/FasesPartida";
+import Teamfights from "./pages/conceptos-intermedios/Teamfights";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -34,6 +37,9 @@ const App = () => (
           <Route path="/glosario" element={<Glosario />} />
           <Route path="/recursos" element={<Recursos />} />
           <Route path="/conceptos-intermedios/vision" element={<Vision />} />
+          <Route path="/conceptos-intermedios/objetivos-neutrales" element={<ObjetivosNeutrales />} />
+          <Route path="/conceptos-intermedios/fases-partida" element={<FasesPartida />} />
+          <Route path="/conceptos-intermedios/teamfights" element={<Teamfights />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
