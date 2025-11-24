@@ -1,11 +1,12 @@
+import { Link } from "react-router-dom";
 import Navigation from "@/components/Navigation";
+import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Link } from "react-router-dom";
-import heroImage from "@/assets/hero-banner.jpg";
 import { BookOpen, Users, TrendingUp, Star, Award, Sparkles } from "lucide-react";
 import { championsData } from "@/data/champions";
+import heroBanner from "@/assets/hero-banner.jpg";
 
 const Index = () => {
   const modules = [
@@ -91,7 +92,7 @@ const Index = () => {
         <div 
           className="absolute inset-0 z-0"
           style={{
-            backgroundImage: `linear-gradient(to bottom, rgba(26, 31, 58, 0.85), rgba(26, 31, 58, 0.95)), url(${heroImage})`,
+            backgroundImage: `linear-gradient(to bottom, rgba(26, 31, 58, 0.85), rgba(26, 31, 58, 0.95)), url(${heroBanner})`,
             backgroundSize: 'cover',
             backgroundPosition: 'center',
           }}
@@ -320,6 +321,8 @@ const Index = () => {
           </CardContent>
         </Card>
       </section>
+
+      <Footer />
     </div>
   );
 };
