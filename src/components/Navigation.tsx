@@ -13,6 +13,7 @@ const Navigation = () => {
     { name: "Campeones", path: "/campeones" },
     { name: "Conceptos", path: "/conceptos-intermedios" },
     { name: "Glosario", path: "/glosario" },
+    { name: "Errores Comunes", path: "/errores-comunes" },
     { name: "Recursos", path: "/recursos" },
   ];
 
