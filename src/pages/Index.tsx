@@ -42,6 +42,46 @@ const Index = () => {
     { title: "Visión y Wards", link: "/conceptos-intermedios/vision", icon: TrendingUp, views: "1.2k" },
   ];
 
+  // Learning phases
+  const learningPhases = [
+    {
+      phase: "Fase 1",
+      title: "Primeros Pasos",
+      description: "Lo esencial para empezar",
+      icon: "🎮",
+      color: "border-lol-blue/30 hover:border-lol-blue bg-lol-blue/5",
+      modules: [
+        { title: "Conceptos Básicos", link: "/fundamentos/conceptos-basicos", icon: BookOpen },
+        { title: "Tu Primera Partida", link: "/fundamentos/primera-partida", icon: Star },
+        { title: "Encuentra tu Campeón", link: "/quiz-campeones", icon: Users },
+      ]
+    },
+    {
+      phase: "Fase 2",
+      title: "Conviértete en Invocador",
+      description: "Profundiza en el juego",
+      icon: "⚔️",
+      color: "border-lol-gold/30 hover:border-lol-gold bg-lol-gold/5",
+      modules: [
+        { title: "Todos los Campeones", link: "/campeones", icon: Users },
+        { title: "Entender los Roles", link: "/roles", icon: TrendingUp },
+        { title: "Glosario de Términos", link: "/glosario", icon: BookOpen },
+      ]
+    },
+    {
+      phase: "Fase 3",
+      title: "Domina la Grieta",
+      description: "Conceptos avanzados",
+      icon: "🏆",
+      color: "border-accent/30 hover:border-accent bg-accent/5",
+      modules: [
+        { title: "Visión y Control", link: "/conceptos-intermedios/vision", icon: TrendingUp },
+        { title: "Objetivos Neutrales", link: "/conceptos-intermedios/objetivos-neutrales", icon: Star },
+        { title: "Ver Todo", link: "/conceptos-intermedios", icon: Award },
+      ]
+    },
+  ];
+
   return (
     <div className="min-h-screen bg-background">
       <Navigation />
@@ -51,37 +91,83 @@ const Index = () => {
         <div 
           className="absolute inset-0 z-0"
           style={{
-            backgroundImage: `linear-gradient(to bottom, rgba(26, 31, 58, 0.8), rgba(26, 31, 58, 0.95)), url(${heroImage})`,
+            backgroundImage: `linear-gradient(to bottom, rgba(26, 31, 58, 0.85), rgba(26, 31, 58, 0.95)), url(${heroImage})`,
             backgroundSize: 'cover',
             backgroundPosition: 'center',
           }}
         />
-        <div className="relative z-10 container mx-auto px-4 py-24 md:py-32">
+        <div className="relative z-10 container mx-auto px-4 py-20 md:py-28">
           <div className="max-w-4xl mx-auto text-center">
-            <Badge className="mb-4 bg-accent/20 text-accent border-accent/40 text-lg px-4 py-2">
-              <Sparkles className="w-4 h-4 mr-2 inline" />
+            <Badge className="mb-6 bg-accent/20 text-accent border-accent/40 text-lg px-5 py-2 animate-fade-in">
+              <Sparkles className="w-5 h-5 mr-2 inline" />
               Tu Academia de la Grieta
             </Badge>
-            <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-gold bg-clip-text text-transparent">
+            <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-gold bg-clip-text text-transparent animate-fade-in" style={{ animationDelay: '0.1s' }}>
               ¿Eres nuevo en League of Legends?
             </h1>
-            <p className="text-xl md:text-2xl text-primary-foreground/90 mb-8 max-w-2xl mx-auto">
+            <p className="text-xl md:text-2xl text-primary-foreground/90 mb-4 max-w-2xl mx-auto animate-fade-in" style={{ animationDelay: '0.2s' }}>
               Empieza aquí. Guías paso a paso, campeones fáciles y todo lo que necesitas para dominar la Grieta del Invocador.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <p className="text-lg text-primary-foreground/70 mb-10 max-w-xl mx-auto animate-fade-in" style={{ animationDelay: '0.3s' }}>
+              Un camino de aprendizaje por fases diseñado para llevarte desde cero hasta convertirte en un invocador competente.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in" style={{ animationDelay: '0.4s' }}>
               <Link to="/fundamentos/primera-partida">
-                <Button size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground font-semibold text-lg px-8 shadow-lg">
+                <Button size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground font-semibold text-lg px-10 shadow-lg hover-scale">
                   <Award className="w-5 h-5 mr-2" />
-                  Empieza Aquí
+                  ¡Empieza tu Aventura Aquí!
                 </Button>
               </Link>
-              <Link to="/campeones">
-                <Button size="lg" variant="outline" className="border-accent/40 text-primary-foreground hover:bg-accent/10 font-semibold text-lg px-8">
-                  Ver Campeones
+              <Link to="/quiz-campeones">
+                <Button size="lg" variant="outline" className="border-accent/40 text-primary-foreground hover:bg-accent/10 font-semibold text-lg px-10">
+                  <Users className="w-5 h-5 mr-2" />
+                  Encuentra tu Estilo
                 </Button>
               </Link>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* Learning Phases Section */}
+      <section className="container mx-auto px-4 py-16">
+        <div className="text-center mb-12">
+          <h2 className="text-4xl font-bold mb-4 text-foreground">
+            Tu Camino de Aprendizaje
+          </h2>
+          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+            Sigue estas fases para convertirte en un maestro de la Grieta del Invocador
+          </p>
+        </div>
+
+        <div className="grid md:grid-cols-3 gap-8 max-w-7xl mx-auto">
+          {learningPhases.map((phase, index) => (
+            <Card key={index} className={`transition-all hover:shadow-xl hover:-translate-y-1 ${phase.color}`}>
+              <CardHeader>
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="text-5xl">{phase.icon}</div>
+                  <div>
+                    <Badge variant="outline" className="mb-2 border-accent/40">{phase.phase}</Badge>
+                    <CardTitle className="text-2xl">{phase.title}</CardTitle>
+                  </div>
+                </div>
+                <CardDescription className="text-base">
+                  {phase.description}
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-3">
+                {phase.modules.map((module, idx) => (
+                  <Link key={idx} to={module.link}>
+                    <Button variant="ghost" className="w-full justify-start text-left hover:bg-accent/10 group">
+                      <module.icon className="w-5 h-5 mr-3 text-accent group-hover:scale-110 transition-transform" />
+                      <span className="flex-1">{module.title}</span>
+                      <span className="opacity-0 group-hover:opacity-100 transition-opacity">→</span>
+                    </Button>
+                  </Link>
+                ))}
+              </CardContent>
+            </Card>
+          ))}
         </div>
       </section>
 
@@ -171,31 +257,31 @@ const Index = () => {
         </section>
       )}
 
-      {/* Modules Section */}
-      <section className="container mx-auto px-4 py-16">
-        <div className="text-center mb-12">
-          <h2 className="text-4xl font-bold mb-4 text-foreground">
-            ¿Qué quieres aprender hoy?
+      {/* Quick Access / Most Searched Section */}
+      <section className="container mx-auto px-4 py-12 bg-muted/30">
+        <div className="text-center mb-10">
+          <h2 className="text-3xl font-bold mb-3 text-foreground">
+            Lo Más Buscado por Principiantes
           </h2>
-          <p className="text-xl text-muted-foreground">
-            Explora nuestros módulos de aprendizaje diseñados para principiantes
+          <p className="text-lg text-muted-foreground">
+            Acceso rápido a las guías más útiles
           </p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
           {modules.map((module, index) => (
             <Link key={index} to={module.link}>
               <Card className={`h-full transition-all hover:shadow-xl hover:-translate-y-1 ${module.color}`}>
                 <CardHeader>
-                  <div className="text-6xl mb-4">{module.icon}</div>
-                  <CardTitle className="text-2xl">{module.title}</CardTitle>
-                  <CardDescription className="text-base">
+                  <div className="text-5xl mb-3">{module.icon}</div>
+                  <CardTitle className="text-xl">{module.title}</CardTitle>
+                  <CardDescription className="text-sm">
                     {module.description}
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <Button variant="ghost" className="w-full text-accent hover:text-accent/80">
-                    Explorar →
+                  <Button variant="ghost" className="w-full text-accent hover:text-accent/80 group">
+                    Explorar <span className="ml-2 group-hover:translate-x-1 transition-transform inline-block">→</span>
                   </Button>
                 </CardContent>
               </Card>
