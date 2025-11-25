@@ -5,7 +5,8 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { championsData } from "@/data/champions";
-import { Sword, Shield, Zap, Target, Book, Package, Lightbulb } from "lucide-react";
+import { Sword, Shield, Zap, Target, Book, Package, Lightbulb, Video } from "lucide-react";
+import { AspectRatio } from "@/components/ui/aspect-ratio";
 
 const ChampionDetail = () => {
   const { id } = useParams<{ id: string }>();
@@ -68,7 +69,7 @@ const ChampionDetail = () => {
 
         <div className="max-w-5xl mx-auto">
           <Tabs defaultValue="resumen" className="w-full">
-            <TabsList className="grid w-full grid-cols-4">
+            <TabsList className="grid w-full grid-cols-5">
               <TabsTrigger value="resumen">Resumen</TabsTrigger>
               <TabsTrigger value="habilidades">
                 <Book className="h-4 w-4 mr-2" />
@@ -82,6 +83,12 @@ const ChampionDetail = () => {
                 <Lightbulb className="h-4 w-4 mr-2" />
                 Consejos
               </TabsTrigger>
+              {champion.guideVideo && (
+                <TabsTrigger value="video">
+                  <Video className="h-4 w-4 mr-2" />
+                  Video Guía
+                </TabsTrigger>
+              )}
             </TabsList>
 
             {/* Resumen Tab */}
@@ -133,7 +140,17 @@ const ChampionDetail = () => {
                       <span className="px-2 py-1 rounded bg-accent/20 text-accent font-bold text-sm">PASIVA</span>
                       <h3 className="font-semibold text-lg">{champion.abilities.passive.name}</h3>
                     </div>
-                    <p className="text-muted-foreground">{champion.abilities.passive.description}</p>
+                    <p className="text-muted-foreground mb-3">{champion.abilities.passive.description}</p>
+                    {champion.abilities.passive.video && (
+                      <AspectRatio ratio={16 / 9}>
+                        <iframe
+                          src={champion.abilities.passive.video}
+                          className="w-full h-full rounded-lg"
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                          allowFullScreen
+                        />
+                      </AspectRatio>
+                    )}
                   </div>
                   
                   {(['q', 'w', 'e', 'r'] as const).map((key, index) => (
@@ -142,7 +159,17 @@ const ChampionDetail = () => {
                         <span className="px-2 py-1 rounded bg-lol-blue/20 text-lol-blue font-bold text-sm uppercase">{key}</span>
                         <h3 className="font-semibold text-lg">{champion.abilities[key].name}</h3>
                       </div>
-                      <p className="text-muted-foreground">{champion.abilities[key].description}</p>
+                      <p className="text-muted-foreground mb-3">{champion.abilities[key].description}</p>
+                      {champion.abilities[key].video && (
+                        <AspectRatio ratio={16 / 9}>
+                          <iframe
+                            src={champion.abilities[key].video}
+                            className="w-full h-full rounded-lg"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowFullScreen
+                          />
+                        </AspectRatio>
+                      )}
                     </div>
                   ))}
                 </CardContent>
@@ -209,6 +236,28 @@ const ChampionDetail = () => {
                 </CardContent>
               </Card>
             </TabsContent>
+
+            {/* Video Guide Tab */}
+            {champion.guideVideo && (
+              <TabsContent value="video" className="space-y-6 mt-6">
+                <Card className="border-lol-blue/30">
+                  <CardHeader>
+                    <CardTitle>Video Guía Completa</CardTitle>
+                    <CardDescription>Aprende a jugar {champion.name} con este video tutorial</CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <AspectRatio ratio={16 / 9}>
+                      <iframe
+                        src={champion.guideVideo}
+                        className="w-full h-full rounded-lg"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                      />
+                    </AspectRatio>
+                  </CardContent>
+                </Card>
+              </TabsContent>
+            )}
           </Tabs>
         </div>
       </section>

@@ -7,11 +7,11 @@ export interface Champion {
   damageType: 'AD' | 'AP' | 'Tanque' | 'Híbrido';
   description: string;
   abilities: {
-    passive: { name: string; description: string };
-    q: { name: string; description: string };
-    w: { name: string; description: string };
-    e: { name: string; description: string };
-    r: { name: string; description: string };
+    passive: { name: string; description: string; video?: string };
+    q: { name: string; description: string; video?: string };
+    w: { name: string; description: string; video?: string };
+    e: { name: string; description: string; video?: string };
+    r: { name: string; description: string; video?: string };
   };
   build: string[];
   runes: {
@@ -19,6 +19,7 @@ export interface Champion {
     secondary: string;
   };
   tips: string[];
+  guideVideo?: string;
 }
 
 export const championsData: Champion[] = [

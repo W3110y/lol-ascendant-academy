@@ -14,6 +14,8 @@ import Glosario from "./pages/Glosario";
 import Recursos from "./pages/Recursos";
 import ConceptosIntermedios from "./pages/ConceptosIntermedios";
 import ErroresComunes from "./pages/ErroresComunes";
+import Simulador from "./pages/Simulador";
+import MapaWards from "./pages/MapaWards";
 import Vision from "./pages/conceptos-intermedios/Vision";
 import ObjetivosNeutrales from "./pages/conceptos-intermedios/ObjetivosNeutrales";
 import FasesPartida from "./pages/conceptos-intermedios/FasesPartida";
@@ -46,6 +48,8 @@ const App = () => (
           <Route path="/conceptos-intermedios/fases-partida" element={<FasesPartida />} />
           <Route path="/conceptos-intermedios/teamfights" element={<Teamfights />} />
           <Route path="/errores-comunes" element={<ErroresComunes />} />
+          <Route path="/herramientas/simulador" element={<Simulador />} />
+          <Route path="/herramientas/ward-map" element={<MapaWards />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

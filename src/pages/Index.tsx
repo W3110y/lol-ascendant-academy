@@ -87,16 +87,32 @@ const Index = () => {
     <div className="min-h-screen bg-background">
       <Navigation />
       
-      {/* Hero Section */}
+      {/* Hero Section with Optional Video Background */}
       <section className="relative overflow-hidden">
-        <div 
-          className="absolute inset-0 z-0"
-          style={{
-            backgroundImage: `linear-gradient(to bottom, rgba(26, 31, 58, 0.85), rgba(26, 31, 58, 0.95)), url(${heroBanner})`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-          }}
-        />
+        {/* Background - supports video or image */}
+        {false ? ( // Set to true and add video URL to enable video background
+          <>
+            <video
+              autoPlay
+              loop
+              muted
+              playsInline
+              className="absolute inset-0 z-0 w-full h-full object-cover"
+            >
+              <source src="YOUR_VIDEO_URL_HERE.mp4" type="video/mp4" />
+            </video>
+            <div className="absolute inset-0 z-0 bg-gradient-to-b from-background/70 via-background/85 to-background" />
+          </>
+        ) : (
+          <div 
+            className="absolute inset-0 z-0"
+            style={{
+              backgroundImage: `linear-gradient(to bottom, rgba(26, 31, 58, 0.85), rgba(26, 31, 58, 0.95)), url(${heroBanner})`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+            }}
+          />
+        )}
         <div className="relative z-10 container mx-auto px-4 py-20 md:py-28">
           <div className="max-w-4xl mx-auto text-center">
             <Badge className="mb-6 bg-accent/20 text-accent border-accent/40 text-lg px-5 py-2 animate-fade-in">
