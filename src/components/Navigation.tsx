@@ -12,6 +12,7 @@ const Navigation = () => {
     { name: "Fundamentos", path: "/fundamentos" },
     { name: "Campeones", path: "/campeones" },
     { name: "Conceptos", path: "/conceptos-intermedios" },
+    { name: "Herramientas", path: "/herramientas/simulador" },
     { name: "Glosario", path: "/glosario" },
     { name: "Errores Comunes", path: "/errores-comunes" },
     { name: "Recursos", path: "/recursos" },

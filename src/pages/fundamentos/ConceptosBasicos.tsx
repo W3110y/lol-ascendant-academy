@@ -1,5 +1,7 @@
 import Navigation from "@/components/Navigation";
 import Breadcrumbs from "@/components/Breadcrumbs";
+import Footer from "@/components/Footer";
+import InteractiveMap from "@/components/InteractiveMap";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Coins, Crosshair, Castle, Flame } from "lucide-react";
 
@@ -24,6 +26,10 @@ const ConceptosBasicos = () => {
       {/* Content */}
       <section className="container mx-auto px-4 py-12">
         <div className="max-w-5xl mx-auto space-y-8">
+          
+          {/* Interactive Map */}
+          <InteractiveMap />
+
           {/* Minions and Farming */}
           <Card className="border-lol-gold/30">
             <CardHeader>
@@ -232,6 +238,8 @@ const ConceptosBasicos = () => {
           </Card>
         </div>
       </section>
+
+      <Footer />
     </div>
   );
 };
