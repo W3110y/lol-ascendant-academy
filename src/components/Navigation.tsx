@@ -13,9 +13,9 @@ const Navigation = () => {
     { name: "Campeones", path: "/campeones" },
     { name: "Conceptos", path: "/conceptos-intermedios" },
     { name: "Herramientas", path: "/herramientas/simulador" },
+    { name: "Blog", path: "/blog" },
+    { name: "Parches", path: "/parches" },
     { name: "Glosario", path: "/glosario" },
-    { name: "Errores Comunes", path: "/errores-comunes" },
-    { name: "Recursos", path: "/recursos" },
   ];
 
   const isActive = (path: string) => location.pathname === path;

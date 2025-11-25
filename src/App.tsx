@@ -22,6 +22,11 @@ import FasesPartida from "./pages/conceptos-intermedios/FasesPartida";
 import Teamfights from "./pages/conceptos-intermedios/Teamfights";
 import QuizCampeones from "./pages/QuizCampeones";
 import NotFound from "./pages/NotFound";
+import BuildCalculator from "./pages/BuildCalculator";
+import ChampionComparison from "./pages/ChampionComparison";
+import Blog from "./pages/Blog";
+import BlogPost from "./pages/BlogPost";
+import Parches from "./pages/Parches";
 
 const queryClient = new QueryClient();
 
@@ -50,6 +55,11 @@ const App = () => (
           <Route path="/errores-comunes" element={<ErroresComunes />} />
           <Route path="/herramientas/simulador" element={<Simulador />} />
           <Route path="/herramientas/ward-map" element={<MapaWards />} />
+          <Route path="/herramientas/build-calculator" element={<BuildCalculator />} />
+          <Route path="/herramientas/comparar-campeones" element={<ChampionComparison />} />
+          <Route path="/blog" element={<Blog />} />
+          <Route path="/blog/:slug" element={<BlogPost />} />
+          <Route path="/parches" element={<Parches />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
