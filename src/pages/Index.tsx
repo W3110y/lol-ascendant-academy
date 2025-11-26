@@ -4,9 +4,10 @@ import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { BookOpen, Users, TrendingUp, Star, Award, Sparkles } from "lucide-react";
+import { BookOpen, Users, TrendingUp, Star, Award } from "lucide-react";
 import { championsData } from "@/data/champions";
-import heroBanner from "@/assets/hero-banner.jpg";
+import { HeroCarousel } from "@/components/HeroCarousel";
+import { FreeRotation } from "@/components/FreeRotation";
 
 const Index = () => {
   const modules = [
@@ -87,64 +88,8 @@ const Index = () => {
     <div className="min-h-screen bg-background">
       <Navigation />
       
-      {/* Hero Section with Optional Video Background */}
-      <section className="relative overflow-hidden">
-        {/* Background - supports video or image */}
-        {false ? ( // Set to true and add video URL to enable video background
-          <>
-            <video
-              autoPlay
-              loop
-              muted
-              playsInline
-              className="absolute inset-0 z-0 w-full h-full object-cover"
-            >
-              <source src="YOUR_VIDEO_URL_HERE.mp4" type="video/mp4" />
-            </video>
-            <div className="absolute inset-0 z-0 bg-gradient-to-b from-background/70 via-background/85 to-background" />
-          </>
-        ) : (
-          <div 
-            className="absolute inset-0 z-0"
-            style={{
-              backgroundImage: `linear-gradient(to bottom, rgba(26, 31, 58, 0.85), rgba(26, 31, 58, 0.95)), url(${heroBanner})`,
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
-            }}
-          />
-        )}
-        <div className="relative z-10 container mx-auto px-4 py-20 md:py-28">
-          <div className="max-w-4xl mx-auto text-center">
-            <Badge className="mb-6 bg-accent/20 text-accent border-accent/40 text-lg px-5 py-2 animate-fade-in">
-              <Sparkles className="w-5 h-5 mr-2 inline" />
-              Tu Academia de la Grieta
-            </Badge>
-            <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-gold bg-clip-text text-transparent animate-fade-in" style={{ animationDelay: '0.1s' }}>
-              ¿Eres nuevo en League of Legends?
-            </h1>
-            <p className="text-xl md:text-2xl text-primary-foreground/90 mb-4 max-w-2xl mx-auto animate-fade-in" style={{ animationDelay: '0.2s' }}>
-              Empieza aquí. Guías paso a paso, campeones fáciles y todo lo que necesitas para dominar la Grieta del Invocador.
-            </p>
-            <p className="text-lg text-primary-foreground/70 mb-10 max-w-xl mx-auto animate-fade-in" style={{ animationDelay: '0.3s' }}>
-              Un camino de aprendizaje por fases diseñado para llevarte desde cero hasta convertirte en un invocador competente.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in" style={{ animationDelay: '0.4s' }}>
-              <Link to="/fundamentos/primera-partida">
-                <Button size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground font-semibold text-lg px-10 shadow-lg hover-scale">
-                  <Award className="w-5 h-5 mr-2" />
-                  ¡Empieza tu Aventura Aquí!
-                </Button>
-              </Link>
-              <Link to="/quiz-campeones">
-                <Button size="lg" variant="outline" className="border-accent/40 text-primary-foreground hover:bg-accent/10 font-semibold text-lg px-10">
-                  <Users className="w-5 h-5 mr-2" />
-                  Encuentra tu Estilo
-                </Button>
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* Hero Carousel */}
+      <HeroCarousel />
 
       {/* Learning Phases Section */}
       <section className="container mx-auto px-4 py-16">
@@ -223,6 +168,9 @@ const Index = () => {
         </Card>
       </section>
 
+      {/* Free Rotation */}
+      <FreeRotation />
+
       {/* Champion of the Week */}
       {championOfWeek && (
         <section className="container mx-auto px-4 py-12">
@@ -256,7 +204,7 @@ const Index = () => {
                       <li>✓ Ideal para aprender los fundamentos del juego</li>
                     </ul>
                   </div>
-                  <Link to={`/campeones/${championOfWeek.name.toLowerCase()}`}>
+                  <Link to={`/campeones/${championOfWeek.id}`}>
                     <Button className="w-full bg-accent hover:bg-accent/90 text-accent-foreground">
                       Ver Guía Completa →
                     </Button>
