@@ -1,6 +1,9 @@
 import Navigation from "@/components/Navigation";
 import Breadcrumbs from "@/components/Breadcrumbs";
+import Footer from "@/components/Footer";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { AspectRatio } from "@/components/ui/aspect-ratio";
+import { Video } from "lucide-react";
 
 const Roles = () => {
   const roles = [
@@ -17,6 +20,7 @@ const Roles = () => {
       ],
       championTypes: "Tanques, Luchadores, Dividepuentes",
       tips: "Aprende a gestionar las oleadas de súbditos y a cuándo teleportarte para ayudar al equipo",
+      video: "https://www.youtube.com/embed/WQg4fFQ7OlM",
     },
     {
       name: "Jungla",
@@ -31,6 +35,7 @@ const Roles = () => {
       ],
       championTypes: "Asesinos, Tanques, Controladores",
       tips: "La jungla es el rol más complejo para principiantes. Aprende las rutas de farmeo básicas primero",
+      video: "https://www.youtube.com/embed/Vw0pYBJxQCU",
     },
     {
       name: "Mid Laner",
@@ -45,6 +50,7 @@ const Roles = () => {
       ],
       championTypes: "Magos, Asesinos, Controladores",
       tips: "La posición central te permite influir en todo el mapa. Usa esta ventaja para ayudar a tus compañeros",
+      video: "https://www.youtube.com/embed/B-z2SQWyxAY",
     },
     {
       name: "ADC (Tirador)",
@@ -59,6 +65,7 @@ const Roles = () => {
       ],
       championTypes: "Tiradores (Marksmen)",
       tips: "Eres frágil pero poderoso. Aprende a posicionarte detrás de tu equipo y a farmear eficientemente",
+      video: "https://www.youtube.com/embed/yiWLw0vTCfU",
     },
     {
       name: "Soporte",
@@ -73,6 +80,7 @@ const Roles = () => {
       ],
       championTypes: "Encantadores, Tanques, Magos",
       tips: "No necesitas farmear súbditos. Tu oro viene de los objetos de soporte y ayudar al equipo",
+      video: "https://www.youtube.com/embed/mvfFjccfXkI",
     },
   ];
 
@@ -140,6 +148,23 @@ const Roles = () => {
                     
                     <h3 className="text-lg font-semibold mb-3 text-accent">Consejo Principal</h3>
                     <p className="text-muted-foreground italic">{role.tips}</p>
+                    
+                    {role.video && (
+                      <div className="mt-4">
+                        <h3 className="text-lg font-semibold mb-3 text-accent flex items-center gap-2">
+                          <Video className="w-5 h-5" />
+                          Video Guía del Rol
+                        </h3>
+                        <AspectRatio ratio={16 / 9}>
+                          <iframe
+                            src={role.video}
+                            className="w-full h-full rounded-lg border border-accent/20"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowFullScreen
+                          />
+                        </AspectRatio>
+                      </div>
+                    )}
                   </div>
                 </div>
               </CardContent>
@@ -163,6 +188,8 @@ const Roles = () => {
           </CardContent>
         </Card>
       </main>
+
+      <Footer />
     </div>
   );
 };

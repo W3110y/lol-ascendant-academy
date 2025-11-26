@@ -27,6 +27,7 @@ import ChampionComparison from "./pages/ChampionComparison";
 import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
 import Parches from "./pages/Parches";
+import RutasJungla from "./pages/RutasJungla";
 
 const queryClient = new QueryClient();
 
@@ -57,6 +58,7 @@ const App = () => (
           <Route path="/herramientas/ward-map" element={<MapaWards />} />
           <Route path="/herramientas/build-calculator" element={<BuildCalculator />} />
           <Route path="/herramientas/comparar-campeones" element={<ChampionComparison />} />
+          <Route path="/herramientas/rutas-jungla" element={<RutasJungla />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/blog/:slug" element={<BlogPost />} />
           <Route path="/parches" element={<Parches />} />
