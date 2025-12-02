@@ -6,7 +6,9 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { BookOpen, Users, TrendingUp, Star, Award } from "lucide-react";
 import { championsData } from "@/data/champions";
-import { HeroCarousel } from "@/components/HeroCarousel";
+import { HeroSection } from "@/components/HeroSection";
+import { StatsSection } from "@/components/StatsSection";
+import { PartnersSection } from "@/components/PartnersSection";
 import { FreeRotation } from "@/components/FreeRotation";
 
 const Index = () => {
@@ -88,8 +90,14 @@ const Index = () => {
     <div className="min-h-screen bg-background">
       <Navigation />
       
-      {/* Hero Carousel */}
-      <HeroCarousel />
+      {/* Hero Section */}
+      <HeroSection />
+      
+      {/* Partners Section */}
+      <PartnersSection />
+      
+      {/* Stats Section */}
+      <StatsSection />
 
       {/* Learning Phases Section */}
       <section className="container mx-auto px-4 py-16">
