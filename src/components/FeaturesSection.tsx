@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
-import { BookOpen, Users, TrendingUp, Star, Award, Gamepad2, Target, Shield, Swords } from "lucide-react";
+import { BookOpen, TrendingUp, Star, Award, Gamepad2, Target, Shield, Swords } from "lucide-react";
+import { ScrollAnimation } from "@/hooks/useScrollAnimation";
 
 interface Feature {
   icon: React.ReactNode;
@@ -59,7 +60,7 @@ export const FeaturesSection = () => {
     <section className="py-20 bg-muted/30">
       <div className="container mx-auto px-4">
         {/* Header */}
-        <div className="text-center mb-16">
+        <ScrollAnimation animation="fade-up" className="text-center mb-16">
           <div className="inline-flex items-center gap-2 bg-accent/10 border border-accent/20 rounded-full px-4 py-2 mb-6">
             <Star className="w-4 h-4 text-accent" />
             <span className="text-sm font-medium text-accent">Todo lo que necesitas</span>
@@ -70,43 +71,45 @@ export const FeaturesSection = () => {
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
             Recursos diseñados específicamente para que cualquier principiante pueda mejorar rápidamente
           </p>
-        </div>
+        </ScrollAnimation>
 
         {/* Features Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
           {features.map((feature, index) => (
-            <Link key={index} to={feature.link} className="group">
-              <div className={`relative h-full p-8 rounded-2xl border border-border/50 bg-card hover:border-accent/50 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 overflow-hidden`}>
-                {/* Gradient background */}
-                <div className={`absolute inset-0 bg-gradient-to-br ${feature.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
-                
-                <div className="relative z-10">
-                  {/* Icon */}
-                  <div className="inline-flex items-center justify-center w-14 h-14 rounded-xl bg-accent/10 text-accent mb-6 group-hover:scale-110 group-hover:bg-accent group-hover:text-accent-foreground transition-all duration-300">
-                    {feature.icon}
-                  </div>
+            <ScrollAnimation key={index} animation="fade-up" delay={index * 100}>
+              <Link to={feature.link} className="group block h-full">
+                <div className={`relative h-full p-8 rounded-2xl border border-border/50 bg-card hover:border-accent/50 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 overflow-hidden`}>
+                  {/* Gradient background */}
+                  <div className={`absolute inset-0 bg-gradient-to-br ${feature.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
+                  
+                  <div className="relative z-10">
+                    {/* Icon */}
+                    <div className="inline-flex items-center justify-center w-14 h-14 rounded-xl bg-accent/10 text-accent mb-6 group-hover:scale-110 group-hover:bg-accent group-hover:text-accent-foreground transition-all duration-300">
+                      {feature.icon}
+                    </div>
 
-                  {/* Content */}
-                  <h3 className="text-xl font-bold text-foreground mb-3 group-hover:text-accent transition-colors">
-                    {feature.title}
-                  </h3>
-                  <p className="text-muted-foreground leading-relaxed">
-                    {feature.description}
-                  </p>
+                    {/* Content */}
+                    <h3 className="text-xl font-bold text-foreground mb-3 group-hover:text-accent transition-colors">
+                      {feature.title}
+                    </h3>
+                    <p className="text-muted-foreground leading-relaxed">
+                      {feature.description}
+                    </p>
 
-                  {/* Arrow */}
-                  <div className="mt-6 flex items-center text-accent font-medium opacity-0 group-hover:opacity-100 translate-x-[-10px] group-hover:translate-x-0 transition-all duration-300">
-                    <span>Explorar</span>
-                    <span className="ml-2">→</span>
+                    {/* Arrow */}
+                    <div className="mt-6 flex items-center text-accent font-medium opacity-0 group-hover:opacity-100 translate-x-[-10px] group-hover:translate-x-0 transition-all duration-300">
+                      <span>Explorar</span>
+                      <span className="ml-2">→</span>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </Link>
+              </Link>
+            </ScrollAnimation>
           ))}
         </div>
 
         {/* Bottom CTA */}
-        <div className="text-center mt-12">
+        <ScrollAnimation animation="fade-up" delay={600} className="text-center mt-12">
           <Link 
             to="/fundamentos"
             className="inline-flex items-center gap-2 text-accent hover:text-accent/80 font-semibold transition-colors"
@@ -114,7 +117,7 @@ export const FeaturesSection = () => {
             <span>Ver todas las guías</span>
             <Award className="w-5 h-5" />
           </Link>
-        </div>
+        </ScrollAnimation>
       </div>
     </section>
   );

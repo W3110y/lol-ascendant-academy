@@ -1,4 +1,5 @@
 import { Gamepad2, Video, MessageCircle, Trophy, Globe, Zap } from "lucide-react";
+import { ScrollAnimation } from "@/hooks/useScrollAnimation";
 
 interface Partner {
   name: string;
@@ -18,23 +19,26 @@ export const PartnersSection = () => {
   return (
     <section className="py-12 border-y border-border/50 bg-background">
       <div className="container mx-auto px-4">
-        <p className="text-center text-sm text-muted-foreground mb-8 uppercase tracking-wider font-medium">
-          Información basada en recursos oficiales de
-        </p>
+        <ScrollAnimation animation="fade">
+          <p className="text-center text-sm text-muted-foreground mb-8 uppercase tracking-wider font-medium">
+            Información basada en recursos oficiales de
+          </p>
+        </ScrollAnimation>
         
         <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12">
           {partners.map((partner, index) => (
-            <div 
-              key={index}
-              className="flex items-center gap-3 text-muted-foreground/60 hover:text-accent transition-colors cursor-default group"
-            >
-              <div className="group-hover:scale-110 transition-transform">
-                {partner.icon}
+            <ScrollAnimation key={index} animation="scale" delay={index * 100}>
+              <div 
+                className="flex items-center gap-3 text-muted-foreground/60 hover:text-accent transition-colors cursor-default group"
+              >
+                <div className="group-hover:scale-110 transition-transform">
+                  {partner.icon}
+                </div>
+                <span className="font-semibold text-lg hidden sm:inline">
+                  {partner.name}
+                </span>
               </div>
-              <span className="font-semibold text-lg hidden sm:inline">
-                {partner.name}
-              </span>
-            </div>
+            </ScrollAnimation>
           ))}
         </div>
       </div>
