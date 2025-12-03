@@ -4,12 +4,14 @@ import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { BookOpen, Users, TrendingUp, Star, Award } from "lucide-react";
+import { BookOpen, Users, TrendingUp, Star } from "lucide-react";
 import { championsData } from "@/data/champions";
 import { HeroSection } from "@/components/HeroSection";
 import { StatsSection } from "@/components/StatsSection";
 import { PartnersSection } from "@/components/PartnersSection";
 import { FreeRotation } from "@/components/FreeRotation";
+import { FeaturesSection } from "@/components/FeaturesSection";
+import { CTASection } from "@/components/CTASection";
 
 const Index = () => {
   const modules = [
@@ -46,46 +48,6 @@ const Index = () => {
     { title: "Visión y Wards", link: "/conceptos-intermedios/vision", icon: TrendingUp, views: "1.2k" },
   ];
 
-  // Learning phases
-  const learningPhases = [
-    {
-      phase: "Fase 1",
-      title: "Primeros Pasos",
-      description: "Lo esencial para empezar",
-      icon: "🎮",
-      color: "border-lol-blue/30 hover:border-lol-blue bg-lol-blue/5",
-      modules: [
-        { title: "Conceptos Básicos", link: "/fundamentos/conceptos-basicos", icon: BookOpen },
-        { title: "Tu Primera Partida", link: "/fundamentos/primera-partida", icon: Star },
-        { title: "Encuentra tu Campeón", link: "/quiz-campeones", icon: Users },
-      ]
-    },
-    {
-      phase: "Fase 2",
-      title: "Conviértete en Invocador",
-      description: "Profundiza en el juego",
-      icon: "⚔️",
-      color: "border-lol-gold/30 hover:border-lol-gold bg-lol-gold/5",
-      modules: [
-        { title: "Todos los Campeones", link: "/campeones", icon: Users },
-        { title: "Entender los Roles", link: "/roles", icon: TrendingUp },
-        { title: "Glosario de Términos", link: "/glosario", icon: BookOpen },
-      ]
-    },
-    {
-      phase: "Fase 3",
-      title: "Domina la Grieta",
-      description: "Conceptos avanzados",
-      icon: "🏆",
-      color: "border-accent/30 hover:border-accent bg-accent/5",
-      modules: [
-        { title: "Visión y Control", link: "/conceptos-intermedios/vision", icon: TrendingUp },
-        { title: "Objetivos Neutrales", link: "/conceptos-intermedios/objetivos-neutrales", icon: Star },
-        { title: "Ver Todo", link: "/conceptos-intermedios", icon: Award },
-      ]
-    },
-  ];
-
   return (
     <div className="min-h-screen bg-background">
       <Navigation />
@@ -99,47 +61,8 @@ const Index = () => {
       {/* Stats Section */}
       <StatsSection />
 
-      {/* Learning Phases Section */}
-      <section className="container mx-auto px-4 py-16">
-        <div className="text-center mb-12">
-          <h2 className="text-4xl font-bold mb-4 text-foreground">
-            Tu Camino de Aprendizaje
-          </h2>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Sigue estas fases para convertirte en un maestro de la Grieta del Invocador
-          </p>
-        </div>
-
-        <div className="grid md:grid-cols-3 gap-8 max-w-7xl mx-auto">
-          {learningPhases.map((phase, index) => (
-            <Card key={index} className={`transition-all hover:shadow-xl hover:-translate-y-1 ${phase.color}`}>
-              <CardHeader>
-                <div className="flex items-center gap-3 mb-3">
-                  <div className="text-5xl">{phase.icon}</div>
-                  <div>
-                    <Badge variant="outline" className="mb-2 border-accent/40">{phase.phase}</Badge>
-                    <CardTitle className="text-2xl">{phase.title}</CardTitle>
-                  </div>
-                </div>
-                <CardDescription className="text-base">
-                  {phase.description}
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-3">
-                {phase.modules.map((module, idx) => (
-                  <Link key={idx} to={module.link}>
-                    <Button variant="ghost" className="w-full justify-start text-left hover:bg-accent/10 group">
-                      <module.icon className="w-5 h-5 mr-3 text-accent group-hover:scale-110 transition-transform" />
-                      <span className="flex-1">{module.title}</span>
-                      <span className="opacity-0 group-hover:opacity-100 transition-opacity">→</span>
-                    </Button>
-                  </Link>
-                ))}
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-      </section>
+      {/* Features Section */}
+      <FeaturesSection />
 
       {/* Popular Guides Section */}
       <section className="container mx-auto px-4 py-12 -mt-8">
@@ -264,35 +187,7 @@ const Index = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="container mx-auto px-4 py-16">
-        <Card className="bg-gradient-hero text-primary-foreground border-0 max-w-4xl mx-auto">
-          <CardHeader className="text-center">
-            <CardTitle className="text-3xl md:text-4xl mb-4">
-              🎮 Empieza tu Viaje como Invocador
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="text-center">
-            <p className="text-lg text-primary-foreground/90 mb-6 max-w-2xl mx-auto">
-              No importa si nunca has jugado un MOBA antes. Nuestras guías te llevarán paso a paso 
-              desde lo más básico hasta convertirte en un jugador competente. ¡Únete a millones de 
-              invocadores en todo el mundo!
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link to="/fundamentos">
-                <Button size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground font-semibold">
-                  Comenzar con los Fundamentos
-                </Button>
-              </Link>
-              <Link to="/recursos">
-                <Button size="lg" variant="outline" className="border-primary-foreground/40 text-primary-foreground hover:bg-primary-foreground/10 font-semibold">
-                  <Users className="w-5 h-5 mr-2" />
-                  Únete a la Comunidad
-                </Button>
-              </Link>
-            </div>
-          </CardContent>
-        </Card>
-      </section>
+      <CTASection />
 
       <Footer />
     </div>
