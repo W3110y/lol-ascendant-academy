@@ -15,6 +15,7 @@ import Recursos from "./pages/Recursos";
 import ConceptosIntermedios from "./pages/ConceptosIntermedios";
 import ErroresComunes from "./pages/ErroresComunes";
 import Simulador from "./pages/Simulador";
+import Herramientas from "./pages/Herramientas";
 import MapaWards from "./pages/MapaWards";
 import Vision from "./pages/conceptos-intermedios/Vision";
 import ObjetivosNeutrales from "./pages/conceptos-intermedios/ObjetivosNeutrales";
@@ -54,6 +55,7 @@ const App = () => (
           <Route path="/conceptos-intermedios/fases-partida" element={<FasesPartida />} />
           <Route path="/conceptos-intermedios/teamfights" element={<Teamfights />} />
           <Route path="/errores-comunes" element={<ErroresComunes />} />
+          <Route path="/herramientas" element={<Herramientas />} />
           <Route path="/herramientas/simulador" element={<Simulador />} />
           <Route path="/herramientas/ward-map" element={<MapaWards />} />
           <Route path="/herramientas/build-calculator" element={<BuildCalculator />} />
