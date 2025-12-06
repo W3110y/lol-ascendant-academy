@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { championsData } from "@/data/champions";
 import { ScrollAnimation } from "@/hooks/useScrollAnimation";
+import { getChampionSquareUrl } from "@/lib/ddragon";
 import { 
   Search, 
   Sword, 
@@ -269,22 +270,32 @@ const Campeones = () => {
             {filteredChampions.map((champion, index) => (
               <ScrollAnimation key={champion.id} animation="fade-up" delay={(index % 6) * 50}>
                 <Link to={`/campeones/${champion.id}`}>
-                  <Card className="border-accent/20 hover:border-primary/60 transition-all hover:shadow-xl hover:-translate-y-1 h-full group">
-                    <CardHeader>
-                      <div className="flex items-start justify-between mb-2">
-                        <CardTitle className="text-xl group-hover:text-primary transition-colors">
-                          {champion.name}
-                        </CardTitle>
-                        <Badge className={difficultyColor(champion.difficulty)}>
-                          {champion.difficulty}
-                        </Badge>
+                  <Card className="border-accent/20 hover:border-primary/60 transition-all hover:shadow-xl hover:-translate-y-1 h-full group overflow-hidden">
+                    <div className="flex items-center gap-4 p-4 pb-0">
+                      <img 
+                        src={getChampionSquareUrl(champion.id)} 
+                        alt={champion.name}
+                        className="w-16 h-16 rounded-lg object-cover border-2 border-border group-hover:border-primary/50 transition-colors"
+                        onError={(e) => {
+                          (e.target as HTMLImageElement).src = '/placeholder.svg';
+                        }}
+                      />
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-start justify-between gap-2">
+                          <CardTitle className="text-lg group-hover:text-primary transition-colors truncate">
+                            {champion.name}
+                          </CardTitle>
+                          <Badge className={`${difficultyColor(champion.difficulty)} shrink-0`}>
+                            {champion.difficulty}
+                          </Badge>
+                        </div>
+                        <CardDescription className="text-accent">
+                          {champion.role.join(", ")}
+                        </CardDescription>
                       </div>
-                      <CardDescription className="text-accent">
-                        {champion.role.join(", ")}
-                      </CardDescription>
-                    </CardHeader>
-                    <CardContent>
-                      <p className="text-sm text-muted-foreground mb-3">{champion.description}</p>
+                    </div>
+                    <CardContent className="pt-3">
+                      <p className="text-sm text-muted-foreground mb-3 line-clamp-2">{champion.description}</p>
                       <div className="flex items-center text-primary text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity">
                         Ver detalles <ChevronRight className="w-4 h-4 ml-1" />
                       </div>
