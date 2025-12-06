@@ -7,6 +7,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { championsData } from "@/data/champions";
 import { Sword, Shield, Zap, Target, Book, Package, Lightbulb, Video } from "lucide-react";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
+import { getChampionSquareUrl, getChampionSplashUrl } from "@/lib/ddragon";
 
 const ChampionDetail = () => {
   const { id } = useParams<{ id: string }>();
@@ -34,17 +35,30 @@ const ChampionDetail = () => {
       <Navigation />
       <Breadcrumbs />
       
-      <section className="container mx-auto px-4 py-8">
+      {/* Hero Banner with Splash Art */}
+      <section className="relative h-64 md:h-80 overflow-hidden">
+        <div 
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{ 
+            backgroundImage: `url(${getChampionSplashUrl(champion.id)})`,
+          }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-r from-background/80 to-transparent" />
+      </section>
+
+      <section className="container mx-auto px-4 -mt-20 relative z-10">
         {/* Champion Header */}
         <div className="max-w-5xl mx-auto mb-12">
           <div className="flex flex-col md:flex-row gap-6 items-start">
-            <div className="w-32 h-32 rounded-lg bg-gradient-card border border-lol-blue/30 flex items-center justify-center text-6xl">
-              {champion.role.includes('Top') && '⚔️'}
-              {champion.role.includes('Jungla') && '🌲'}
-              {champion.role.includes('Mid') && '✨'}
-              {champion.role.includes('ADC') && '🏹'}
-              {champion.role.includes('Soporte') && '💚'}
-            </div>
+            <img 
+              src={getChampionSquareUrl(champion.id)} 
+              alt={champion.name}
+              className="w-32 h-32 rounded-xl border-4 border-background shadow-2xl object-cover"
+              onError={(e) => {
+                (e.target as HTMLImageElement).src = '/placeholder.svg';
+              }}
+            />
             <div className="flex-1">
               <div className="flex flex-wrap gap-2 mb-2">
                 <Badge className={difficultyColor[champion.difficulty]}>
