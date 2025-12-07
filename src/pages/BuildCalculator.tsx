@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Item, itemsData, calculateTotalStats, ItemStats } from "@/data/items";
+import { getItemUrl } from "@/lib/ddragon";
 import { Package, Trash2, Save } from "lucide-react";
 import { toast } from "sonner";
 
@@ -111,20 +112,28 @@ const BuildCalculator = () => {
                           .map((item) => (
                             <div
                               key={item.id}
-                              className="flex items-center justify-between p-4 rounded-lg border border-border/40 hover:border-accent/50 transition-colors cursor-pointer"
+                              className="flex items-center gap-4 p-4 rounded-lg border border-border/40 hover:border-accent/50 transition-colors cursor-pointer group"
                               onClick={() => addItem(item)}
                             >
-                              <div className="flex-1">
+                              <div className="relative w-14 h-14 flex-shrink-0">
+                                <img
+                                  src={getItemUrl(item.ddragonId)}
+                                  alt={item.name}
+                                  className="w-full h-full rounded-md border-2 border-border/60 group-hover:border-accent/70 transition-colors"
+                                  loading="lazy"
+                                />
+                              </div>
+                              <div className="flex-1 min-w-0">
                                 <h4 className="font-semibold text-foreground">{item.name}</h4>
-                                <p className="text-sm text-muted-foreground mt-1">{item.description}</p>
-                                <div className="flex gap-2 mt-2">
-                                  {item.stats.ad && <Badge variant="secondary">AD +{item.stats.ad}</Badge>}
-                                  {item.stats.ap && <Badge variant="secondary">AP +{item.stats.ap}</Badge>}
-                                  {item.stats.health && <Badge variant="secondary">Vida +{item.stats.health}</Badge>}
-                                  {item.stats.armor && <Badge variant="secondary">Armadura +{item.stats.armor}</Badge>}
+                                <p className="text-sm text-muted-foreground mt-1 line-clamp-1">{item.description}</p>
+                                <div className="flex flex-wrap gap-1.5 mt-2">
+                                  {item.stats.ad && <Badge variant="secondary" className="text-xs">AD +{item.stats.ad}</Badge>}
+                                  {item.stats.ap && <Badge variant="secondary" className="text-xs">AP +{item.stats.ap}</Badge>}
+                                  {item.stats.health && <Badge variant="secondary" className="text-xs">Vida +{item.stats.health}</Badge>}
+                                  {item.stats.armor && <Badge variant="secondary" className="text-xs">Armadura +{item.stats.armor}</Badge>}
                                 </div>
                               </div>
-                              <div className="text-right ml-4">
+                              <div className="text-right flex-shrink-0">
                                 <span className="text-lg font-bold text-accent">{item.cost}g</span>
                               </div>
                             </div>
@@ -148,17 +157,20 @@ const BuildCalculator = () => {
                     {Array.from({ length: maxItems }).map((_, index) => (
                       <div
                         key={index}
-                        className="aspect-square rounded-lg border-2 border-dashed border-border/40 flex items-center justify-center relative"
+                        className="aspect-square rounded-lg border-2 border-dashed border-border/40 flex items-center justify-center relative overflow-hidden bg-background/50"
                       >
                         {selectedItems[index] ? (
                           <>
-                            <div className="text-center p-2">
-                              <p className="text-xs font-medium">{selectedItems[index].name}</p>
-                            </div>
+                            <img
+                              src={getItemUrl(selectedItems[index].ddragonId)}
+                              alt={selectedItems[index].name}
+                              className="w-full h-full object-cover"
+                              title={selectedItems[index].name}
+                            />
                             <Button
                               variant="destructive"
                               size="icon"
-                              className="absolute -top-2 -right-2 h-6 w-6 rounded-full"
+                              className="absolute -top-1 -right-1 h-5 w-5 rounded-full"
                               onClick={() => removeItem(index)}
                             >
                               <Trash2 className="h-3 w-3" />

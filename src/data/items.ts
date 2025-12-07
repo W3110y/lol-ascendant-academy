@@ -13,18 +13,19 @@ export interface ItemStats {
 
 export interface Item {
   id: string;
+  ddragonId: number; // Official DDragon item ID
   name: string;
   category: "Daño" | "Tanque" | "Soporte" | "Movilidad" | "Jungla";
   cost: number;
   stats: ItemStats;
   description: string;
-  icon?: string;
 }
 
 export const itemsData: Item[] = [
   // Daño AD
   {
     id: "infinity-edge",
+    ddragonId: 3031,
     name: "Filo del Infinito",
     category: "Daño",
     cost: 3400,
@@ -33,6 +34,7 @@ export const itemsData: Item[] = [
   },
   {
     id: "kraken-slayer",
+    ddragonId: 6672,
     name: "Sacrificio del Kraken",
     category: "Daño",
     cost: 3100,
@@ -41,6 +43,7 @@ export const itemsData: Item[] = [
   },
   {
     id: "bloodthirster",
+    ddragonId: 3072,
     name: "Sanguinario",
     category: "Daño",
     cost: 3400,
@@ -49,6 +52,7 @@ export const itemsData: Item[] = [
   },
   {
     id: "lord-dominiks",
+    ddragonId: 3036,
     name: "Recuerdos de Lord Dominik",
     category: "Daño",
     cost: 3000,
@@ -59,6 +63,7 @@ export const itemsData: Item[] = [
   // Daño AP
   {
     id: "rabadons",
+    ddragonId: 3089,
     name: "Sombrero Mortal de Rabadon",
     category: "Daño",
     cost: 3600,
@@ -67,6 +72,7 @@ export const itemsData: Item[] = [
   },
   {
     id: "ludens-tempest",
+    ddragonId: 3100,
     name: "Tempestad de Luden",
     category: "Daño",
     cost: 3200,
@@ -75,6 +81,7 @@ export const itemsData: Item[] = [
   },
   {
     id: "zhonyas",
+    ddragonId: 3157,
     name: "Reloj de Arena de Zhonya",
     category: "Daño",
     cost: 3000,
@@ -83,6 +90,7 @@ export const itemsData: Item[] = [
   },
   {
     id: "void-staff",
+    ddragonId: 3135,
     name: "Bastón del Vacío",
     category: "Daño",
     cost: 2800,
@@ -93,6 +101,7 @@ export const itemsData: Item[] = [
   // Tanque
   {
     id: "sunfire",
+    ddragonId: 3068,
     name: "Égida de Fuego Solar",
     category: "Tanque",
     cost: 2800,
@@ -101,6 +110,7 @@ export const itemsData: Item[] = [
   },
   {
     id: "thornmail",
+    ddragonId: 3075,
     name: "Malla de Espinas",
     category: "Tanque",
     cost: 2700,
@@ -109,6 +119,7 @@ export const itemsData: Item[] = [
   },
   {
     id: "spirit-visage",
+    ddragonId: 3065,
     name: "Visage Espiritual",
     category: "Tanque",
     cost: 2900,
@@ -117,6 +128,7 @@ export const itemsData: Item[] = [
   },
   {
     id: "warmogs",
+    ddragonId: 3083,
     name: "Armadura de Warmog",
     category: "Tanque",
     cost: 3000,
@@ -127,6 +139,7 @@ export const itemsData: Item[] = [
   // Soporte
   {
     id: "moonstone",
+    ddragonId: 6617,
     name: "Renovación de Piedra Lunar",
     category: "Soporte",
     cost: 2500,
@@ -135,6 +148,7 @@ export const itemsData: Item[] = [
   },
   {
     id: "shurelyas",
+    ddragonId: 2065,
     name: "Batlesong de Shurelya",
     category: "Soporte",
     cost: 2500,
@@ -143,6 +157,7 @@ export const itemsData: Item[] = [
   },
   {
     id: "redemption",
+    ddragonId: 3107,
     name: "Redención",
     category: "Soporte",
     cost: 2300,
@@ -151,6 +166,7 @@ export const itemsData: Item[] = [
   },
   {
     id: "locket",
+    ddragonId: 3050,
     name: "Convergencia de Zeke",
     category: "Soporte",
     cost: 2500,
@@ -160,7 +176,8 @@ export const itemsData: Item[] = [
 
   // Movilidad
   {
-    id: "galeforce",
+    id: "trinity",
+    ddragonId: 3078,
     name: "Fuerza de Trinidad",
     category: "Movilidad",
     cost: 3333,
@@ -169,6 +186,7 @@ export const itemsData: Item[] = [
   },
   {
     id: "youmuus",
+    ddragonId: 3142,
     name: "Espada Espectral de Youmuu",
     category: "Movilidad",
     cost: 2900,
@@ -177,6 +195,7 @@ export const itemsData: Item[] = [
   },
   {
     id: "deadmans",
+    ddragonId: 3742,
     name: "Coraza del Difunto",
     category: "Movilidad",
     cost: 2900,
@@ -187,6 +206,7 @@ export const itemsData: Item[] = [
   // Jungla
   {
     id: "goredrinker",
+    ddragonId: 6630,
     name: "Bebehemoglobina",
     category: "Jungla",
     cost: 3300,
@@ -195,6 +215,7 @@ export const itemsData: Item[] = [
   },
   {
     id: "eclipse",
+    ddragonId: 6692,
     name: "Eclipse",
     category: "Jungla",
     cost: 3200,
