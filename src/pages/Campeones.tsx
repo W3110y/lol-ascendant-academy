@@ -6,9 +6,10 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Skeleton } from "@/components/ui/skeleton";
 import { championsData } from "@/data/champions";
 import { ScrollAnimation } from "@/hooks/useScrollAnimation";
-import { getChampionSquareUrl } from "@/lib/ddragon";
+import { useDDragonVersion, useDDragonUrls } from "@/hooks/useDDragon";
 import { 
   Search, 
   Sword, 
@@ -19,10 +20,10 @@ import {
   Sparkles,
   Users,
   BookOpen,
-  ArrowRight,
   Gamepad2,
   Star,
-  ChevronRight
+  ChevronRight,
+  RefreshCw
 } from "lucide-react";
 import {
   Select,
@@ -36,6 +37,10 @@ const Campeones = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [roleFilter, setRoleFilter] = useState("Todos");
   const [difficultyFilter, setDifficultyFilter] = useState("Todos");
+  
+  // Dynamic DDragon version and URLs
+  const { version, loading: versionLoading } = useDDragonVersion();
+  const { getChampionSquare } = useDDragonUrls();
 
   const filteredChampions = championsData.filter((champion) => {
     const matchesSearch = champion.name.toLowerCase().includes(searchTerm.toLowerCase());
@@ -138,6 +143,12 @@ const Campeones = () => {
               <Badge className="mb-6 px-4 py-2 text-sm bg-primary/10 text-primary border-primary/20">
                 <Sparkles className="w-4 h-4 mr-2" />
                 Guía Completa de Campeones
+                {version && (
+                  <span className="ml-2 flex items-center gap-1 text-xs opacity-75">
+                    <RefreshCw className="w-3 h-3" />
+                    Parche {version}
+                  </span>
+                )}
               </Badge>
               <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-foreground via-primary to-accent bg-clip-text text-transparent">
                 Domina a tu Campeón Favorito
@@ -272,14 +283,18 @@ const Campeones = () => {
                 <Link to={`/campeones/${champion.id}`}>
                   <Card className="border-accent/20 hover:border-primary/60 transition-all hover:shadow-xl hover:-translate-y-1 h-full group overflow-hidden">
                     <div className="flex items-center gap-4 p-4 pb-0">
-                      <img 
-                        src={getChampionSquareUrl(champion.id)} 
-                        alt={champion.name}
-                        className="w-16 h-16 rounded-lg object-cover border-2 border-border group-hover:border-primary/50 transition-colors"
-                        onError={(e) => {
-                          (e.target as HTMLImageElement).src = '/placeholder.svg';
-                        }}
-                      />
+                      {versionLoading ? (
+                        <Skeleton className="w-16 h-16 rounded-lg" />
+                      ) : (
+                        <img 
+                          src={getChampionSquare(champion.id) || '/placeholder.svg'} 
+                          alt={champion.name}
+                          className="w-16 h-16 rounded-lg object-cover border-2 border-border group-hover:border-primary/50 transition-colors"
+                          onError={(e) => {
+                            (e.target as HTMLImageElement).src = '/placeholder.svg';
+                          }}
+                        />
+                      )}
                       <div className="flex-1 min-w-0">
                         <div className="flex items-start justify-between gap-2">
                           <CardTitle className="text-lg group-hover:text-primary transition-colors truncate">

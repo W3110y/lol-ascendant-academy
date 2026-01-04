@@ -4,14 +4,19 @@ import Breadcrumbs from "@/components/Breadcrumbs";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Skeleton } from "@/components/ui/skeleton";
 import { championsData } from "@/data/champions";
-import { Sword, Shield, Zap, Target, Book, Package, Lightbulb, Video } from "lucide-react";
+import { Sword, Shield, Zap, Target, Book, Package, Lightbulb, Video, RefreshCw } from "lucide-react";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
-import { getChampionSquareUrl, getChampionSplashUrl } from "@/lib/ddragon";
+import { useDDragonVersion, useDDragonUrls } from "@/hooks/useDDragon";
 
 const ChampionDetail = () => {
   const { id } = useParams<{ id: string }>();
   const champion = championsData.find((c) => c.id === id);
+  
+  // Dynamic DDragon version and URLs
+  const { version, loading: versionLoading } = useDDragonVersion();
+  const { getChampionSquare, getChampionSplash } = useDDragonUrls();
 
   if (!champion) {
     return <Navigate to="/campeones" replace />;
@@ -40,7 +45,7 @@ const ChampionDetail = () => {
         <div 
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{ 
-            backgroundImage: `url(${getChampionSplashUrl(champion.id)})`,
+            backgroundImage: `url(${getChampionSplash(champion.id)})`,
           }}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent" />
@@ -51,19 +56,29 @@ const ChampionDetail = () => {
         {/* Champion Header */}
         <div className="max-w-5xl mx-auto mb-12">
           <div className="flex flex-col md:flex-row gap-6 items-start">
-            <img 
-              src={getChampionSquareUrl(champion.id)} 
-              alt={champion.name}
-              className="w-32 h-32 rounded-xl border-4 border-background shadow-2xl object-cover"
-              onError={(e) => {
-                (e.target as HTMLImageElement).src = '/placeholder.svg';
-              }}
-            />
+            {versionLoading ? (
+              <Skeleton className="w-32 h-32 rounded-xl" />
+            ) : (
+              <img 
+                src={getChampionSquare(champion.id) || '/placeholder.svg'} 
+                alt={champion.name}
+                className="w-32 h-32 rounded-xl border-4 border-background shadow-2xl object-cover"
+                onError={(e) => {
+                  (e.target as HTMLImageElement).src = '/placeholder.svg';
+                }}
+              />
+            )}
             <div className="flex-1">
               <div className="flex flex-wrap gap-2 mb-2">
                 <Badge className={difficultyColor[champion.difficulty]}>
                   {champion.difficulty}
                 </Badge>
+                {version && (
+                  <Badge variant="outline" className="flex items-center gap-1 text-xs">
+                    <RefreshCw className="w-3 h-3" />
+                    Parche {version}
+                  </Badge>
+                )}
                 <Badge variant="outline" className="flex items-center gap-1">
                   {damageTypeIcon[champion.damageType]}
                   {champion.damageType}
