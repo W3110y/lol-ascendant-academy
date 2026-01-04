@@ -29,6 +29,7 @@ import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
 import Parches from "./pages/Parches";
 import RutasJungla from "./pages/RutasJungla";
+import ScrollToTop from "./components/ScrollToTop";
 
 const queryClient = new QueryClient();
 
@@ -38,6 +39,7 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
+        <ScrollToTop />
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/fundamentos" element={<Fundamentos />} />
