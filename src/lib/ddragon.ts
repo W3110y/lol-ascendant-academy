@@ -7,18 +7,27 @@
  * DDragon provides:
  * - Champion images and data
  * - Item images and data
- * - Runes images and data
- * - Spell images
+ * - Runes images and data (runesReforged.json)
+ * - Summoner spell images and data
  * - Profile icons
+ * 
+ * Note: Champion spell data and item stats can be inaccurate.
+ * For precise values, use League Wikia: https://leagueoflegends.fandom.com
+ * 
+ * Community Dragon (CDragon) supplements DDragon with additional assets
+ * like rune stat images: http://raw.communitydragon.org/
  */
 
-// Latest patch version - update this when new patches release
+// Fallback patch version - prefer using useDDragonVersion() hook for latest
 // Check latest at: https://ddragon.leagueoflegends.com/api/versions.json
-export const DDRAGON_VERSION = "14.23.1";
+export const DDRAGON_VERSION = "14.24.1";
 
 // Base URLs
 export const DDRAGON_BASE = "https://ddragon.leagueoflegends.com";
 export const DDRAGON_CDN = `${DDRAGON_BASE}/cdn/${DDRAGON_VERSION}`;
+
+// Community Dragon for additional assets not in DDragon
+export const CDRAGON_BASE = "https://raw.communitydragon.org/latest";
 
 // Language codes supported by DDragon
 export type DDragonLanguage = 
@@ -39,6 +48,16 @@ export type DDragonLanguage =
 
 // Default language for Spanish LoL learning site
 export const DEFAULT_LANGUAGE: DDragonLanguage = "es_ES";
+
+// API endpoint for getting available game regions/realms
+export const getRealmUrl = (region: string): string => {
+  return `${DDRAGON_BASE}/realms/${region}.json`;
+};
+
+// Get versions list
+export const getVersionsUrl = (): string => {
+  return `${DDRAGON_BASE}/api/versions.json`;
+};
 
 /**
  * Champion Image URLs
@@ -283,9 +302,8 @@ export const fetchItemsData = async (language: DDragonLanguage = DEFAULT_LANGUAG
 /**
  * Community Dragon (CDragon) for additional assets
  * Useful for rune stat images and other assets not in DDragon
+ * See: http://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/
  */
-export const CDRAGON_BASE = "https://raw.communitydragon.org/latest";
-
 export const getCDragonRuneStatUrl = (statName: string): string => {
   return `${CDRAGON_BASE}/plugins/rcp-be-lol-game-data/global/default/v1/perk-images/statmods/${statName}`;
 };
