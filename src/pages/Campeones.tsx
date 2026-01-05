@@ -10,6 +10,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { championsData } from "@/data/champions";
 import { ScrollAnimation } from "@/hooks/useScrollAnimation";
 import { useDDragonVersion, useDDragonUrls } from "@/hooks/useDDragon";
+import { normalizeChampionId } from "@/lib/ddragon";
 import { 
   Search, 
   Sword, 
@@ -287,7 +288,7 @@ const Campeones = () => {
                         <Skeleton className="w-16 h-16 rounded-lg" />
                       ) : (
                         <img 
-                          src={getChampionSquare(champion.id) || '/placeholder.svg'} 
+                          src={getChampionSquare(normalizeChampionId(champion.id)) || '/placeholder.svg'}
                           alt={champion.name}
                           className="w-16 h-16 rounded-lg object-cover border-2 border-border group-hover:border-primary/50 transition-colors"
                           onError={(e) => {

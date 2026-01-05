@@ -9,6 +9,7 @@ import { championsData } from "@/data/champions";
 import { Sword, Shield, Zap, Target, Book, Package, Lightbulb, Video, RefreshCw } from "lucide-react";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { useDDragonVersion, useDDragonUrls } from "@/hooks/useDDragon";
+import { normalizeChampionId } from "@/lib/ddragon";
 
 const ChampionDetail = () => {
   const { id } = useParams<{ id: string }>();
@@ -45,7 +46,7 @@ const ChampionDetail = () => {
         <div 
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{ 
-            backgroundImage: `url(${getChampionSplash(champion.id)})`,
+            backgroundImage: `url(${getChampionSplash(normalizeChampionId(champion.id))})`,
           }}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent" />
@@ -60,7 +61,7 @@ const ChampionDetail = () => {
               <Skeleton className="w-32 h-32 rounded-xl" />
             ) : (
               <img 
-                src={getChampionSquare(champion.id) || '/placeholder.svg'} 
+                src={getChampionSquare(normalizeChampionId(champion.id)) || '/placeholder.svg'}
                 alt={champion.name}
                 className="w-32 h-32 rounded-xl border-4 border-background shadow-2xl object-cover"
                 onError={(e) => {
