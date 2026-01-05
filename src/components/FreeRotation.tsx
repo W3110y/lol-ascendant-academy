@@ -4,8 +4,12 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Sparkles, ArrowRight } from "lucide-react";
 import { championsData } from "@/data/champions";
+import { useDDragonUrls } from "@/hooks/useDDragon";
+import { normalizeChampionId } from "@/lib/ddragon";
 
 export const FreeRotation = () => {
+  const { getChampionSquare, version } = useDDragonUrls();
+  
   // Simular rotación gratuita semanal (en producción vendría de Riot API)
   const getFreeChampions = () => {
     return championsData
@@ -33,12 +37,17 @@ export const FreeRotation = () => {
             <Link key={champion.id} to={`/campeones/${champion.id}`}>
               <Card className="border-accent/20 hover:border-accent/60 transition-all hover:-translate-y-1 h-full">
                 <CardContent className="p-4 text-center">
-                  <div className="text-5xl mb-3">
-                    {champion.role.includes('Top') && '⚔️'}
-                    {champion.role.includes('Jungla') && '🌲'}
-                    {champion.role.includes('Mid') && '✨'}
-                    {champion.role.includes('ADC') && '🏹'}
-                    {champion.role.includes('Soporte') && '💚'}
+                  <div className="w-16 h-16 mx-auto mb-3 rounded-lg overflow-hidden border-2 border-accent/30">
+                    {version ? (
+                      <img 
+                        src={getChampionSquare(normalizeChampionId(champion.id)) || ''} 
+                        alt={champion.name}
+                        className="w-full h-full object-cover"
+                        loading="lazy"
+                      />
+                    ) : (
+                      <div className="w-full h-full bg-muted animate-pulse" />
+                    )}
                   </div>
                   <h3 className="font-semibold text-foreground mb-1">{champion.name}</h3>
                   <div className="flex flex-wrap gap-1 justify-center mb-2">
