@@ -12,8 +12,12 @@ import { PartnersSection } from "@/components/PartnersSection";
 import { FreeRotation } from "@/components/FreeRotation";
 import { FeaturesSection } from "@/components/FeaturesSection";
 import { CTASection } from "@/components/CTASection";
+import { useDDragonUrls } from "@/hooks/useDDragon";
+import { normalizeChampionId } from "@/lib/ddragon";
 
 const Index = () => {
+  const { getChampionSplash, version } = useDDragonUrls();
+  
   const modules = [
     {
       title: "Fundamentos",
@@ -141,11 +145,19 @@ const Index = () => {
                     </Button>
                   </Link>
                 </div>
-                <div className="flex items-center justify-center bg-muted rounded-lg p-8">
-                  <div className="text-center">
-                    <div className="text-6xl mb-4">🏆</div>
-                    <p className="text-muted-foreground">Imagen del campeón</p>
-                  </div>
+                <div className="relative rounded-lg overflow-hidden h-64 md:h-80">
+                  {version ? (
+                    <img 
+                      src={getChampionSplash(normalizeChampionId(championOfWeek.id))} 
+                      alt={championOfWeek.name}
+                      className="w-full h-full object-cover object-top"
+                    />
+                  ) : (
+                    <div className="w-full h-full bg-muted animate-pulse flex items-center justify-center">
+                      <span className="text-muted-foreground">Cargando...</span>
+                    </div>
+                  )}
+                  <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent" />
                 </div>
               </div>
             </CardContent>
