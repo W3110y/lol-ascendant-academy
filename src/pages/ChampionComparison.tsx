@@ -7,10 +7,13 @@ import { Badge } from "@/components/ui/badge";
 import { championsData, Champion } from "@/data/champions";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { GitCompare, Swords, Shield, Zap, Users } from "lucide-react";
+import { useDDragonUrls } from "@/hooks/useDDragon";
+import { normalizeChampionId } from "@/lib/ddragon";
 
 const ChampionComparison = () => {
   const [champion1, setChampion1] = useState<Champion | null>(null);
   const [champion2, setChampion2] = useState<Champion | null>(null);
+  const { getChampionSquare, version } = useDDragonUrls();
 
   const getDifficultyColor = (difficulty: string) => {
     switch (difficulty) {
@@ -70,8 +73,18 @@ const ChampionComparison = () => {
 
                 {champion1 && (
                   <div className="mt-6 text-center">
-                    <div className="w-32 h-32 mx-auto mb-4 rounded-full bg-gradient-to-br from-accent/20 to-accent/5 flex items-center justify-center">
-                      <span className="text-4xl">{champion1.name.charAt(0)}</span>
+                    <div className="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden border-4 border-accent/30">
+                      {version ? (
+                        <img 
+                          src={getChampionSquare(normalizeChampionId(champion1.id)) || '/placeholder.svg'}
+                          alt={champion1.name}
+                          className="w-full h-full object-cover"
+                        />
+                      ) : (
+                        <div className="w-full h-full bg-gradient-to-br from-accent/20 to-accent/5 flex items-center justify-center">
+                          <span className="text-4xl">{champion1.name.charAt(0)}</span>
+                        </div>
+                      )}
                     </div>
                     <h3 className="text-2xl font-bold mb-2">{champion1.name}</h3>
                     <p className="text-sm text-muted-foreground mb-4">{champion1.title}</p>
@@ -106,8 +119,18 @@ const ChampionComparison = () => {
 
                 {champion2 && (
                   <div className="mt-6 text-center">
-                    <div className="w-32 h-32 mx-auto mb-4 rounded-full bg-gradient-to-br from-accent/20 to-accent/5 flex items-center justify-center">
-                      <span className="text-4xl">{champion2.name.charAt(0)}</span>
+                    <div className="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden border-4 border-accent/30">
+                      {version ? (
+                        <img 
+                          src={getChampionSquare(normalizeChampionId(champion2.id)) || '/placeholder.svg'}
+                          alt={champion2.name}
+                          className="w-full h-full object-cover"
+                        />
+                      ) : (
+                        <div className="w-full h-full bg-gradient-to-br from-accent/20 to-accent/5 flex items-center justify-center">
+                          <span className="text-4xl">{champion2.name.charAt(0)}</span>
+                        </div>
+                      )}
                     </div>
                     <h3 className="text-2xl font-bold mb-2">{champion2.name}</h3>
                     <p className="text-sm text-muted-foreground mb-4">{champion2.title}</p>
