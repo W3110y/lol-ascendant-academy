@@ -4,7 +4,7 @@ import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { BookOpen, Users, TrendingUp, Star } from "lucide-react";
+import { BookOpen, Users, TrendingUp, Star, ArrowRight } from "lucide-react";
 import { championsData } from "@/data/champions";
 import { HeroSection } from "@/components/HeroSection";
 import { StatsSection } from "@/components/StatsSection";
@@ -12,6 +12,8 @@ import { PartnersSection } from "@/components/PartnersSection";
 import { FreeRotation } from "@/components/FreeRotation";
 import { FeaturesSection } from "@/components/FeaturesSection";
 import { CTASection } from "@/components/CTASection";
+import { FeatureCarousel } from "@/components/FeatureCarousel";
+import { TermOfTheDay } from "@/components/TermOfTheDay";
 import { useDDragonUrls } from "@/hooks/useDDragon";
 import { normalizeChampionId } from "@/lib/ddragon";
 
@@ -65,42 +67,57 @@ const Index = () => {
       {/* Stats Section */}
       <StatsSection />
 
+      {/* Feature Carousel - NEW */}
+      <section className="container mx-auto px-4 py-12">
+        <FeatureCarousel />
+      </section>
+
       {/* Features Section */}
       <FeaturesSection />
 
-      {/* Popular Guides Section */}
-      <section className="container mx-auto px-4 py-12 -mt-8">
-        <Card className="border-accent/20 shadow-xl">
-          <CardHeader>
-            <div className="flex items-center gap-2">
-              <TrendingUp className="w-6 h-6 text-accent" />
-              <CardTitle className="text-2xl">Lo Más Popular Esta Semana</CardTitle>
-            </div>
-            <CardDescription>Las guías más visitadas por principiantes</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="grid md:grid-cols-3 gap-4">
-              {popularGuides.map((guide, index) => (
-                <Link key={index} to={guide.link}>
-                  <Card className="border-accent/10 hover:border-accent/40 transition-all hover:shadow-md h-full">
-                    <CardContent className="p-4">
-                      <div className="flex items-start gap-3">
-                        <guide.icon className="w-8 h-8 text-accent flex-shrink-0" />
-                        <div className="flex-1">
-                          <h3 className="font-semibold text-foreground mb-1">{guide.title}</h3>
-                          <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                            <Users className="w-4 h-4" />
-                            <span>{guide.views} vistas</span>
+      {/* Popular Guides & Term of the Day */}
+      <section className="container mx-auto px-4 py-12">
+        <div className="grid lg:grid-cols-3 gap-6">
+          {/* Popular Guides - Takes 2 columns */}
+          <div className="lg:col-span-2">
+            <Card className="border-accent/20 shadow-xl h-full">
+              <CardHeader>
+                <div className="flex items-center gap-2">
+                  <TrendingUp className="w-6 h-6 text-accent" />
+                  <CardTitle className="text-2xl">Lo Más Popular Esta Semana</CardTitle>
+                </div>
+                <CardDescription>Las guías más visitadas por principiantes</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="grid md:grid-cols-3 gap-4">
+                  {popularGuides.map((guide, index) => (
+                    <Link key={index} to={guide.link}>
+                      <Card className="border-accent/10 hover:border-accent/40 transition-all hover:shadow-md h-full group">
+                        <CardContent className="p-4">
+                          <div className="flex items-start gap-3">
+                            <guide.icon className="w-8 h-8 text-accent flex-shrink-0" />
+                            <div className="flex-1">
+                              <h3 className="font-semibold text-foreground mb-1 group-hover:text-accent transition-colors">{guide.title}</h3>
+                              <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                                <Users className="w-4 h-4" />
+                                <span>{guide.views} vistas</span>
+                              </div>
+                            </div>
                           </div>
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-                </Link>
-              ))}
-            </div>
-          </CardContent>
-        </Card>
+                        </CardContent>
+                      </Card>
+                    </Link>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+
+          {/* Term of the Day - Takes 1 column */}
+          <div className="lg:col-span-1">
+            <TermOfTheDay />
+          </div>
+        </div>
       </section>
 
       {/* Free Rotation */}
@@ -140,8 +157,9 @@ const Index = () => {
                     </ul>
                   </div>
                   <Link to={`/campeones/${championOfWeek.id}`}>
-                    <Button className="w-full bg-accent hover:bg-accent/90 text-accent-foreground">
-                      Ver Guía Completa →
+                    <Button className="w-full bg-accent hover:bg-accent/90 text-accent-foreground group">
+                      Ver Guía Completa 
+                      <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
                     </Button>
                   </Link>
                 </div>
@@ -189,7 +207,7 @@ const Index = () => {
                 </CardHeader>
                 <CardContent>
                   <Button variant="ghost" className="w-full text-accent hover:text-accent/80 group">
-                    Explorar <span className="ml-2 group-hover:translate-x-1 transition-transform inline-block">→</span>
+                    Explorar <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
                   </Button>
                 </CardContent>
               </Card>
