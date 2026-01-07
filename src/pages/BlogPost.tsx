@@ -8,7 +8,7 @@ import { blogPosts } from "@/data/blog";
 import { Calendar, Clock, ArrowLeft, Share2 } from "lucide-react";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import { toast } from "sonner";
-
+import DOMPurify from "dompurify";
 const BlogPost = () => {
   const { slug } = useParams<{ slug: string }>();
   const post = blogPosts.find((p) => p.slug === slug);
@@ -88,7 +88,7 @@ const BlogPost = () => {
             </header>
 
             <div className="prose prose-lg dark:prose-invert max-w-none mb-12">
-              <div dangerouslySetInnerHTML={{ __html: post.content.replace(/\n/g, '<br />') }} />
+              <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(post.content.replace(/\n/g, '<br />')) }} />
             </div>
           </article>
 
