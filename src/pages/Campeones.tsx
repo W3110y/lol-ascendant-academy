@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { Link } from "react-router-dom";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
@@ -7,6 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Skeleton } from "@/components/ui/skeleton";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { championsData } from "@/data/champions";
 import { ScrollAnimation } from "@/hooks/useScrollAnimation";
 import { useDDragonVersion, useDDragonUrls } from "@/hooks/useDDragon";
@@ -24,7 +25,9 @@ import {
   Gamepad2,
   Star,
   ChevronRight,
-  RefreshCw
+  RefreshCw,
+  Filter,
+  X
 } from "lucide-react";
 import {
   Select,
@@ -38,10 +41,19 @@ const Campeones = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [roleFilter, setRoleFilter] = useState("Todos");
   const [difficultyFilter, setDifficultyFilter] = useState("Todos");
+  const [expandedAbilities, setExpandedAbilities] = useState<string[]>([]);
   
   // Dynamic DDragon version and URLs
   const { version, loading: versionLoading } = useDDragonVersion();
-  const { getChampionSquare } = useDDragonUrls();
+  const { getChampionSquare, getChampionSplash } = useDDragonUrls();
+
+  const clearFilters = useCallback(() => {
+    setSearchTerm("");
+    setRoleFilter("Todos");
+    setDifficultyFilter("Todos");
+  }, []);
+
+  const hasActiveFilters = searchTerm || roleFilter !== "Todos" || difficultyFilter !== "Todos";
 
   const filteredChampions = championsData.filter((champion) => {
     const matchesSearch = champion.name.toLowerCase().includes(searchTerm.toLowerCase());
@@ -55,40 +67,40 @@ const Campeones = () => {
       role: "Top",
       icon: Shield,
       champions: [
-        { name: "Garen", difficulty: "Fácil", description: "Guerrero resistente con habilidades simples pero efectivas" },
-        { name: "Malphite", difficulty: "Fácil", description: "Tanque de roca con una definitiva devastadora" },
+        { name: "Garen", id: "garen", difficulty: "Fácil", description: "Guerrero resistente con habilidades simples pero efectivas", abilities: ["Q - Golpe Decisivo", "W - Coraje", "E - Juicio", "R - Justicia Demaciata"] },
+        { name: "Malphite", id: "malphite", difficulty: "Fácil", description: "Tanque de roca con una definitiva devastadora", abilities: ["Q - Fragmento Sísmico", "W - Trueno", "E - Suelo Inestable", "R - Fuerza Imparable"] },
       ],
     },
     {
       role: "Jungla",
       icon: Sword,
       champions: [
-        { name: "Warwick", difficulty: "Fácil", description: "Cazador que se cura al atacar y rastrea enemigos débiles" },
-        { name: "Maestro Yi", difficulty: "Fácil", description: "Espadachín veloz con alto daño de ataque" },
+        { name: "Warwick", id: "warwick", difficulty: "Fácil", description: "Cazador que se cura al atacar y rastrea enemigos débiles", abilities: ["Q - Fauces del Terror", "W - Caza Sangrienta", "E - Miedo Primitivo", "R - Salto Infinito"] },
+        { name: "Maestro Yi", id: "masteryi", difficulty: "Fácil", description: "Espadachín veloz con alto daño de ataque", abilities: ["Q - Golpe Alfa", "W - Meditar", "E - Estilo Wuju", "R - Highlander"] },
       ],
     },
     {
       role: "Mid",
       icon: Wand2,
       champions: [
-        { name: "Annie", difficulty: "Fácil", description: "Maga con su osito Tibbers y control de masas" },
-        { name: "Lux", difficulty: "Medio", description: "Maga de luz con habilidades de largo alcance" },
+        { name: "Annie", id: "annie", difficulty: "Fácil", description: "Maga con su osito Tibbers y control de masas", abilities: ["Q - Desintegrar", "W - Incineración", "E - Escudo de Molten", "R - Tibbers"] },
+        { name: "Lux", id: "lux", difficulty: "Medio", description: "Maga de luz con habilidades de largo alcance", abilities: ["Q - Atadura de Luz", "W - Barrera Prismática", "E - Singularidad Luciente", "R - Chispa Final"] },
       ],
     },
     {
       role: "ADC",
       icon: Target,
       champions: [
-        { name: "Ashe", difficulty: "Fácil", description: "Arquera de hielo con ralentizaciones constantes" },
-        { name: "Caitlyn", difficulty: "Fácil", description: "Sheriff con el mayor rango de ataque básico" },
+        { name: "Ashe", id: "ashe", difficulty: "Fácil", description: "Arquera de hielo con ralentizaciones constantes", abilities: ["Q - Concentración del Guardabosques", "W - Volea", "E - Halcón Explorador", "R - Flecha de Cristal Encantada"] },
+        { name: "Caitlyn", id: "caitlyn", difficulty: "Fácil", description: "Sheriff con el mayor rango de ataque básico", abilities: ["Q - Disparo Pacificador", "W - Trampa Yordle", "E - Red Calibre 90", "R - Ace en la Manga"] },
       ],
     },
     {
       role: "Soporte",
       icon: Heart,
       champions: [
-        { name: "Soraka", difficulty: "Fácil", description: "Sanadora celestial que mantiene al equipo con vida" },
-        { name: "Leona", difficulty: "Medio", description: "Tanque solar que inicia peleas con control de masas" },
+        { name: "Soraka", id: "soraka", difficulty: "Fácil", description: "Sanadora celestial que mantiene al equipo con vida", abilities: ["Q - Llamada Estelar", "W - Infusión Astral", "E - Ecuanimidad", "R - Deseo"] },
+        { name: "Leona", id: "leona", difficulty: "Medio", description: "Tanque solar que inicia peleas con control de masas", abilities: ["Q - Espada del Alba", "W - Eclipse", "E - Espada del Cénit", "R - Llamarada Solar"] },
       ],
     },
   ];
@@ -123,7 +135,7 @@ const Campeones = () => {
       case "Medio":
         return "bg-yellow-500/20 text-yellow-600 dark:text-yellow-400 border-yellow-500/30";
       default:
-        return "bg-blue-500/20 text-blue-600 dark:text-blue-400 border-blue-500/30";
+        return "bg-red-500/20 text-red-600 dark:text-red-400 border-red-500/30";
     }
   };
 
@@ -222,11 +234,26 @@ const Campeones = () => {
         <ScrollAnimation animation="fade-up">
           <Card id="search" className="mb-8 border-accent/20 scroll-mt-24">
             <CardHeader>
-              <CardTitle className="text-2xl flex items-center gap-3">
-                <Search className="w-6 h-6 text-primary" />
-                Buscar Campeones
-              </CardTitle>
-              <CardDescription>Encuentra el campeón perfecto para ti</CardDescription>
+              <div className="flex items-center justify-between">
+                <div>
+                  <CardTitle className="text-2xl flex items-center gap-3">
+                    <Search className="w-6 h-6 text-primary" />
+                    Buscar Campeones
+                  </CardTitle>
+                  <CardDescription>Encuentra el campeón perfecto para ti</CardDescription>
+                </div>
+                {hasActiveFilters && (
+                  <Button 
+                    variant="ghost" 
+                    size="sm" 
+                    onClick={clearFilters}
+                    className="text-muted-foreground hover:text-foreground"
+                  >
+                    <X className="w-4 h-4 mr-1" />
+                    Limpiar filtros
+                  </Button>
+                )}
+              </div>
             </CardHeader>
             <CardContent>
               <div className="grid md:grid-cols-3 gap-4">
@@ -241,9 +268,10 @@ const Campeones = () => {
                 </div>
                 <Select value={roleFilter} onValueChange={setRoleFilter}>
                   <SelectTrigger>
+                    <Filter className="w-4 h-4 mr-2 text-muted-foreground" />
                     <SelectValue placeholder="Filtrar por rol" />
                   </SelectTrigger>
-                  <SelectContent>
+                  <SelectContent className="bg-popover border border-border z-50">
                     <SelectItem value="Todos">Todos los roles</SelectItem>
                     <SelectItem value="Top">Top</SelectItem>
                     <SelectItem value="Jungla">Jungla</SelectItem>
@@ -254,9 +282,10 @@ const Campeones = () => {
                 </Select>
                 <Select value={difficultyFilter} onValueChange={setDifficultyFilter}>
                   <SelectTrigger>
+                    <Filter className="w-4 h-4 mr-2 text-muted-foreground" />
                     <SelectValue placeholder="Filtrar por dificultad" />
                   </SelectTrigger>
-                  <SelectContent>
+                  <SelectContent className="bg-popover border border-border z-50">
                     <SelectItem value="Todos">Todas las dificultades</SelectItem>
                     <SelectItem value="Fácil">Fácil</SelectItem>
                     <SelectItem value="Medio">Medio</SelectItem>
@@ -323,14 +352,17 @@ const Campeones = () => {
           </div>
           {filteredChampions.length === 0 && (
             <div className="text-center py-12">
-              <p className="text-muted-foreground text-lg">
+              <p className="text-muted-foreground text-lg mb-4">
                 No se encontraron campeones con los filtros seleccionados.
               </p>
+              <Button variant="outline" onClick={clearFilters}>
+                Limpiar filtros
+              </Button>
             </div>
           )}
         </div>
 
-        {/* Beginner Champions Section */}
+        {/* Beginner Champions Section with Accordion for Abilities */}
         <section id="beginners" className="scroll-mt-24">
           <ScrollAnimation animation="fade-up">
             <div className="text-center mb-12">
@@ -340,7 +372,7 @@ const Campeones = () => {
               </Badge>
               <h2 className="text-3xl font-bold mb-4">Campeones para Principiantes</h2>
               <p className="text-muted-foreground max-w-2xl mx-auto">
-                Estos campeones son perfectos para empezar, con mecánicas sencillas que te permitirán enfocarte en aprender el juego
+                Estos campeones son perfectos para empezar, con mecánicas sencillas. Haz clic en cada campeón para ver sus habilidades.
               </p>
             </div>
           </ScrollAnimation>
@@ -358,24 +390,65 @@ const Campeones = () => {
                     </CardTitle>
                   </CardHeader>
                   <CardContent className="pt-6">
-                    <div className="grid md:grid-cols-2 gap-4">
+                    <Accordion type="multiple" className="space-y-4">
                       {roleData.champions.map((champion, champIndex) => (
-                        <div 
-                          key={champIndex}
-                          className="p-4 rounded-lg border border-border hover:border-primary/40 transition-all hover:shadow-md bg-card/50 group cursor-pointer"
+                        <AccordionItem 
+                          key={champIndex} 
+                          value={`${roleData.role}-${champion.id}`}
+                          className="border border-border/50 rounded-lg overflow-hidden"
                         >
-                          <div className="flex items-start justify-between mb-2">
-                            <h3 className="text-lg font-semibold text-foreground group-hover:text-primary transition-colors">
-                              {champion.name}
-                            </h3>
-                            <Badge className={difficultyColor(champion.difficulty)}>
-                              {champion.difficulty}
-                            </Badge>
-                          </div>
-                          <p className="text-sm text-muted-foreground">{champion.description}</p>
-                        </div>
+                          <AccordionTrigger className="px-4 py-3 hover:bg-muted/50 hover:no-underline">
+                            <div className="flex items-center gap-4 w-full">
+                              {version && (
+                                <img 
+                                  src={getChampionSquare(normalizeChampionId(champion.id)) || '/placeholder.svg'}
+                                  alt={champion.name}
+                                  className="w-12 h-12 rounded-lg object-cover border border-border"
+                                  onError={(e) => {
+                                    (e.target as HTMLImageElement).src = '/placeholder.svg';
+                                  }}
+                                />
+                              )}
+                              <div className="flex-1 text-left">
+                                <div className="flex items-center gap-2">
+                                  <h3 className="text-lg font-semibold text-foreground">
+                                    {champion.name}
+                                  </h3>
+                                  <Badge className={difficultyColor(champion.difficulty)}>
+                                    {champion.difficulty}
+                                  </Badge>
+                                </div>
+                                <p className="text-sm text-muted-foreground">{champion.description}</p>
+                              </div>
+                            </div>
+                          </AccordionTrigger>
+                          <AccordionContent className="px-4 pb-4">
+                            <div className="pl-16 space-y-3">
+                              <h4 className="font-medium text-foreground flex items-center gap-2">
+                                <Sparkles className="w-4 h-4 text-accent" />
+                                Habilidades
+                              </h4>
+                              <div className="grid sm:grid-cols-2 gap-2">
+                                {champion.abilities.map((ability, abilityIndex) => (
+                                  <div 
+                                    key={abilityIndex}
+                                    className="p-2 rounded-lg bg-muted/50 border border-border/50 text-sm"
+                                  >
+                                    {ability}
+                                  </div>
+                                ))}
+                              </div>
+                              <Link to={`/campeones/${champion.id}`}>
+                                <Button variant="outline" size="sm" className="mt-2">
+                                  Ver guía completa
+                                  <ChevronRight className="w-4 h-4 ml-1" />
+                                </Button>
+                              </Link>
+                            </div>
+                          </AccordionContent>
+                        </AccordionItem>
                       ))}
-                    </div>
+                    </Accordion>
                   </CardContent>
                 </Card>
               </ScrollAnimation>
@@ -394,54 +467,42 @@ const Campeones = () => {
               </CardTitle>
             </CardHeader>
             <CardContent className="relative z-10">
-              <ul className="space-y-3 text-primary-foreground/90">
+              <ul className="space-y-3">
                 <li className="flex items-start gap-3">
-                  <div className="w-6 h-6 rounded-full bg-white/20 flex items-center justify-center flex-shrink-0 mt-0.5">✓</div>
-                  Empieza con campeones marcados como "Fácil" hasta que entiendas el juego
+                  <div className="w-6 h-6 rounded-full bg-white/20 flex items-center justify-center shrink-0 mt-0.5">
+                    <span className="text-xs font-bold">1</span>
+                  </div>
+                  <p>Empieza con campeones de dificultad Fácil para enfocarte en aprender el juego</p>
                 </li>
                 <li className="flex items-start gap-3">
-                  <div className="w-6 h-6 rounded-full bg-white/20 flex items-center justify-center flex-shrink-0 mt-0.5">✓</div>
-                  Prueba diferentes roles para descubrir cuál te gusta más
+                  <div className="w-6 h-6 rounded-full bg-white/20 flex items-center justify-center shrink-0 mt-0.5">
+                    <span className="text-xs font-bold">2</span>
+                  </div>
+                  <p>Elige un rol que se adapte a tu estilo de juego preferido</p>
                 </li>
                 <li className="flex items-start gap-3">
-                  <div className="w-6 h-6 rounded-full bg-white/20 flex items-center justify-center flex-shrink-0 mt-0.5">✓</div>
-                  Lee las habilidades de tu campeón antes de entrar a una partida
+                  <div className="w-6 h-6 rounded-full bg-white/20 flex items-center justify-center shrink-0 mt-0.5">
+                    <span className="text-xs font-bold">3</span>
+                  </div>
+                  <p>Domina uno o dos campeones antes de expandir tu pool</p>
                 </li>
                 <li className="flex items-start gap-3">
-                  <div className="w-6 h-6 rounded-full bg-white/20 flex items-center justify-center flex-shrink-0 mt-0.5">✓</div>
-                  Practica en partidas contra IA antes de jugar contra otros jugadores
-                </li>
-                <li className="flex items-start gap-3">
-                  <div className="w-6 h-6 rounded-full bg-white/20 flex items-center justify-center flex-shrink-0 mt-0.5">✓</div>
-                  No tengas miedo de experimentar - ¡diviértete aprendiendo!
+                  <div className="w-6 h-6 rounded-full bg-white/20 flex items-center justify-center shrink-0 mt-0.5">
+                    <span className="text-xs font-bold">4</span>
+                  </div>
+                  <p>Usa el Quiz de Campeones para descubrir cuál encaja mejor contigo</p>
                 </li>
               </ul>
+              <div className="mt-6">
+                <Link to="/quiz-campeones">
+                  <Button variant="secondary" size="lg" className="group">
+                    Hacer Quiz de Campeones
+                    <ChevronRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                  </Button>
+                </Link>
+              </div>
             </CardContent>
           </Card>
-        </ScrollAnimation>
-
-        {/* CTA Section */}
-        <ScrollAnimation animation="fade-up">
-          <section className="mt-16 text-center py-16 px-8 rounded-2xl bg-gradient-to-br from-muted/50 to-muted border border-border/50">
-            <h2 className="text-3xl font-bold mb-4">¿Listo para Empezar?</h2>
-            <p className="text-muted-foreground mb-8 max-w-xl mx-auto">
-              Aprende los fundamentos del juego y conviértete en un mejor invocador con nuestras guías
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" asChild>
-                <Link to="/fundamentos">
-                  <BookOpen className="w-5 h-5 mr-2" />
-                  Aprender Fundamentos
-                </Link>
-              </Button>
-              <Button size="lg" variant="outline" asChild>
-                <Link to="/quiz-campeones">
-                  <Gamepad2 className="w-5 h-5 mr-2" />
-                  Quiz de Campeones
-                </Link>
-              </Button>
-            </div>
-          </section>
         </ScrollAnimation>
       </main>
 
