@@ -1,15 +1,22 @@
 import { useParams, Navigate } from "react-router-dom";
 import Navigation from "@/components/Navigation";
+import Footer from "@/components/Footer";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Skeleton } from "@/components/ui/skeleton";
-import { championsData } from "@/data/champions";
-import { Sword, Shield, Zap, Target, Book, Package, Lightbulb, Video, RefreshCw } from "lucide-react";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
+import { championsData } from "@/data/champions";
+import { Sword, Shield, Zap, Target, Book, Package, Lightbulb, Video, RefreshCw, Swords, BookOpen } from "lucide-react";
 import { useDDragonVersion, useDDragonUrls } from "@/hooks/useDDragon";
 import { normalizeChampionId } from "@/lib/ddragon";
+
+// New components
+import ChampionLore from "@/components/ChampionLore";
+import ChampionMatchups from "@/components/ChampionMatchups";
+import ChampionCombos from "@/components/ChampionCombos";
+import ChampionBuilds from "@/components/ChampionBuilds";
 
 const ChampionDetail = () => {
   const { id } = useParams<{ id: string }>();
@@ -37,7 +44,7 @@ const ChampionDetail = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background flex flex-col">
       <Navigation />
       <Breadcrumbs />
       
@@ -53,7 +60,7 @@ const ChampionDetail = () => {
         <div className="absolute inset-0 bg-gradient-to-r from-background/80 to-transparent" />
       </section>
 
-      <section className="container mx-auto px-4 -mt-20 relative z-10">
+      <section className="container mx-auto px-4 -mt-20 relative z-10 flex-1">
         {/* Champion Header */}
         <div className="max-w-5xl mx-auto mb-12">
           <div className="flex flex-col md:flex-row gap-6 items-start">
@@ -97,61 +104,73 @@ const ChampionDetail = () => {
           </div>
         </div>
 
-        <div className="max-w-5xl mx-auto">
+        <div className="max-w-5xl mx-auto pb-12">
           <Tabs defaultValue="resumen" className="w-full">
-            <TabsList className="grid w-full grid-cols-5">
-              <TabsTrigger value="resumen">Resumen</TabsTrigger>
-              <TabsTrigger value="habilidades">
-                <Book className="h-4 w-4 mr-2" />
-                Habilidades
+            <TabsList className="grid w-full grid-cols-3 md:grid-cols-6 gap-1 h-auto p-1">
+              <TabsTrigger value="resumen" className="text-xs md:text-sm">
+                <BookOpen className="h-4 w-4 mr-1 md:mr-2" />
+                <span className="hidden sm:inline">Resumen</span>
               </TabsTrigger>
-              <TabsTrigger value="build">
-                <Package className="h-4 w-4 mr-2" />
-                Build & Runas
+              <TabsTrigger value="habilidades" className="text-xs md:text-sm">
+                <Book className="h-4 w-4 mr-1 md:mr-2" />
+                <span className="hidden sm:inline">Habilidades</span>
               </TabsTrigger>
-              <TabsTrigger value="consejos">
-                <Lightbulb className="h-4 w-4 mr-2" />
-                Consejos
+              <TabsTrigger value="build" className="text-xs md:text-sm">
+                <Package className="h-4 w-4 mr-1 md:mr-2" />
+                <span className="hidden sm:inline">Build</span>
+              </TabsTrigger>
+              <TabsTrigger value="matchups" className="text-xs md:text-sm">
+                <Swords className="h-4 w-4 mr-1 md:mr-2" />
+                <span className="hidden sm:inline">Matchups</span>
+              </TabsTrigger>
+              <TabsTrigger value="consejos" className="text-xs md:text-sm">
+                <Lightbulb className="h-4 w-4 mr-1 md:mr-2" />
+                <span className="hidden sm:inline">Consejos</span>
               </TabsTrigger>
               {champion.guideVideo && (
-                <TabsTrigger value="video">
-                  <Video className="h-4 w-4 mr-2" />
-                  Video Guía
+                <TabsTrigger value="video" className="text-xs md:text-sm">
+                  <Video className="h-4 w-4 mr-1 md:mr-2" />
+                  <span className="hidden sm:inline">Video</span>
                 </TabsTrigger>
               )}
             </TabsList>
 
-            {/* Resumen Tab */}
+            {/* Resumen Tab - Now includes Lore */}
             <TabsContent value="resumen" className="space-y-6 mt-6">
+              <ChampionLore 
+                name={champion.name}
+                lore={champion.lore}
+                region={champion.region}
+                description={champion.description}
+              />
+              
               <Card className="border-lol-blue/30">
                 <CardHeader>
                   <CardTitle>Información General</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
-                  <div>
-                    <h3 className="font-semibold mb-2">Descripción</h3>
-                    <p className="text-muted-foreground">{champion.description}</p>
-                  </div>
-                  <div>
-                    <h3 className="font-semibold mb-2">Roles</h3>
-                    <div className="flex flex-wrap gap-2">
-                      {champion.role.map((role) => (
-                        <Badge key={role} variant="secondary">{role}</Badge>
-                      ))}
+                  <div className="grid md:grid-cols-3 gap-4">
+                    <div className="p-4 rounded-lg bg-muted/30">
+                      <h3 className="font-semibold mb-2 text-sm text-muted-foreground">Roles</h3>
+                      <div className="flex flex-wrap gap-2">
+                        {champion.role.map((role) => (
+                          <Badge key={role} variant="secondary">{role}</Badge>
+                        ))}
+                      </div>
                     </div>
-                  </div>
-                  <div>
-                    <h3 className="font-semibold mb-2">Tipo de Daño</h3>
-                    <Badge variant="outline" className="flex items-center gap-1 w-fit">
-                      {damageTypeIcon[champion.damageType]}
-                      {champion.damageType}
-                    </Badge>
-                  </div>
-                  <div>
-                    <h3 className="font-semibold mb-2">Dificultad</h3>
-                    <Badge className={difficultyColor[champion.difficulty]}>
-                      {champion.difficulty}
-                    </Badge>
+                    <div className="p-4 rounded-lg bg-muted/30">
+                      <h3 className="font-semibold mb-2 text-sm text-muted-foreground">Tipo de Daño</h3>
+                      <Badge variant="outline" className="flex items-center gap-1 w-fit">
+                        {damageTypeIcon[champion.damageType]}
+                        {champion.damageType}
+                      </Badge>
+                    </div>
+                    <div className="p-4 rounded-lg bg-muted/30">
+                      <h3 className="font-semibold mb-2 text-sm text-muted-foreground">Dificultad</h3>
+                      <Badge className={difficultyColor[champion.difficulty]}>
+                        {champion.difficulty}
+                      </Badge>
+                    </div>
                   </div>
                 </CardContent>
               </Card>
@@ -183,7 +202,7 @@ const ChampionDetail = () => {
                     )}
                   </div>
                   
-                  {(['q', 'w', 'e', 'r'] as const).map((key, index) => (
+                  {(['q', 'w', 'e', 'r'] as const).map((key) => (
                     <div key={key} className="p-4 rounded-lg bg-card-foreground/5 border border-border">
                       <div className="flex items-center gap-2 mb-2">
                         <span className="px-2 py-1 rounded bg-lol-blue/20 text-lol-blue font-bold text-sm uppercase">{key}</span>
@@ -204,47 +223,28 @@ const ChampionDetail = () => {
                   ))}
                 </CardContent>
               </Card>
+
+              {/* Combos Section - within abilities tab */}
+              <ChampionCombos championName={champion.name} combos={champion.combos} />
             </TabsContent>
 
             {/* Build & Runas Tab */}
             <TabsContent value="build" className="space-y-6 mt-6">
-              <div className="grid md:grid-cols-2 gap-6">
-                <Card className="border-lol-gold/30">
-                  <CardHeader>
-                    <CardTitle>Build Recomendada</CardTitle>
-                    <CardDescription>Objetos para empezar con {champion.name}</CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <ul className="space-y-2">
-                      {champion.build.map((item, index) => (
-                        <li key={index} className="flex items-center gap-2">
-                          <span className="w-6 h-6 rounded-full bg-lol-gold/20 text-lol-gold flex items-center justify-center text-sm font-bold">
-                            {index + 1}
-                          </span>
-                          <span className="text-foreground">{item}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </CardContent>
-                </Card>
+              <ChampionBuilds
+                championName={champion.name}
+                builds={champion.builds}
+                defaultBuild={champion.build}
+                runes={champion.runes}
+                summonerSpells={champion.summonerSpells}
+              />
+            </TabsContent>
 
-                <Card className="border-accent/30">
-                  <CardHeader>
-                    <CardTitle>Runas Recomendadas</CardTitle>
-                    <CardDescription>Configuración estándar de runas</CardDescription>
-                  </CardHeader>
-                  <CardContent className="space-y-4">
-                    <div>
-                      <h4 className="font-semibold text-accent mb-2">Primaria</h4>
-                      <p className="text-foreground/90">{champion.runes.primary}</p>
-                    </div>
-                    <div>
-                      <h4 className="font-semibold text-accent mb-2">Secundaria</h4>
-                      <p className="text-foreground/90">{champion.runes.secondary}</p>
-                    </div>
-                  </CardContent>
-                </Card>
-              </div>
+            {/* Matchups Tab */}
+            <TabsContent value="matchups" className="space-y-6 mt-6">
+              <ChampionMatchups 
+                championName={champion.name} 
+                matchups={champion.matchups} 
+              />
             </TabsContent>
 
             {/* Consejos Tab */}
@@ -258,7 +258,7 @@ const ChampionDetail = () => {
                   <ul className="space-y-3">
                     {champion.tips.map((tip, index) => (
                       <li key={index} className="flex gap-3">
-                        <span className="text-green-400 font-bold">✓</span>
+                        <span className="text-green-400 font-bold flex-shrink-0">✓</span>
                         <span className="text-foreground/90">{tip}</span>
                       </li>
                     ))}
@@ -291,6 +291,8 @@ const ChampionDetail = () => {
           </Tabs>
         </div>
       </section>
+
+      <Footer />
     </div>
   );
 };

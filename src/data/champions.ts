@@ -1,3 +1,24 @@
+export interface Matchup {
+  championId: string;
+  championName: string;
+  difficulty: 'Fácil' | 'Medio' | 'Difícil';
+  tip: string;
+}
+
+export interface Combo {
+  name: string;
+  keys: string[];
+  description: string;
+  difficulty: 'Básico' | 'Intermedio' | 'Avanzado';
+}
+
+export interface BuildOption {
+  name: string;
+  description: string;
+  items: string[];
+  situational?: boolean;
+}
+
 export interface Champion {
   id: string;
   name: string;
@@ -6,6 +27,8 @@ export interface Champion {
   difficulty: 'Fácil' | 'Medio' | 'Difícil';
   damageType: 'AD' | 'AP' | 'Tanque' | 'Híbrido';
   description: string;
+  lore?: string;
+  region?: string;
   abilities: {
     passive: { name: string; description: string; video?: string };
     q: { name: string; description: string; video?: string };
@@ -14,11 +37,18 @@ export interface Champion {
     r: { name: string; description: string; video?: string };
   };
   build: string[];
+  builds?: BuildOption[];
   runes: {
     primary: string;
     secondary: string;
   };
   tips: string[];
+  matchups?: {
+    easy: Matchup[];
+    hard: Matchup[];
+  };
+  combos?: Combo[];
+  summonerSpells?: string[];
   guideVideo?: string;
 }
 
@@ -32,6 +62,8 @@ export const championsData: Champion[] = [
     difficulty: 'Fácil',
     damageType: 'AD',
     description: 'Garen es el campeón perfecto para principiantes. Su pasiva le permite regenerar vida, y su kit es muy directo: giras y haces daño. No usa maná, así que nunca te quedarás sin recursos.',
+    lore: 'Garen es un guerrero noble y orgulloso de Demacia, líder de los Vanguardia. Juró proteger su nación y a su pueblo con su vida, empuñando una enorme espada y vistiendo una armadura imponente. Su devoción a la justicia es inquebrantable, aunque su relación con la magia, y con cierta maga noxiana, complica su visión del mundo.',
+    region: 'Demacia',
     abilities: {
       passive: { name: 'Perseverancia', description: 'Regenera vida cuando no recibe daño durante unos segundos.' },
       q: { name: 'Golpe Decisivo', description: 'Garen se acelera y su próximo ataque hace daño adicional y silencia al enemigo.' },
@@ -40,6 +72,24 @@ export const championsData: Champion[] = [
       r: { name: 'Justicia Demaciana', description: 'Ejecuta a un enemigo, causando daño verdadero basado en la vida que le falta.' },
     },
     build: ['Botas de rapidez', 'Cuchilla negra', 'Fuerza de Trinidad', 'Baile de la muerte', 'Calibrador de Sterak'],
+    builds: [
+      {
+        name: 'Estándar',
+        description: 'Build equilibrada para la mayoría de partidas',
+        items: ['Botas de rapidez', 'Cuchilla negra', 'Fuerza de Trinidad', 'Baile de la muerte', 'Calibrador de Sterak'],
+      },
+      {
+        name: 'Agresiva',
+        description: 'Maximiza el daño cuando estás adelantado',
+        items: ['Botas de berserker', 'Fuerza de Trinidad', 'Filo del infinito', 'Baile de la muerte', 'Señor de la muerte'],
+      },
+      {
+        name: 'Defensiva',
+        description: 'Contra equipos con mucho daño físico',
+        items: ['Botas de acero', 'Cuchilla negra', 'Corazón de hielo', 'Calibrador de Sterak', 'Armadura de Warmog'],
+        situational: true,
+      },
+    ],
     runes: {
       primary: 'Conquistador (Precisión)',
       secondary: 'Demoler + Revestimiento de huesos (Valor)',
@@ -51,6 +101,57 @@ export const championsData: Champion[] = [
       'Tu pasiva te permite quedarte más tiempo en línea sin tener que volver a base',
       'Usa W cuando sepas que recibirás mucho daño (como una ultimate enemiga)',
     ],
+    matchups: {
+      easy: [
+        {
+          championId: 'nasus',
+          championName: 'Nasus',
+          difficulty: 'Fácil',
+          tip: 'Presiona temprano antes de que escale. Tu Q cancela su Q y tu silencio le impide escapar.',
+        },
+        {
+          championId: 'kayle',
+          championName: 'Kayle',
+          difficulty: 'Fácil',
+          tip: 'Es muy débil en niveles bajos. Agrede constantemente antes del nivel 6.',
+        },
+      ],
+      hard: [
+        {
+          championId: 'darius',
+          championName: 'Darius',
+          difficulty: 'Difícil',
+          tip: 'No tradees largamente. Su sangrado te destruye. Espera jungla o pokea con Q cortos.',
+        },
+        {
+          championId: 'vayne',
+          championName: 'Vayne',
+          difficulty: 'Difícil',
+          tip: 'Su daño verdadero ignora tu tanqueza. Intenta buscar all-in con Flash + Q + R.',
+        },
+      ],
+    },
+    combos: [
+      {
+        name: 'Combo Básico',
+        keys: ['Q', 'AA', 'E'],
+        description: 'Tu combo más simple. Activa Q, golpea para silenciar, y luego gira con E.',
+        difficulty: 'Básico',
+      },
+      {
+        name: 'All-in Completo',
+        keys: ['Q', 'AA', 'E', 'W', 'R'],
+        description: 'Combo de todo o nada. Activa W cuando el enemigo intente responderte.',
+        difficulty: 'Básico',
+      },
+      {
+        name: 'Flash Engage',
+        keys: ['Flash', 'Q', 'AA', 'E', 'R'],
+        description: 'Sorprende enemigos que creen estar a salvo. Flash + Q es instantáneo.',
+        difficulty: 'Intermedio',
+      },
+    ],
+    summonerSpells: ['Flash', 'Ignite', 'Teleport'],
   },
   {
     id: 'malphite',
