@@ -161,6 +161,8 @@ export const championsData: Champion[] = [
     difficulty: 'Fácil',
     damageType: 'AP',
     description: 'Malphite es un tanque de roca sólida, ideal contra equipos con mucho daño físico. Su ultimate puede cambiar el curso de una pelea al noquear a varios enemigos.',
+    lore: 'Malphite es un ser de roca viviente nacido de los restos del Monolito, una estructura mágica destruida por la Nada. Vaga por Runaterra buscando propósito y fragmentos de su antiguo hogar, enfrentándose a las criaturas del Vacío que destruyeron todo lo que conocía.',
+    region: 'Ixtal',
     abilities: {
       passive: { name: 'Escudo de Granito', description: 'Malphite obtiene un escudo que se regenera después de no recibir daño.' },
       q: { name: 'Fragmento Sísmico', description: 'Lanza una roca que daña, ralentiza al enemigo y le roba velocidad de movimiento.' },
@@ -169,6 +171,24 @@ export const championsData: Champion[] = [
       r: { name: 'Fuerza Imparable', description: 'Se lanza hacia una ubicación, dañando y noqueando a todos los enemigos en el área.' },
     },
     build: ['Botas de mercurio', 'Égida de fuego solar', 'Guantelete de hielo', 'Máscara abisal', 'Corazón de hielo'],
+    builds: [
+      {
+        name: 'Tanque Clásico',
+        description: 'Build estándar contra equipos AD',
+        items: ['Botas de acero', 'Égida de fuego solar', 'Corazón de hielo', 'Guantelete de hielo', 'Armadura de Warmog'],
+      },
+      {
+        name: 'AP Burst',
+        description: 'Maximiza el daño de tu R para eliminar carries',
+        items: ['Botas de hechicero', 'Ecos de Luden', 'Sombrero mortal de Rabadon', 'Bastón del Vacío', 'Reloj de arena de Zhonya'],
+      },
+      {
+        name: 'Híbrido',
+        description: 'Equilibrio entre daño y resistencia',
+        items: ['Botas de mercurio', 'Cinturón cohete Hextech', 'Máscara abisal', 'Égida de fuego solar', 'Corazón de hielo'],
+        situational: true,
+      },
+    ],
     runes: {
       primary: 'Cometa Arcano (Brujería)',
       secondary: 'Demoler + Fuente de vida (Valor)',
@@ -180,6 +200,57 @@ export const championsData: Champion[] = [
       'Contra campeones de daño físico, eres muy resistente gracias a tu W',
       'No uses tu ultimate para escapar a menos que sea absolutamente necesario',
     ],
+    matchups: {
+      easy: [
+        {
+          championId: 'tryndamere',
+          championName: 'Tryndamere',
+          difficulty: 'Fácil',
+          tip: 'Tu E reduce su velocidad de ataque y tu armadura lo anula. Pokea con Q constantemente.',
+        },
+        {
+          championId: 'yasuo',
+          championName: 'Yasuo',
+          difficulty: 'Fácil',
+          tip: 'Es AD puro. Tu armadura lo destruye y tu R atraviesa su muro de viento.',
+        },
+      ],
+      hard: [
+        {
+          championId: 'sylas',
+          championName: 'Sylas',
+          difficulty: 'Difícil',
+          tip: 'Roba tu R y hace daño mágico. Construye resistencia mágica temprana.',
+        },
+        {
+          championId: 'mordekaiser',
+          championName: 'Mordekaiser',
+          difficulty: 'Difícil',
+          tip: 'Su daño mágico ignora tu armadura. Evita peleas largas, pokea y retrocede.',
+        },
+      ],
+    },
+    combos: [
+      {
+        name: 'Poke Básico',
+        keys: ['Q', 'AA'],
+        description: 'Lanza Q para robar velocidad y golpea mientras huyen.',
+        difficulty: 'Básico',
+      },
+      {
+        name: 'All-in Engage',
+        keys: ['R', 'E', 'W', 'Q'],
+        description: 'Inicia con R para noquear, E inmediatamente, activa W y persigue con Q.',
+        difficulty: 'Básico',
+      },
+      {
+        name: 'Flash Engage',
+        keys: ['Flash', 'R', 'E', 'W'],
+        description: 'Extiende el rango de tu R con Flash para sorprender al enemigo.',
+        difficulty: 'Intermedio',
+      },
+    ],
+    summonerSpells: ['Flash', 'Teleport', 'Ignite'],
   },
   {
     id: 'darius',
@@ -189,6 +260,8 @@ export const championsData: Champion[] = [
     difficulty: 'Medio',
     damageType: 'AD',
     description: 'Darius es un luchador brutal que domina los duelos 1v1. Cuanto más tiempo peleas contra él, más fuerte se vuelve gracias a su pasiva de sangrado.',
+    lore: 'Darius es el temido general de Noxus, conocido por su brutalidad en el campo de batalla. Ascendió desde la pobreza hasta convertirse en la Mano de Noxus, el ejecutor de la voluntad del imperio. Su hacha ha cortado innumerables cabezas y su lealtad a Noxus es inquebrantable.',
+    region: 'Noxus',
     abilities: {
       passive: { name: 'Hemorragia', description: 'Los ataques y habilidades de Darius causan sangrado. Con 5 acumulaciones, Darius obtiene mucho daño de ataque adicional.' },
       q: { name: 'Decimate', description: 'Gira su hacha en círculo. La parte externa cura a Darius y hace más daño.' },
@@ -197,6 +270,24 @@ export const championsData: Champion[] = [
       r: { name: 'Guillotina Noxiana', description: 'Salta y ejecuta a un enemigo. Si mata, puede usarla de nuevo inmediatamente.' },
     },
     build: ['Botas de rapidez', 'Cuchilla negra', 'Baile de la muerte', 'Fuerza de Trinidad', 'Calibrador de Sterak'],
+    builds: [
+      {
+        name: 'Estándar',
+        description: 'Build equilibrada para la mayoría de partidas',
+        items: ['Botas de rapidez', 'Fuerza de Trinidad', 'Calibrador de Sterak', 'Baile de la muerte', 'Armadura de Warmog'],
+      },
+      {
+        name: 'Contra Tanques',
+        description: 'Penetración de armadura para destruir tanques',
+        items: ['Botas de rapidez', 'Cuchilla negra', 'Fuerza de Trinidad', 'Señor de la muerte', 'Baile de la muerte'],
+      },
+      {
+        name: 'Full Tanque',
+        description: 'Cuando necesitas sobrevivir en teamfights',
+        items: ['Botas de acero', 'Cuchilla negra', 'Corazón de hielo', 'Calibrador de Sterak', 'Piedra de gárgola'],
+        situational: true,
+      },
+    ],
     runes: {
       primary: 'Conquistador (Precisión)',
       secondary: 'Demoler + Revestimiento de huesos (Valor)',
@@ -208,6 +299,63 @@ export const championsData: Champion[] = [
       'Si matas con tu R, puedes usarla de nuevo, lo que te permite conseguir pentakills',
       'Contra campeones con movilidad, usa tu E con cuidado para no desperdiciarla',
     ],
+    matchups: {
+      easy: [
+        {
+          championId: 'garen',
+          championName: 'Garen',
+          difficulty: 'Fácil',
+          tip: 'Tu sangrado cancela su pasiva. Tradea agresivamente y no le dejes regenerar.',
+        },
+        {
+          championId: 'nasus',
+          championName: 'Nasus',
+          difficulty: 'Fácil',
+          tip: 'Es débil temprano. Agrede constantemente para que no pueda farmear su Q.',
+        },
+      ],
+      hard: [
+        {
+          championId: 'vayne',
+          championName: 'Vayne',
+          difficulty: 'Difícil',
+          tip: 'Su kite y daño verdadero te destruyen. Necesitas Flash + E para atraparla.',
+        },
+        {
+          championId: 'quinn',
+          championName: 'Quinn',
+          difficulty: 'Difícil',
+          tip: 'Te pokea sin parar. Espera a nivel 6 y busca all-in con Ghost.',
+        },
+      ],
+    },
+    combos: [
+      {
+        name: 'Trade Corto',
+        keys: ['AA', 'W', 'Q'],
+        description: 'Un auto con W para ralentizar y Q mientras intentan huir.',
+        difficulty: 'Básico',
+      },
+      {
+        name: 'All-in Completo',
+        keys: ['E', 'AA', 'W', 'Q', 'R'],
+        description: 'Atrae con E, acumula sangrado con autos y W, Q para curar, R para ejecutar.',
+        difficulty: 'Intermedio',
+      },
+      {
+        name: 'Flash Execute',
+        keys: ['Flash', 'R'],
+        description: 'Flashea encima del enemigo y ejecuta con R. Perfecto para kills sorpresa.',
+        difficulty: 'Intermedio',
+      },
+      {
+        name: 'Noxian Guillotine Chain',
+        keys: ['R', 'AA', 'W', 'Q', 'R'],
+        description: 'Ejecuta un enemigo y encadena R al siguiente. El sueño del pentakill.',
+        difficulty: 'Avanzado',
+      },
+    ],
+    summonerSpells: ['Flash', 'Ghost', 'Teleport'],
   },
   // JUNGLE
   {
@@ -218,6 +366,8 @@ export const championsData: Champion[] = [
     difficulty: 'Fácil',
     damageType: 'AD',
     description: 'Warwick es el mejor jungla para principiantes. Su pasiva lo cura constantemente en la jungla, y su W te muestra dónde están los enemigos con poca vida.',
+    lore: 'Warwick fue una vez un hombre de Zaun, transformado en una bestia por los crueles experimentos de Singed. Ahora vaga por las calles oscuras de Zaun, cazando criminales y bebiendo su sangre. Aunque es un monstruo, una parte de su humanidad lucha por emerger.',
+    region: 'Zaun',
     abilities: {
       passive: { name: 'Sed Eterna', description: 'Los ataques curan a Warwick. Hace daño adicional contra enemigos con poca vida.' },
       q: { name: 'Fauces del Lobo', description: 'Muerde a un enemigo, curándose por el daño causado. Puedes lanzarte detrás del enemigo.' },
@@ -226,6 +376,24 @@ export const championsData: Champion[] = [
       r: { name: 'Restricción Infinita', description: 'Salta hacia un enemigo, suprimiendo y dañándolo.' },
     },
     build: ['Botas de movilidad', 'Quimiopunka divino', 'Calibrador de Sterak', 'Fuerza de Trinidad', 'Cota de espinas'],
+    builds: [
+      {
+        name: 'Bruiser Estándar',
+        description: 'Build equilibrada con daño y resistencia',
+        items: ['Botas de rapidez', 'Quimiopunka divino', 'Calibrador de Sterak', 'Baile de la muerte', 'Espíritu visionario'],
+      },
+      {
+        name: 'Full Tanque',
+        description: 'Cuando necesitas iniciar y aguantar mucho',
+        items: ['Botas de acero', 'Égida de fuego solar', 'Espíritu visionario', 'Cota de espinas', 'Armadura de Warmog'],
+      },
+      {
+        name: 'On-Hit',
+        description: 'Maximiza el daño con ataques rápidos',
+        items: ['Botas de berserker', 'Hoja del rey arruinado', 'Quimiopunka divino', 'Ingenio maligno', 'Filo del infinito'],
+        situational: true,
+      },
+    ],
     runes: {
       primary: 'Ataque presionante (Precisión)',
       secondary: 'Demoler + Revestimiento de huesos (Valor)',
@@ -237,6 +405,57 @@ export const championsData: Champion[] = [
       'Tu R puede atravesar paredes, úsala para sorprender a los enemigos',
       'Presiona Q de nuevo para seguir a enemigos que usen dash o flash',
     ],
+    matchups: {
+      easy: [
+        {
+          championId: 'master-yi',
+          championName: 'Maestro Yi',
+          difficulty: 'Fácil',
+          tip: 'Tu E lo asusta cuando intenta pelear. Tu R cancela su ultimate.',
+        },
+        {
+          championId: 'amumu',
+          championName: 'Amumu',
+          difficulty: 'Fácil',
+          tip: 'Eres más fuerte en duelos 1v1. Invade su jungla constantemente.',
+        },
+      ],
+      hard: [
+        {
+          championId: 'lillia',
+          championName: 'Lillia',
+          difficulty: 'Difícil',
+          tip: 'Te kiteará infinitamente. Necesitas Flash + R para atraparla.',
+        },
+        {
+          championId: 'graves',
+          championName: 'Graves',
+          difficulty: 'Difícil',
+          tip: 'Su burst te mata antes de que puedas curarte. Evita peleas directas.',
+        },
+      ],
+    },
+    combos: [
+      {
+        name: 'Gank Básico',
+        keys: ['E', 'Q', 'AA'],
+        description: 'Activa E mientras te acercas, Q para gap close, y ataques básicos.',
+        difficulty: 'Básico',
+      },
+      {
+        name: 'All-in con R',
+        keys: ['R', 'E', 'Q', 'AA'],
+        description: 'Inicia con R desde lejos, activa E durante la supresión, Q para seguir.',
+        difficulty: 'Básico',
+      },
+      {
+        name: 'Q Hold Engage',
+        keys: ['Q', 'E', 'R'],
+        description: 'Mantén Q para lanzarte detrás del enemigo, E para asustarlo hacia tu equipo.',
+        difficulty: 'Intermedio',
+      },
+    ],
+    summonerSpells: ['Flash', 'Smite'],
   },
   {
     id: 'master-yi',
@@ -274,6 +493,8 @@ export const championsData: Champion[] = [
     difficulty: 'Fácil',
     damageType: 'AP',
     description: 'Amumu es un tanque jungla con una ultimate devastadora para peleas de equipo. Es perfecto para principiantes que quieren aprender a iniciar peleas.',
+    lore: 'Amumu es una momia solitaria de Shurima, condenada a vagar eternamente sin recordar quién fue. Cualquiera que se acerque demasiado muere misteriosamente, dejándolo en una soledad eterna. Busca desesperadamente un amigo que sobreviva a su maldición.',
+    region: 'Shurima',
     abilities: {
       passive: { name: 'Toque maldito', description: 'Los hechizos de Amumu maldicen a los enemigos, haciendo que reciban más daño mágico.' },
       q: { name: 'Lanzamiento de vendas', description: 'Lanza sus vendas. Si golpea, se lanza hacia el enemigo y lo aturde.' },
@@ -282,6 +503,24 @@ export const championsData: Champion[] = [
       r: { name: 'Maldición del faraón triste', description: 'Atrapa a todos los enemigos cercanos con vendas, inmovilizándolos.' },
     },
     build: ['Botas de movilidad', 'Égida de fuego solar', 'Máscara abisal', 'Tormento de Liandry', 'Armadura de Warmog'],
+    builds: [
+      {
+        name: 'Tanque AP',
+        description: 'Build estándar con daño mágico y resistencia',
+        items: ['Botas de movilidad', 'Égida de fuego solar', 'Máscara abisal', 'Espíritu visionario', 'Armadura de Warmog'],
+      },
+      {
+        name: 'Full AP',
+        description: 'Maximiza el daño de tu R y W',
+        items: ['Botas de hechicero', 'Tormento de Liandry', 'Sombrero mortal de Rabadon', 'Reloj de arena de Zhonya', 'Bastón del Vacío'],
+      },
+      {
+        name: 'Full Tanque',
+        description: 'Para cuando necesitas ser el frontliner principal',
+        items: ['Botas de acero', 'Égida de fuego solar', 'Corazón de hielo', 'Armadura de Warmog', 'Piedra de gárgola'],
+        situational: true,
+      },
+    ],
     runes: {
       primary: 'Reverberación (Brujería)',
       secondary: 'Demoler + Revestimiento de huesos (Valor)',
@@ -293,6 +532,57 @@ export const championsData: Champion[] = [
       'Tu E se recarga más rápido cuando recibes golpes, así que no temas tanquear',
       'Usa Flash + R para sorprender a los enemigos en peleas importantes',
     ],
+    matchups: {
+      easy: [
+        {
+          championId: 'sejuani',
+          championName: 'Sejuani',
+          difficulty: 'Fácil',
+          tip: 'Tienes mejor clear y más impacto en teamfights. Farmea y escala.',
+        },
+        {
+          championId: 'rammus',
+          championName: 'Rammus',
+          difficulty: 'Fácil',
+          tip: 'Tu daño mágico ignora su armadura. Ganas peleas 1v1.',
+        },
+      ],
+      hard: [
+        {
+          championId: 'lee-sin',
+          championName: 'Lee Sin',
+          difficulty: 'Difícil',
+          tip: 'Te invade constantemente. Pide ayuda a tu equipo y evita duelos.',
+        },
+        {
+          championId: 'nidalee',
+          championName: 'Nidalee',
+          difficulty: 'Difícil',
+          tip: 'Te pokea y te quita objetivos. Espera a nivel 6 para pelear.',
+        },
+      ],
+    },
+    combos: [
+      {
+        name: 'Gank Básico',
+        keys: ['Q', 'E', 'W'],
+        description: 'Conecta Q para entrar, E para daño, W activo mientras peleas.',
+        difficulty: 'Básico',
+      },
+      {
+        name: 'Flash Ultimate',
+        keys: ['Flash', 'R', 'Q', 'E'],
+        description: 'Flash + R para atrapar a múltiples enemigos desprevenidos.',
+        difficulty: 'Intermedio',
+      },
+      {
+        name: 'Doble Q',
+        keys: ['Q', 'AA', 'E', 'Q', 'R'],
+        description: 'Aprovecha las dos cargas de Q para máximo CC.',
+        difficulty: 'Intermedio',
+      },
+    ],
+    summonerSpells: ['Flash', 'Smite'],
   },
   // MID LANE
   {
@@ -303,6 +593,8 @@ export const championsData: Champion[] = [
     difficulty: 'Fácil',
     damageType: 'AP',
     description: 'Annie es perfecta para aprender mid lane. Su pasiva te indica claramente cuándo puedes aturdirán, y Tibbers (su oso) hace mucho daño.',
+    lore: 'Annie es una niña prodigio de magia oscura nacida en las Montañas Envueltas. Después de perder a su familia en circunstancias trágicas, canaliza su ira y tristeza a través de Tibbers, su oso de peluche animado por magia. Aunque parece inocente, su poder es aterrador.',
+    region: 'Noxus',
     abilities: {
       passive: { name: 'Pirotecnia', description: 'Cada 4 hechizos, el próximo aturde al enemigo.' },
       q: { name: 'Desintegrar', description: 'Lanza una bola de fuego. Si mata, devuelve el maná.' },
@@ -311,6 +603,24 @@ export const championsData: Champion[] = [
       r: { name: 'Invocar a Tibbers', description: 'Invoca a Tibbers, un oso gigante que ataca a los enemigos.' },
     },
     build: ['Botas de hechicero', 'Cinturón cohete Hextech', 'Sombrero mortal de Rabadon', 'Bastón del Vacío', 'Reloj de arena de Zhonya'],
+    builds: [
+      {
+        name: 'Burst Estándar',
+        description: 'Maximiza el daño de un solo combo',
+        items: ['Botas de hechicero', 'Cinturón cohete Hextech', 'Sombrero mortal de Rabadon', 'Bastón del Vacío', 'Reloj de arena de Zhonya'],
+      },
+      {
+        name: 'Ecos de Luden',
+        description: 'Más poke y waveclear en línea',
+        items: ['Botas de hechicero', 'Ecos de Luden', 'Sombrero mortal de Rabadon', 'Horizonte de enfoque', 'Bastón del Vacío'],
+      },
+      {
+        name: 'Defensiva',
+        description: 'Contra equipos con mucho burst',
+        items: ['Botas de mercurio', 'Cinturón cohete Hextech', 'Reloj de arena de Zhonya', 'Velo de la banshee', 'Sombrero mortal de Rabadon'],
+        situational: true,
+      },
+    ],
     runes: {
       primary: 'Electrocutar (Dominación)',
       secondary: 'Banda de maná + Trascendencia (Brujería)',
@@ -322,6 +632,57 @@ export const championsData: Champion[] = [
       'Tibbers sigue atacando después de invocarlo, contrólalo presionando R',
       'Usa E cuando veas skillshots importantes venir hacia ti',
     ],
+    matchups: {
+      easy: [
+        {
+          championId: 'veigar',
+          championName: 'Veigar',
+          difficulty: 'Fácil',
+          tip: 'Tienes más rango y burst temprano. Agrede antes de que escale.',
+        },
+        {
+          championId: 'twisted-fate',
+          championName: 'Twisted Fate',
+          difficulty: 'Fácil',
+          tip: 'Es frágil y tú tienes más burst. Combo completo = kill.',
+        },
+      ],
+      hard: [
+        {
+          championId: 'syndra',
+          championName: 'Syndra',
+          difficulty: 'Difícil',
+          tip: 'Tiene más rango. Espera que falle sus habilidades para entrar.',
+        },
+        {
+          championId: 'xerath',
+          championName: 'Xerath',
+          difficulty: 'Difícil',
+          tip: 'Te pokea desde muy lejos. Necesitas Flash + R para alcanzarlo.',
+        },
+      ],
+    },
+    combos: [
+      {
+        name: 'Combo Q Básico',
+        keys: ['Q', 'AA'],
+        description: 'Farmea minions con Q, si mata recuperas maná.',
+        difficulty: 'Básico',
+      },
+      {
+        name: 'Burst Completo',
+        keys: ['R', 'W', 'Q', 'AA'],
+        description: 'R con stun preparado, W inmediatamente, Q y auto.',
+        difficulty: 'Básico',
+      },
+      {
+        name: 'Flash Tibbers',
+        keys: ['Flash', 'R', 'W', 'Q'],
+        description: 'El combo más icónico. Flash + R sorprende a cualquiera.',
+        difficulty: 'Intermedio',
+      },
+    ],
+    summonerSpells: ['Flash', 'Ignite', 'Teleport'],
   },
   {
     id: 'lux',
@@ -331,6 +692,8 @@ export const championsData: Champion[] = [
     difficulty: 'Medio',
     damageType: 'AP',
     description: 'Lux es una maga de largo alcance con mucho daño y control. Es segura de jugar y puede eliminar enemigos desde lejos.',
+    lore: 'Lux es una maga nacida en Demacia, una nación que persigue y teme la magia. Oculta sus poderes de su propia familia mientras secretamente ayuda a otros magos a escapar. Vive una doble vida, siendo la brillante hija de los Crownguard mientras esconde su verdadera naturaleza.',
+    region: 'Demacia',
     abilities: {
       passive: { name: 'Iluminación', description: 'Las habilidades de Lux marcan a los enemigos. Su próximo ataque detona la marca haciendo daño adicional.' },
       q: { name: 'Atadura de luz', description: 'Dispara una esfera de luz que ata a los primeros dos enemigos, enraizándolos.' },
@@ -339,6 +702,24 @@ export const championsData: Champion[] = [
       r: { name: 'Chispa final', description: 'Dispara un gran láser que atraviesa todo, dañando a todos los enemigos.' },
     },
     build: ['Botas de hechicero', 'Ecos de Luden', 'Fragmento de hielo perpetuo', 'Sombrero mortal de Rabadon', 'Bastón del Vacío'],
+    builds: [
+      {
+        name: 'Burst Mid',
+        description: 'Maximiza el daño de un combo completo',
+        items: ['Botas de hechicero', 'Ecos de Luden', 'Sombrero mortal de Rabadon', 'Horizonte de enfoque', 'Bastón del Vacío'],
+      },
+      {
+        name: 'Soporte AP',
+        description: 'Build para lane de bot con utilidad',
+        items: ['Botas de movilidad', 'Fragmento de hielo perpetuo', 'Bastón de aguas fluidas', 'Sombrero mortal de Rabadon', 'Redención'],
+      },
+      {
+        name: 'Segura',
+        description: 'Contra equipos con mucho engage',
+        items: ['Botas de hechicero', 'Ecos de Luden', 'Reloj de arena de Zhonya', 'Velo de la banshee', 'Sombrero mortal de Rabadon'],
+        situational: true,
+      },
+    ],
     runes: {
       primary: 'Cometa Arcano (Brujería)',
       secondary: 'Sabor a sangre + Cazador de tesoros (Dominación)',
@@ -350,6 +731,57 @@ export const championsData: Champion[] = [
       'Tu R tiene muy poco cooldown en late game, no tengas miedo de usarla',
       'Mantén distancia, Lux es frágil y muere rápido si te atrapan',
     ],
+    matchups: {
+      easy: [
+        {
+          championId: 'veigar',
+          championName: 'Veigar',
+          difficulty: 'Fácil',
+          tip: 'Tu rango supera el suyo. Pokea constantemente y evita su jaula.',
+        },
+        {
+          championId: 'brand',
+          championName: 'Brand',
+          difficulty: 'Fácil',
+          tip: 'Esquiva su W y lo outrangeas. Tu escudo reduce su daño.',
+        },
+      ],
+      hard: [
+        {
+          championId: 'zed',
+          championName: 'Zed',
+          difficulty: 'Difícil',
+          tip: 'Guarda tu Q para cuando aparezca con R. Compra Zhonya temprano.',
+        },
+        {
+          championId: 'fizz',
+          championName: 'Fizz',
+          difficulty: 'Difícil',
+          tip: 'Su E esquiva todo tu combo. Pokea antes del nivel 3.',
+        },
+      ],
+    },
+    combos: [
+      {
+        name: 'Poke Básico',
+        keys: ['E', 'AA'],
+        description: 'E para ralentizar y activar pasiva con auto.',
+        difficulty: 'Básico',
+      },
+      {
+        name: 'Combo Completo',
+        keys: ['Q', 'E', 'R', 'AA'],
+        description: 'Q para enraizar, E + R mientras están atrapados, auto para pasiva.',
+        difficulty: 'Intermedio',
+      },
+      {
+        name: 'Snipe a Distancia',
+        keys: ['E', 'R'],
+        description: 'E para revelar y ralentizar, R para rematar desde lejos.',
+        difficulty: 'Básico',
+      },
+    ],
+    summonerSpells: ['Flash', 'Barrier', 'Ignite', 'Exhaust'],
   },
   {
     id: 'ahri',
@@ -359,6 +791,8 @@ export const championsData: Champion[] = [
     difficulty: 'Medio',
     damageType: 'AP',
     description: 'Ahri es una maga asesina muy móvil. Su encanto (E) es clave para atrapar enemigos, y su ultimate le da tres dashes.',
+    lore: 'Ahri es una vastaya zorro de nueve colas que se alimenta de las emociones y recuerdos de otros. Durante años robó esencias para sentirse humana, pero ahora busca redención y su verdadera identidad. Viaja por Jonia descubriendo su pasado mientras lucha contra su naturaleza depredadora.',
+    region: 'Jonia',
     abilities: {
       passive: { name: 'Esencia devorada', description: 'Después de matar súbditos o monstruos, Ahri se cura.' },
       q: { name: 'Orbe del engaño', description: 'Lanza un orbe que hace daño mágico al ir y daño verdadero al volver.' },
@@ -367,6 +801,24 @@ export const championsData: Champion[] = [
       r: { name: 'Embestida espiritual', description: 'Se lanza en una dirección tres veces, lanzando esencias que dañan enemigos.' },
     },
     build: ['Botas de hechicero', 'Ecos de Luden', 'Sombrero mortal de Rabadon', 'Bastón del Vacío', 'Reloj de arena de Zhonya'],
+    builds: [
+      {
+        name: 'Burst Estándar',
+        description: 'Maximiza el daño para eliminar carries',
+        items: ['Botas de hechicero', 'Ecos de Luden', 'Sombrero mortal de Rabadon', 'Horizonte de enfoque', 'Bastón del Vacío'],
+      },
+      {
+        name: 'Electrocutar',
+        description: 'Combo burst con Electrocutar',
+        items: ['Botas de hechicero', 'Cinturón cohete Hextech', 'Sombrero mortal de Rabadon', 'Reloj de arena de Zhonya', 'Bastón del Vacío'],
+      },
+      {
+        name: 'Poke/Utility',
+        description: 'Para líneas donde necesitas más seguridad',
+        items: ['Botas de hechicero', 'Ecos de Luden', 'Fragmento de hielo perpetuo', 'Horizonte de enfoque', 'Sombrero mortal de Rabadon'],
+        situational: true,
+      },
+    ],
     runes: {
       primary: 'Electrocutar (Dominación)',
       secondary: 'Banda de maná + Trascendencia (Brujería)',
@@ -378,6 +830,63 @@ export const championsData: Champion[] = [
       'El daño verdadero de tu Q (al volver) ignora resistencias mágicas',
       'Combina E + Q + W + R para eliminar enemigos rápidamente',
     ],
+    matchups: {
+      easy: [
+        {
+          championId: 'veigar',
+          championName: 'Veigar',
+          difficulty: 'Fácil',
+          tip: 'Tu R te permite esquivar su jaula. Agrede temprano.',
+        },
+        {
+          championId: 'lux',
+          championName: 'Lux',
+          difficulty: 'Fácil',
+          tip: 'Esquiva su Q y la destruyes. Tu movilidad es superior.',
+        },
+      ],
+      hard: [
+        {
+          championId: 'zed',
+          championName: 'Zed',
+          difficulty: 'Difícil',
+          tip: 'Guarda E para cuando aparezca con R. Compra Zhonya.',
+        },
+        {
+          championId: 'yasuo',
+          championName: 'Yasuo',
+          difficulty: 'Difícil',
+          tip: 'Su muro bloquea todo. Espera a que lo gaste antes de usar E.',
+        },
+      ],
+    },
+    combos: [
+      {
+        name: 'Poke Básico',
+        keys: ['Q'],
+        description: 'Lanza Q para farmear y pokear. El regreso hace daño verdadero.',
+        difficulty: 'Básico',
+      },
+      {
+        name: 'Charm Combo',
+        keys: ['E', 'Q', 'W'],
+        description: 'Encanta primero, Q mientras caminan hacia ti, W para rematar.',
+        difficulty: 'Básico',
+      },
+      {
+        name: 'All-in con R',
+        keys: ['R', 'E', 'Q', 'W', 'R', 'R'],
+        description: 'Usa R para acercarte, combo completo, y R para perseguir o escapar.',
+        difficulty: 'Intermedio',
+      },
+      {
+        name: 'E Flash',
+        keys: ['E', 'Flash'],
+        description: 'Lanza E y flashea para redirigirlo. Muy difícil de esquivar.',
+        difficulty: 'Avanzado',
+      },
+    ],
+    summonerSpells: ['Flash', 'Ignite', 'Teleport'],
   },
   // ADC
   {
@@ -388,6 +897,8 @@ export const championsData: Champion[] = [
     difficulty: 'Fácil',
     damageType: 'AD',
     description: 'Ashe es la ADC más fácil de aprender. Todos sus ataques ralentizan, y su ultimate puede iniciar peleas desde muy lejos.',
+    lore: 'Ashe es la líder de la mayor tribu de Freljord, la Tribu de la Escarcha. Busca unificar las tribus bajo su liderazgo pacífico, usando el legendario arco de hielo de Avarosa. Su matrimonio político con Tryndamere une a dos de las tribus más grandes.',
+    region: 'Freljord',
     abilities: {
       passive: { name: 'Tiro con escarcha', description: 'Los ataques básicos ralentizan. Los ataques críticos ralentizan aún más.' },
       q: { name: 'Concentración del arquero', description: 'Ashe dispara una ráfaga de flechas, aumentando su velocidad de ataque.' },
@@ -396,6 +907,24 @@ export const championsData: Champion[] = [
       r: { name: 'Flecha de cristal encantada', description: 'Dispara una flecha gigante que aturde al primer enemigo. El aturdimiento dura más si viaja más lejos.' },
     },
     build: ['Botas de berserker', 'Kraken Slayer', 'Cañón de fuego rápido', 'El Recordatorio', 'Filo infinito'],
+    builds: [
+      {
+        name: 'Crítico Estándar',
+        description: 'Build de ADC clásica con críticos',
+        items: ['Botas de berserker', 'Kraken Slayer', 'Cañón de fuego rápido', 'Filo infinito', 'El Recordatorio'],
+      },
+      {
+        name: 'On-Hit',
+        description: 'Daño sostenido contra tanques',
+        items: ['Botas de berserker', 'Hoja del rey arruinado', 'Cuchilla de furia de Guinsoo', 'Ingenio maligno', 'Huracán de Runaan'],
+      },
+      {
+        name: 'Utilidad',
+        description: 'Más lentitud y control de equipo',
+        items: ['Botas de berserker', 'Filo de Trinidad', 'Cañón de fuego rápido', 'Huracán de Runaan', 'Rencor de Serylda'],
+        situational: true,
+      },
+    ],
     runes: {
       primary: 'Ataque presionante (Precisión)',
       secondary: 'Sabor a sangre + Cazador de tesoros (Dominación)',
@@ -407,6 +936,57 @@ export const championsData: Champion[] = [
       'Tu R funciona desde cualquier parte del mapa, úsala para ayudar otras líneas',
       'Mantén distancia siempre, Ashe no tiene escape si la atrapan',
     ],
+    matchups: {
+      easy: [
+        {
+          championId: 'jinx',
+          championName: 'Jinx',
+          difficulty: 'Fácil',
+          tip: 'Tu W la alcanza antes que ella a ti. Tu R es más útil temprano.',
+        },
+        {
+          championId: 'kogmaw',
+          championName: 'Kog Maw',
+          difficulty: 'Fácil',
+          tip: 'No tiene escape. Tu lentitud constante lo hace presa fácil.',
+        },
+      ],
+      hard: [
+        {
+          championId: 'draven',
+          championName: 'Draven',
+          difficulty: 'Difícil',
+          tip: 'Su daño temprano es brutal. Juega pasivo y farmea de lejos con W.',
+        },
+        {
+          championId: 'lucian',
+          championName: 'Lucian',
+          difficulty: 'Difícil',
+          tip: 'Es muy agresivo. Mantén distancia y espera ganks de tu jungla.',
+        },
+      ],
+    },
+    combos: [
+      {
+        name: 'Poke Básico',
+        keys: ['W', 'AA'],
+        description: 'W para ralentizar y auto para activar Q stacks.',
+        difficulty: 'Básico',
+      },
+      {
+        name: 'Trade en Línea',
+        keys: ['W', 'Q', 'AA', 'AA', 'AA'],
+        description: 'W para slow, activa Q y ataca varias veces.',
+        difficulty: 'Básico',
+      },
+      {
+        name: 'Engage con R',
+        keys: ['R', 'W', 'Q', 'AA'],
+        description: 'R para stunear, W mientras viaja, Q y autos cuando conecte.',
+        difficulty: 'Intermedio',
+      },
+    ],
+    summonerSpells: ['Flash', 'Heal', 'Cleanse'],
   },
   {
     id: 'caitlyn',
