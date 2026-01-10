@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useMemo } from "react";
 import { Link } from "react-router-dom";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
@@ -8,9 +8,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { championsData } from "@/data/champions";
 import { ScrollAnimation } from "@/hooks/useScrollAnimation";
-import { useDDragonVersion, useDDragonUrls } from "@/hooks/useDDragon";
+import { useDDragonChampions } from "@/hooks/useDDragonChampions";
 import { normalizeChampionId } from "@/lib/ddragon";
 import { 
   Search, 
@@ -27,7 +26,9 @@ import {
   ChevronRight,
   RefreshCw,
   Filter,
-  X
+  X,
+  Database,
+  CheckCircle
 } from "lucide-react";
 import {
   Select,
@@ -43,9 +44,15 @@ const Campeones = () => {
   const [difficultyFilter, setDifficultyFilter] = useState("Todos");
   const [expandedAbilities, setExpandedAbilities] = useState<string[]>([]);
   
-  // Dynamic DDragon version and URLs
-  const { version, loading: versionLoading } = useDDragonVersion();
-  const { getChampionSquare, getChampionSplash } = useDDragonUrls();
+  // Use DDragon champions hook for all champion data
+  const { 
+    champions: allChampions, 
+    loading: championsLoading, 
+    version, 
+    getChampionSquare,
+    totalChampions,
+    championsWithData
+  } = useDDragonChampions('es_ES');
 
   const clearFilters = useCallback(() => {
     setSearchTerm("");
@@ -55,12 +62,14 @@ const Campeones = () => {
 
   const hasActiveFilters = searchTerm || roleFilter !== "Todos" || difficultyFilter !== "Todos";
 
-  const filteredChampions = championsData.filter((champion) => {
-    const matchesSearch = champion.name.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesRole = roleFilter === "Todos" || champion.role.includes(roleFilter);
-    const matchesDifficulty = difficultyFilter === "Todos" || champion.difficulty === difficultyFilter;
-    return matchesSearch && matchesRole && matchesDifficulty;
-  });
+  const filteredChampions = useMemo(() => {
+    return allChampions.filter((champion) => {
+      const matchesSearch = champion.name.toLowerCase().includes(searchTerm.toLowerCase());
+      const matchesRole = roleFilter === "Todos" || champion.role.includes(roleFilter);
+      const matchesDifficulty = difficultyFilter === "Todos" || champion.difficulty === difficultyFilter;
+      return matchesSearch && matchesRole && matchesDifficulty;
+    });
+  }, [allChampions, searchTerm, roleFilter, difficultyFilter]);
 
   const beginnerChampions = [
     {
@@ -108,13 +117,13 @@ const Campeones = () => {
   const features = [
     {
       icon: Users,
-      title: "+160 Campeones",
+      title: `${totalChampions || '160+'} Campeones`,
       description: "Un roster masivo con estilos únicos para cada jugador"
     },
     {
-      icon: BookOpen,
-      title: "Guías Detalladas",
-      description: "Aprende combos, builds y estrategias para cada campeón"
+      icon: Database,
+      title: `${championsWithData} Con Guía`,
+      description: "Campeones con datos completos de builds, combos y matchups"
     },
     {
       icon: Gamepad2,
@@ -307,44 +316,52 @@ const Campeones = () => {
               </Badge>
             </h2>
           </ScrollAnimation>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
             {filteredChampions.map((champion, index) => (
-              <ScrollAnimation key={champion.id} animation="fade-up" delay={(index % 6) * 50}>
-                <Link to={`/campeones/${champion.id}`}>
+              <ScrollAnimation key={champion.id} animation="fade-up" delay={(index % 8) * 30}>
+                <Link to={`/campeones/${champion.id.toLowerCase()}`}>
                   <Card className="border-accent/20 hover:border-primary/60 transition-all hover:shadow-xl hover:-translate-y-1 h-full group overflow-hidden">
-                    <div className="flex items-center gap-4 p-4 pb-0">
-                      {versionLoading ? (
-                        <Skeleton className="w-16 h-16 rounded-lg" />
+                    <div className="flex items-center gap-3 p-3">
+                      {championsLoading ? (
+                        <Skeleton className="w-14 h-14 rounded-lg" />
                       ) : (
-                        <img 
-                          src={getChampionSquare(normalizeChampionId(champion.id)) || '/placeholder.svg'}
-                          alt={champion.name}
-                          className="w-16 h-16 rounded-lg object-cover border-2 border-border group-hover:border-primary/50 transition-colors"
-                          onError={(e) => {
-                            (e.target as HTMLImageElement).src = '/placeholder.svg';
-                          }}
-                        />
+                        <div className="relative">
+                          <img 
+                            src={getChampionSquare(normalizeChampionId(champion.id)) || '/placeholder.svg'}
+                            alt={champion.name}
+                            className="w-14 h-14 rounded-lg object-cover border-2 border-border group-hover:border-primary/50 transition-colors"
+                            onError={(e) => {
+                              (e.target as HTMLImageElement).src = '/placeholder.svg';
+                            }}
+                          />
+                          {champion.hasLocalData && (
+                            <div className="absolute -top-1 -right-1 bg-green-500 rounded-full p-0.5" title="Guía completa disponible">
+                              <CheckCircle className="w-3 h-3 text-white" />
+                            </div>
+                          )}
+                        </div>
                       )}
                       <div className="flex-1 min-w-0">
                         <div className="flex items-start justify-between gap-2">
-                          <CardTitle className="text-lg group-hover:text-primary transition-colors truncate">
+                          <CardTitle className="text-sm font-semibold group-hover:text-primary transition-colors truncate">
                             {champion.name}
                           </CardTitle>
-                          <Badge className={`${difficultyColor(champion.difficulty)} shrink-0`}>
+                          <Badge className={`${difficultyColor(champion.difficulty)} shrink-0 text-xs px-1.5 py-0.5`}>
                             {champion.difficulty}
                           </Badge>
                         </div>
-                        <CardDescription className="text-accent">
+                        <CardDescription className="text-xs text-accent truncate">
                           {champion.role.join(", ")}
                         </CardDescription>
+                        <div className="flex gap-1 mt-1">
+                          {champion.tags.slice(0, 2).map(tag => (
+                            <Badge key={tag} variant="outline" className="text-[10px] px-1 py-0">
+                              {tag}
+                            </Badge>
+                          ))}
+                        </div>
                       </div>
                     </div>
-                    <CardContent className="pt-3">
-                      <p className="text-sm text-muted-foreground mb-3 line-clamp-2">{champion.description}</p>
-                      <div className="flex items-center text-primary text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity">
-                        Ver detalles <ChevronRight className="w-4 h-4 ml-1" />
-                      </div>
-                    </CardContent>
                   </Card>
                 </Link>
               </ScrollAnimation>
