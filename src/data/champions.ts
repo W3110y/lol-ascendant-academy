@@ -996,6 +996,8 @@ export const championsData: Champion[] = [
     difficulty: 'Medio',
     damageType: 'AD',
     description: 'Caitlyn tiene el mayor rango de ataque básico del juego, lo que la hace muy segura. Sus trampas controlan zonas y su ultimate ejecuta enemigos.',
+    lore: 'Caitlyn es la sheriff de Piltóver, la ciudad del progreso. Con su rifle hextech de precisión, protege las calles de criminales y conspiraciones. Junto a su compañera Vi, forma un dúo imparable contra el crimen, aunque su pasado con Jinx complica las cosas.',
+    region: 'Piltover',
     abilities: {
       passive: { name: 'Disparo fulminante', description: 'Cada pocos ataques, dispara una bala más poderosa que hace daño adicional.' },
       q: { name: 'Pacificadora de Piltóver', description: 'Dispara una bala larga que atraviesa enemigos.' },
@@ -1004,6 +1006,24 @@ export const championsData: Champion[] = [
       r: { name: 'As en la manga', description: 'Apunta a un enemigo y dispara una bala que no puede fallar.' },
     },
     build: ['Botas de berserker', 'Segador de esencia', 'Cañón de fuego rápido', 'Filo infinito', 'El Recordatorio'],
+    builds: [
+      {
+        name: 'Crítico Estándar',
+        description: 'Build clásica de ADC con máximo crítico',
+        items: ['Botas de berserker', 'Segador de esencia', 'Cañón de fuego rápido', 'Filo infinito', 'El Recordatorio'],
+      },
+      {
+        name: 'Lethality Poke',
+        description: 'Máximo daño con Q y R',
+        items: ['Botas de rapidez', 'Eclipse', 'El Coleccionista', 'Rencor de Serylda', 'Filo de la noche'],
+      },
+      {
+        name: 'Anti-Tank',
+        description: 'Penetración contra equipos tanky',
+        items: ['Botas de berserker', 'Kraken Slayer', 'Danza de la muerte', 'El Recordatorio', 'Filo infinito'],
+        situational: true,
+      },
+    ],
     runes: {
       primary: 'Pies veloces (Precisión)',
       secondary: 'Concentración absoluta + Tormenta creciente (Brujería)',
@@ -1015,6 +1035,63 @@ export const championsData: Champion[] = [
       'Tu R hace mucho daño pero puede ser bloqueada, apunta bien',
       'Tu pasiva hace más daño en enemigos atrapados en tus trampas',
     ],
+    matchups: {
+      easy: [
+        {
+          championId: 'kogmaw',
+          championName: "Kog'Maw",
+          difficulty: 'Fácil',
+          tip: 'Tu rango es mayor temprano. Presiona antes de que escale.',
+        },
+        {
+          championId: 'jinx',
+          championName: 'Jinx',
+          difficulty: 'Fácil',
+          tip: 'Tu rango es superior. Coloca trampas donde ella quiera farmear.',
+        },
+      ],
+      hard: [
+        {
+          championId: 'samira',
+          championName: 'Samira',
+          difficulty: 'Difícil',
+          tip: 'Puede bloquear tu R con su W. Mantén distancia y no dejes que entre.',
+        },
+        {
+          championId: 'draven',
+          championName: 'Draven',
+          difficulty: 'Difícil',
+          tip: 'Su daño temprano es brutal. No tradees, solo farmea con Q.',
+        },
+      ],
+    },
+    combos: [
+      {
+        name: 'Poke Básico',
+        keys: ['AA', 'Q'],
+        description: 'Auto con pasiva cargada, luego Q para máximo daño.',
+        difficulty: 'Básico',
+      },
+      {
+        name: 'Trap Combo',
+        keys: ['W', 'AA', 'Q', 'AA'],
+        description: 'Trampa bajo enemigo CC, auto headshot, Q, otro auto.',
+        difficulty: 'Intermedio',
+      },
+      {
+        name: 'E Cancel Combo',
+        keys: ['E', 'Q', 'AA'],
+        description: 'E para retroceder mientras lanzas Q, auto al enemigo slow.',
+        difficulty: 'Intermedio',
+      },
+      {
+        name: 'Machine Gun Combo',
+        keys: ['W', 'W', 'W', 'AA', 'AA', 'AA'],
+        description: 'Coloca múltiples trampas en CC enemigo para headshots seguidos.',
+        difficulty: 'Avanzado',
+      },
+    ],
+    summonerSpells: ['Flash', 'Heal', 'Cleanse'],
   },
   {
     id: 'miss-fortune',
@@ -1024,6 +1101,8 @@ export const championsData: Champion[] = [
     difficulty: 'Fácil',
     damageType: 'AD',
     description: 'Miss Fortune es simple pero efectiva. Su ultimate puede cambiar peleas de equipo completas si se posiciona bien.',
+    lore: 'Sarah Fortune, conocida como Miss Fortune, creció en Aguas Estancadas soñando con venganza contra el pirata Gangplank, quien mató a su familia. Ahora es una de las cazarrecompensas más temidas de los mares, con pistolas gemelas que nunca fallan.',
+    region: 'Aguas Estancadas',
     abilities: {
       passive: { name: 'Paso ligero', description: 'Gana velocidad de movimiento si no recibe daño. El primer disparo contra un nuevo objetivo hace daño adicional.' },
       q: { name: 'Doble disparo', description: 'Dispara una bala que rebota en un segundo objetivo.' },
@@ -1032,6 +1111,24 @@ export const championsData: Champion[] = [
       r: { name: 'Lluvia de balas', description: 'Canaliza disparando ondas de balas en cono que dañan a todos los enemigos.' },
     },
     build: ['Botas de rapidez', 'Eclipse', 'El Recordatorio', 'Rencor de Serylda', 'Filo de la noche'],
+    builds: [
+      {
+        name: 'Lethality',
+        description: 'Máximo daño con Q y R',
+        items: ['Botas de rapidez', 'Eclipse', 'El Coleccionista', 'Rencor de Serylda', 'Filo de la noche'],
+      },
+      {
+        name: 'Crítico',
+        description: 'Daño sostenido con ataques',
+        items: ['Botas de berserker', 'Kraken Slayer', 'Cañón de fuego rápido', 'Filo infinito', 'El Recordatorio'],
+      },
+      {
+        name: 'Híbrido',
+        description: 'Balance entre burst y DPS',
+        items: ['Botas de rapidez', 'Eclipse', 'El Coleccionista', 'Filo infinito', 'El Recordatorio'],
+        situational: true,
+      },
+    ],
     runes: {
       primary: 'Primer Golpe (Inspiración)',
       secondary: 'Concentración absoluta + Tormenta creciente (Brujería)',
@@ -1043,6 +1140,57 @@ export const championsData: Champion[] = [
       'Usa E para ralentizar enemigos y facilitar que tu equipo los atrape',
       'Tu R es devastadora en espacios cerrados como la jungla',
     ],
+    matchups: {
+      easy: [
+        {
+          championId: 'vayne',
+          championName: 'Vayne',
+          difficulty: 'Fácil',
+          tip: 'Tu daño temprano es muy superior. Presiona desde nivel 1.',
+        },
+        {
+          championId: 'twitch',
+          championName: 'Twitch',
+          difficulty: 'Fácil',
+          tip: 'Tu E revela su invisible. Tu poke lo destruye.',
+        },
+      ],
+      hard: [
+        {
+          championId: 'caitlyn',
+          championName: 'Caitlyn',
+          difficulty: 'Difícil',
+          tip: 'Su rango es mayor. Farmea con Q y espera ganks.',
+        },
+        {
+          championId: 'draven',
+          championName: 'Draven',
+          difficulty: 'Difícil',
+          tip: 'Su daño es brutal. No tradees, solo R en teamfights.',
+        },
+      ],
+    },
+    combos: [
+      {
+        name: 'Poke Q',
+        keys: ['AA', 'Q'],
+        description: 'Auto en súbdito bajo de vida, Q rebota al campeón.',
+        difficulty: 'Básico',
+      },
+      {
+        name: 'Trade Básico',
+        keys: ['AA', 'Q', 'W', 'AA'],
+        description: 'Auto con pasiva, Q, activa W para más autos.',
+        difficulty: 'Básico',
+      },
+      {
+        name: 'All-in Completo',
+        keys: ['E', 'AA', 'Q', 'R'],
+        description: 'E para slow, auto, Q, y R mientras están lentos.',
+        difficulty: 'Intermedio',
+      },
+    ],
+    summonerSpells: ['Flash', 'Heal', 'Exhaust'],
   },
   // SUPPORT
   {
@@ -1081,6 +1229,8 @@ export const championsData: Champion[] = [
     difficulty: 'Medio',
     damageType: 'Tanque',
     description: 'Leona es un soporte tanque que inicia peleas. Casi todas sus habilidades pueden aturdirán o enraizarán enemigos.',
+    lore: 'Leona es la Elegida del Sol, una guerrera del Monte Targon que porta la luz del sol mismo. Abandonó a los Solari cuando descubrió que su amiga Diana había sido elegida por la luna, y ahora busca un equilibrio entre la luz y la oscuridad.',
+    region: 'Targon',
     abilities: {
       passive: { name: 'Luz Solar', description: 'Las habilidades de Leona marcan a los enemigos. Los aliados que golpean la marca hacen daño adicional.' },
       q: { name: 'Escudo del Alba', description: 'Su próximo ataque básico aturde al enemigo.' },
@@ -1089,6 +1239,18 @@ export const championsData: Champion[] = [
       r: { name: 'Resplandor Solar', description: 'Invoca un rayo de luz que aturde enemigos en el centro y ralentiza en el exterior.' },
     },
     build: ['Botas de movilidad', 'Medallón férreo solari', 'Convergencia de Zeke', 'Armadura de caballero', 'Promesa del caballero'],
+    builds: [
+      {
+        name: 'Estándar Tank',
+        description: 'Máxima utilidad y resistencia',
+        items: ['Botas de movilidad', 'Medallón férreo solari', 'Convergencia de Zeke', 'Armadura de caballero', 'Promesa del caballero'],
+      },
+      {
+        name: 'Engage Agresivo',
+        description: 'Más daño para dominar la línea',
+        items: ['Botas de acero', 'Égida de fuego solar', 'Thornmail', 'Fuerza de la Naturaleza', 'Piedra de gárgola'],
+      },
+    ],
     runes: {
       primary: 'Reverberación (Brujería)',
       secondary: 'Demoler + Fuente de vida (Valor)',
@@ -1100,6 +1262,57 @@ export const championsData: Champion[] = [
       'Tu R puede usarse desde lejos para ralentizar enemigos que escapan',
       'Eres tanque, tu trabajo es absorber daño por tu equipo',
     ],
+    matchups: {
+      easy: [
+        {
+          championId: 'soraka',
+          championName: 'Soraka',
+          difficulty: 'Fácil',
+          tip: 'Es muy frágil. Un engage completo la elimina.',
+        },
+        {
+          championId: 'sona',
+          championName: 'Sona',
+          difficulty: 'Fácil',
+          tip: 'Cero escapes. Engagea en nivel 2 y mata.',
+        },
+      ],
+      hard: [
+        {
+          championId: 'morgana',
+          championName: 'Morgana',
+          difficulty: 'Difícil',
+          tip: 'Su escudo negro bloquea tu CC. Espera a que lo gaste.',
+        },
+        {
+          championId: 'janna',
+          championName: 'Janna',
+          difficulty: 'Difícil',
+          tip: 'Su Q y R te sacan de peleas. Baita su tornado primero.',
+        },
+      ],
+    },
+    combos: [
+      {
+        name: 'Engage Básico',
+        keys: ['W', 'E', 'Q'],
+        description: 'Activa W, E hacia enemigo, Q para stunear.',
+        difficulty: 'Básico',
+      },
+      {
+        name: 'All-in Completo',
+        keys: ['W', 'E', 'Q', 'R'],
+        description: 'Engage básico + R para más daño y stun en área.',
+        difficulty: 'Básico',
+      },
+      {
+        name: 'Flash Engage',
+        keys: ['Flash', 'E', 'W', 'Q', 'R'],
+        description: 'Flash para sorprender, E inmediato, combo completo.',
+        difficulty: 'Intermedio',
+      },
+    ],
+    summonerSpells: ['Flash', 'Ignite', 'Exhaust'],
   },
   {
     id: 'lulu',
@@ -1137,6 +1350,8 @@ export const championsData: Champion[] = [
     difficulty: 'Difícil',
     damageType: 'Tanque',
     description: 'Thresh es uno de los soportes más completos del juego. Su gancho puede cambiar peleas, y su linterna puede salvar aliados.',
+    lore: 'Thresh fue un carcelero sádico que disfrutaba torturando las almas de sus prisioneros. Ahora es un espectro de las Islas de la Sombra, coleccionando almas en su linterna y causando sufrimiento eterno a sus víctimas.',
+    region: 'Islas de la Sombra',
     abilities: {
       passive: { name: 'Condena', description: 'Thresh recolecta almas que le dan armadura y poder de habilidad.' },
       q: { name: 'Sentencia de muerte', description: 'Lanza un gancho. Si atrapa un enemigo, puede lanzarse hacia él.' },
@@ -1145,6 +1360,18 @@ export const championsData: Champion[] = [
       r: { name: 'La Caja', description: 'Crea una prisión de paredes que ralentizan y dañan a los enemigos que las atraviesan.' },
     },
     build: ['Botas de movilidad', 'Medallón férreo solari', 'Redención', 'Convergencia de Zeke', 'Armadura de caballero'],
+    builds: [
+      {
+        name: 'Tanque Utilidad',
+        description: 'Build estándar de soporte',
+        items: ['Botas de movilidad', 'Medallón férreo solari', 'Redención', 'Convergencia de Zeke', 'Armadura de caballero'],
+      },
+      {
+        name: 'Engage Heavy',
+        description: 'Máxima resistencia para iniciaciones',
+        items: ['Botas de acero', 'Égida de fuego solar', 'Thornmail', 'Fuerza de la Naturaleza', 'Piedra de gárgola'],
+      },
+    ],
     runes: {
       primary: 'Reverberación (Brujería)',
       secondary: 'Demoler + Revestimiento de huesos (Valor)',
@@ -1156,6 +1383,63 @@ export const championsData: Champion[] = [
       'Tu R puede usarse para atrapar enemigos o proteger a tu equipo',
       'Recolecta almas constantemente para ser más tanque',
     ],
+    matchups: {
+      easy: [
+        {
+          championId: 'sona',
+          championName: 'Sona',
+          difficulty: 'Fácil',
+          tip: 'Es muy frágil. Un hook = kill garantizada.',
+        },
+        {
+          championId: 'soraka',
+          championName: 'Soraka',
+          difficulty: 'Fácil',
+          tip: 'Sin escapatoria. Hookea y elimina.',
+        },
+      ],
+      hard: [
+        {
+          championId: 'morgana',
+          championName: 'Morgana',
+          difficulty: 'Difícil',
+          tip: 'Su escudo negro bloquea todo tu CC. Hookea cuando no lo tenga.',
+        },
+        {
+          championId: 'alistar',
+          championName: 'Alistar',
+          difficulty: 'Difícil',
+          tip: 'Su combo W-Q es más rápido. Guarda E para cancelarlo.',
+        },
+      ],
+    },
+    combos: [
+      {
+        name: 'Hook Básico',
+        keys: ['Q', 'Q', 'E', 'AA'],
+        description: 'Hookea, vuela hacia el enemigo, E hacia atrás, auto.',
+        difficulty: 'Básico',
+      },
+      {
+        name: 'Flay First',
+        keys: ['E', 'Q'],
+        description: 'E primero para ralentizar, luego Q garantizado.',
+        difficulty: 'Intermedio',
+      },
+      {
+        name: 'All-in Completo',
+        keys: ['Q', 'Q', 'E', 'R', 'AA'],
+        description: 'Hook, volar, E hacia tu equipo, R para atrapar.',
+        difficulty: 'Intermedio',
+      },
+      {
+        name: 'Lantern Gank',
+        keys: ['W', 'Q', 'Q', 'E'],
+        description: 'Linterna al jungler, hookea, él toma linterna, combo.',
+        difficulty: 'Avanzado',
+      },
+    ],
+    summonerSpells: ['Flash', 'Ignite', 'Exhaust'],
   },
   {
     id: 'nautilus',
@@ -1500,10 +1784,12 @@ export const championsData: Champion[] = [
     id: 'yasuo',
     name: 'Yasuo',
     title: 'El Imperdonable',
-    role: ['Mid'],
+    role: ['Mid', 'Top'],
     difficulty: 'Difícil',
     damageType: 'AD',
     description: 'Yasuo es extremadamente móvil con su E y puede bloquear proyectiles con su W.',
+    lore: 'Yasuo es un espadachín ioniano acusado injustamente de matar a su maestro. Huyó de su hogar y ahora vaga por Runaterra buscando redención y al verdadero asesino. Su técnica de la espada del viento es legendaria.',
+    region: 'Ionia',
     abilities: {
       passive: { name: 'Camino del Errante', description: 'Cada dos ataques o Q, su crítico es el doble de efectivo pero hace menos daño base.' },
       q: { name: 'Acero Templado', description: 'Embiste con su espada. Cada tercer Q lanza un tornado que noquea.' },
@@ -1512,6 +1798,24 @@ export const championsData: Champion[] = [
       r: { name: 'Último aliento', description: 'Salta a enemigos noqueados, suspendidos en el aire, dañándolos críticamente.' },
     },
     build: ['Botas de berserker', 'Rompeescudos inmortal', 'Filo infinito', 'Baile de la muerte', 'Sanguinaria'],
+    builds: [
+      {
+        name: 'Crítico Estándar',
+        description: 'Build clásica de Yasuo',
+        items: ['Botas de berserker', 'Rompeescudos inmortal', 'Filo infinito', 'Baile de la muerte', 'Sanguinaria'],
+      },
+      {
+        name: 'Tanky',
+        description: 'Más supervivencia en teamfights',
+        items: ['Botas de berserker', 'Rompeescudos inmortal', 'Filo infinito', 'Espíritu visionario', 'Piedra de gárgola'],
+      },
+      {
+        name: 'On-Hit',
+        description: 'Contra equipos tanky',
+        items: ['Botas de berserker', 'Hoja del rey arruinado', 'Rompeescudos inmortal', 'Ingenio maligno', 'Filo infinito'],
+        situational: true,
+      },
+    ],
     runes: {
       primary: 'Conquistador (Precisión)',
       secondary: 'Revestimiento de huesos + Sobrecrecimiento (Valor)',
@@ -1523,6 +1827,63 @@ export const championsData: Champion[] = [
       'Farmea hasta tener dos objetos, luego eres muy fuerte',
       'Es muy difícil de dominar, practica mucho antes de ranked',
     ],
+    matchups: {
+      easy: [
+        {
+          championId: 'lux',
+          championName: 'Lux',
+          difficulty: 'Fácil',
+          tip: 'Tu W bloquea todo su kit. Dashea y elimínala.',
+        },
+        {
+          championId: 'veigar',
+          championName: 'Veigar',
+          difficulty: 'Fácil',
+          tip: 'Dashea fuera de su jaula. Sin jaula, no hace nada.',
+        },
+      ],
+      hard: [
+        {
+          championId: 'renekton',
+          championName: 'Renekton',
+          difficulty: 'Difícil',
+          tip: 'Su stun es point-and-click. Farmea de lejos con Q.',
+        },
+        {
+          championId: 'annie',
+          championName: 'Annie',
+          difficulty: 'Difícil',
+          tip: 'Tu W no bloquea a Tibbers. Espera a que gaste stun.',
+        },
+      ],
+    },
+    combos: [
+      {
+        name: 'Poke Q3',
+        keys: ['Q', 'Q', 'E', 'Q'],
+        description: 'Carga tornado, E hacia enemigo, Q3 noquea.',
+        difficulty: 'Básico',
+      },
+      {
+        name: 'E-Q Cancel',
+        keys: ['E', 'Q'],
+        description: 'E + Q al mismo tiempo hace daño en círculo.',
+        difficulty: 'Intermedio',
+      },
+      {
+        name: 'Beyblade',
+        keys: ['E', 'Q', 'Flash'],
+        description: 'E-Q círculo + Flash para extender rango del tornado.',
+        difficulty: 'Avanzado',
+      },
+      {
+        name: 'Keyblade',
+        keys: ['E', 'Q', 'Flash', 'R', 'AA', 'Q'],
+        description: 'Beyblade + R inmediato. El combo definitivo.',
+        difficulty: 'Avanzado',
+      },
+    ],
+    summonerSpells: ['Flash', 'Ignite', 'Exhaust', 'Teleport'],
   },
   {
     id: 'zed',
@@ -1532,6 +1893,8 @@ export const championsData: Champion[] = [
     difficulty: 'Difícil',
     damageType: 'AD',
     description: 'Zed es un asesino que usa sombras para confundir y eliminar enemigos. Su R marca al objetivo.',
+    lore: 'Zed es el maestro de las artes prohibidas de las sombras. Traicionó a su maestro y al orden Kinkou para fundar la Orden de las Sombras, buscando poder a cualquier costo. Ahora lidera asesinos que operan desde Ionia.',
+    region: 'Ionia',
     abilities: {
       passive: { name: 'Desprecio por los débiles', description: 'Daña enemigos con poca vida con ataques básicos.' },
       q: { name: 'Shuriken Viviente', description: 'Lanza shurikens. Las sombras también los lanzan.' },
@@ -1540,6 +1903,18 @@ export const championsData: Champion[] = [
       r: { name: 'Marca de la Muerte', description: 'Salta detrás de un enemigo, volviéndose intocable. Después de 3 segundos, detona haciendo daño basado en el daño causado.' },
     },
     build: ['Botas de movilidad', 'Eclipse', 'Filo de la noche', 'Rencor de Serylda', 'Baile de la muerte'],
+    builds: [
+      {
+        name: 'Lethality Burst',
+        description: 'Máximo daño instantáneo',
+        items: ['Botas de movilidad', 'Eclipse', 'El Coleccionista', 'Rencor de Serylda', 'Filo de la noche'],
+      },
+      {
+        name: 'Bruiser',
+        description: 'Más supervivencia en peleas',
+        items: ['Botas de movilidad', 'Eclipse', 'Cuchilla negra', 'Baile de la muerte', 'Piedra de gárgola'],
+      },
+    ],
     runes: {
       primary: 'Electrocutar (Dominación)',
       secondary: 'Triunfo + Golpe de gracia (Precisión)',
@@ -1551,6 +1926,57 @@ export const championsData: Champion[] = [
       'Tu marca (R) hace más daño cuanto más daño hagas durante 3 segundos',
       'Busca asesinar al ADC o mid enemigo en peleas de equipo',
     ],
+    matchups: {
+      easy: [
+        {
+          championId: 'lux',
+          championName: 'Lux',
+          difficulty: 'Fácil',
+          tip: 'Esquiva su Q con W o R. Sin Q no tiene defensa.',
+        },
+        {
+          championId: 'veigar',
+          championName: 'Veigar',
+          difficulty: 'Fácil',
+          tip: 'R esquiva su jaula. Sin jaula, lo destruyes.',
+        },
+      ],
+      hard: [
+        {
+          championId: 'lissandra',
+          championName: 'Lissandra',
+          difficulty: 'Difícil',
+          tip: 'Su R anula tu all-in. Roamea en lugar de pelear.',
+        },
+        {
+          championId: 'malzahar',
+          championName: 'Malzahar',
+          difficulty: 'Difícil',
+          tip: 'Su R te lockea después de tu R. Compra QSS.',
+        },
+      ],
+    },
+    combos: [
+      {
+        name: 'Poke Seguro',
+        keys: ['W', 'E', 'Q'],
+        description: 'W hacia enemigo, E-Q desde sombra, W de vuelta.',
+        difficulty: 'Básico',
+      },
+      {
+        name: 'All-in Básico',
+        keys: ['R', 'E', 'Q', 'AA'],
+        description: 'R para marcar, E-Q inmediato, autos para más daño.',
+        difficulty: 'Intermedio',
+      },
+      {
+        name: 'Triple Shuriken',
+        keys: ['W', 'R', 'E', 'Q'],
+        description: 'W, R al objetivo, E-Q con 3 shurikens desde ti, R y W.',
+        difficulty: 'Avanzado',
+      },
+    ],
+    summonerSpells: ['Flash', 'Ignite', 'Teleport'],
   },
   {
     id: 'katarina',
@@ -1560,6 +1986,8 @@ export const championsData: Champion[] = [
     difficulty: 'Difícil',
     damageType: 'AP',
     description: 'Katarina resetea todas sus habilidades con kills. Puede eliminar equipos enteros si consigue una kill.',
+    lore: 'Katarina es la hija mayor del general noxiano Du Couteau. Es una asesina de élite que ha matado innumerables objetivos para Noxus. Su rivalidad con su hermana Cassiopeia y su pasado con Garen de Demacia la definen.',
+    region: 'Noxus',
     abilities: {
       passive: { name: 'Voracidad', description: 'Las kills y asistencias resetean sus cooldowns. Deja dagas que daña al recogerlas.' },
       q: { name: 'Daga Rebotante', description: 'Lanza una daga que rebota entre enemigos.' },
@@ -1568,6 +1996,24 @@ export const championsData: Champion[] = [
       r: { name: 'Loto Mortal', description: 'Canaliza lanzando dagas a enemigos cercanos rápidamente.' },
     },
     build: ['Botas de hechicero', 'Cinturón cohete Hextech', 'Sombrero mortal de Rabadon', 'Bastón del Vacío', 'Reloj de arena de Zhonya'],
+    builds: [
+      {
+        name: 'AP Estándar',
+        description: 'Build clásica de Katarina',
+        items: ['Botas de hechicero', 'Cinturón cohete Hextech', 'Diente de Nashor', 'Sombrero mortal de Rabadon', 'Reloj de arena de Zhonya'],
+      },
+      {
+        name: 'On-Hit',
+        description: 'Daño sostenido con ataques',
+        items: ['Botas de berserker', 'Hoja del rey arruinado', 'Diente de Nashor', 'Kraken Slayer', 'Guinsoo'],
+      },
+      {
+        name: 'Full Burst',
+        description: 'Máximo daño instantáneo',
+        items: ['Botas de hechicero', 'Cinturón cohete Hextech', 'Sombrero mortal de Rabadon', 'Bastón del Vacío', 'Fragmento de hielo perpetuo'],
+        situational: true,
+      },
+    ],
     runes: {
       primary: 'Electrocutar (Dominación)',
       secondary: 'Triunfo + Golpe de gracia (Precisión)',
@@ -1579,6 +2025,57 @@ export const championsData: Champion[] = [
       'Tu R se cancela si te mueves o usas otras habilidades',
       'Es muy difícil, necesita mucha práctica para dominar',
     ],
+    matchups: {
+      easy: [
+        {
+          championId: 'veigar',
+          championName: 'Veigar',
+          difficulty: 'Fácil',
+          tip: 'Tu E te saca de su jaula. Sin jaula, no tiene nada.',
+        },
+        {
+          championId: 'karthus',
+          championName: 'Karthus',
+          difficulty: 'Fácil',
+          tip: 'Es inmóvil. Tu movilidad lo destruye completamente.',
+        },
+      ],
+      hard: [
+        {
+          championId: 'diana',
+          championName: 'Diana',
+          difficulty: 'Difícil',
+          tip: 'Su escudo y daño son brutales. Farmea y roamea.',
+        },
+        {
+          championId: 'kassadin',
+          championName: 'Kassadin',
+          difficulty: 'Difícil',
+          tip: 'Escala mejor que tú. Agrede antes de nivel 6.',
+        },
+      ],
+    },
+    combos: [
+      {
+        name: 'Trade Básico',
+        keys: ['Q', 'E', 'W', 'E'],
+        description: 'Q, E a la daga, W, E a la nueva daga o súbdito.',
+        difficulty: 'Básico',
+      },
+      {
+        name: 'All-in',
+        keys: ['E', 'W', 'Q', 'E', 'R'],
+        description: 'E al enemigo, W, Q para daga atrás, E reset, R.',
+        difficulty: 'Intermedio',
+      },
+      {
+        name: 'Dagger Setup',
+        keys: ['W', 'E', 'Q', 'E', 'E'],
+        description: 'W en ti, E al enemigo, Q, E a daggers, resetea con kills.',
+        difficulty: 'Avanzado',
+      },
+    ],
+    summonerSpells: ['Flash', 'Ignite', 'Teleport'],
   },
   {
     id: 'veigar',
