@@ -5006,6 +5006,8 @@ export const championsData: Champion[] = [
     difficulty: 'Fácil',
     damageType: 'AP',
     description: 'Lulu es una soporte encantadora que potencia a su ADC.',
+    lore: 'Lulu es una yordle hechicera que pasó siglos en el Reino de los Espíritus junto a su hada Pix. Cuando regresó a Runaterra, el tiempo había pasado diferente para ella y todo le parecía extraño y maravilloso. Ahora vaga por el mundo usando su magia caprichosa para ayudar a quienes lo necesitan, convirtiendo enemigos en ardillas y haciendo crecer a sus amigos.',
+    region: 'Bandle',
     abilities: {
       passive: { name: 'Pix', description: 'Pix acompaña a Lulu o aliado, disparando junto a ataques.' },
       q: { name: 'Resplandor', description: 'Lulu y Pix disparan rayos que ralentizan.' },
@@ -5014,17 +5016,86 @@ export const championsData: Champion[] = [
       r: { name: 'Crecimiento Descomunal', description: 'Aliado crece, gana vida, knockea enemigos cercanos.' },
     },
     build: ['Botas de movilidad', 'Incensario Ardiente', 'Redención', 'Báculo de agua de flujo', 'Mandato Imperial'],
+    builds: [
+      {
+        name: 'Encantadora',
+        description: 'Maximiza escudos y buffs para el ADC',
+        items: ['Botas de movilidad', 'Incensario Ardiente', 'Redención', 'Báculo de agua de flujo', 'Mandato Imperial'],
+      },
+      {
+        name: 'AP Ofensiva',
+        description: 'Para lanes donde puedes ser agresiva',
+        items: ['Botas de hechicero', 'Ecos de Luden', 'Reloj de arena de Zhonya', 'Sombrero mortal de Rabadon', 'Bastón del Vacío'],
+      },
+      {
+        name: 'Híbrida',
+        description: 'Equilibrio entre utilidad y daño',
+        items: ['Botas de movilidad', 'Mandato Imperial', 'Incensario Ardiente', 'Sombrero mortal de Rabadon', 'Redención'],
+        situational: true,
+      },
+    ],
     runes: {
       primary: 'Invocar Aery (Brujería)',
       secondary: 'Fuente de vida + Renovación (Valor)',
     },
     tips: [
       'W en enemigo lo polimorfea (muy fuerte)',
-      'R en ADC cuando lo focusean',
+      'R en ADC cuando lo focuseen',
       'E + Q para poke desde lejos',
       'Tu pasiva hace que aliados escudados hagan más daño',
       'Eres excelente protegiendo hypercarries',
     ],
+    matchups: {
+      easy: [
+        {
+          championId: 'draven',
+          championName: 'Draven',
+          difficulty: 'Fácil',
+          tip: 'Tu W lo polimorfea y cancela su daño. Protege bien a tu ADC.',
+        },
+        {
+          championId: 'master-yi',
+          championName: 'Maestro Yi',
+          difficulty: 'Fácil',
+          tip: 'Tu W lo polimorfea durante su R. Counter perfecto.',
+        },
+      ],
+      hard: [
+        {
+          championId: 'blitzcrank',
+          championName: 'Blitzcrank',
+          difficulty: 'Difícil',
+          tip: 'Si te hookea, estás muerta. Posiciona detrás de minions.',
+        },
+        {
+          championId: 'nautilus',
+          championName: 'Nautilus',
+          difficulty: 'Difícil',
+          tip: 'Su engage es muy fuerte. Guarda W para pelar por tu ADC.',
+        },
+      ],
+    },
+    combos: [
+      {
+        name: 'Poke Básico',
+        keys: ['E', 'Q'],
+        description: 'E al enemigo para que Pix lo siga, Q para daño garantizado.',
+        difficulty: 'Básico',
+      },
+      {
+        name: 'Protección de ADC',
+        keys: ['E', 'W', 'R'],
+        description: 'E para escudo, W para velocidad, R si lo focusean.',
+        difficulty: 'Básico',
+      },
+      {
+        name: 'All-in Aliado',
+        keys: ['E', 'W', 'R', 'Q'],
+        description: 'Buff completo a tu ADC para que haga todo el trabajo.',
+        difficulty: 'Intermedio',
+      },
+    ],
+    summonerSpells: ['Flash', 'Exhaust', 'Ignite'],
   },
   {
     id: 'maokai',
@@ -5118,6 +5189,8 @@ export const championsData: Champion[] = [
     difficulty: 'Fácil',
     damageType: 'AP',
     description: 'Mordekaiser es un juggernaut AP que secuestra enemigos con su ultimate.',
+    lore: 'Mordekaiser fue un señor de la guerra brutal que conquistó naciones enteras en la antigüedad. Tras su muerte, forjó un reino en el más allá con pura voluntad y regresó a Runaterra como un revenant de armadura viviente. Su objetivo es crear un imperio de los muertos que eclipsará todo lo que existe.',
+    region: 'Islas de la Sombra',
     abilities: {
       passive: { name: 'Oscuridad Creciente', description: 'Tras 3 ataques/habilidades, crea tormenta de daño alrededor.' },
       q: { name: 'Aniquilar', description: 'Golpea con maza. Daño extra si impacta un solo objetivo.' },
@@ -5126,6 +5199,24 @@ export const championsData: Champion[] = [
       r: { name: 'Reino de la Muerte', description: 'Secuestra enemigo a dimensión 1v1. Roba stats mientras dura.' },
     },
     build: ['Botas de hechicero', 'Cetro de Rylai', 'Tormento de Liandry', 'Sombrero mortal de Rabadon', 'Bastón del Vacío'],
+    builds: [
+      {
+        name: 'AP Estándar',
+        description: 'Build equilibrada para la mayoría de partidas',
+        items: ['Botas de hechicero', 'Cetro de Rylai', 'Tormento de Liandry', 'Reloj de arena de Zhonya', 'Sombrero mortal de Rabadon'],
+      },
+      {
+        name: 'Tanque AP',
+        description: 'Cuando necesitas ser más resistente',
+        items: ['Botas de mercurio', 'Cetro de Rylai', 'Espíritu visionario', 'Máscara abisal', 'Tormento de Liandry'],
+      },
+      {
+        name: 'Full AP',
+        description: 'Cuando estás adelantado y quieres oneshot',
+        items: ['Botas de hechicero', 'Cinturón cohete Hextech', 'Sombrero mortal de Rabadon', 'Bastón del Vacío', 'Tormento de Liandry'],
+        situational: true,
+      },
+    ],
     runes: {
       primary: 'Conquistador (Precisión)',
       secondary: 'Revestimiento de huesos + Sobrecrecimiento (Valor)',
@@ -5137,6 +5228,57 @@ export const championsData: Champion[] = [
       'W da escudo o cura, decide bien',
       'Eres muy fuerte en duelos 1v1',
     ],
+    matchups: {
+      easy: [
+        {
+          championId: 'darius',
+          championName: 'Darius',
+          difficulty: 'Fácil',
+          tip: 'Tu R lo aísla de su equipo y tu daño mágico ignora su armadura.',
+        },
+        {
+          championId: 'nasus',
+          championName: 'Nasus',
+          difficulty: 'Fácil',
+          tip: 'Tu R roba sus stats cuando está escalado. Es tuyo en 1v1.',
+        },
+      ],
+      hard: [
+        {
+          championId: 'fiora',
+          championName: 'Fiora',
+          difficulty: 'Difícil',
+          tip: 'Puede parry tu E y R. Su daño verdadero te destruye. Farmea.',
+        },
+        {
+          championId: 'vayne',
+          championName: 'Vayne',
+          difficulty: 'Difícil',
+          tip: 'Te kitea y hace daño verdadero. Necesitas Flash + E para atraparla.',
+        },
+      ],
+    },
+    combos: [
+      {
+        name: 'Trade Básico',
+        keys: ['E', 'Q', 'AA'],
+        description: 'Atrae con E, Q mientras se acercan, auto para activar pasiva.',
+        difficulty: 'Básico',
+      },
+      {
+        name: 'All-in',
+        keys: ['E', 'Q', 'AA', 'R', 'Q'],
+        description: 'Combo básico, R para asegurar la kill, Q de nuevo.',
+        difficulty: 'Intermedio',
+      },
+      {
+        name: 'Isolate Carry',
+        keys: ['Flash', 'R', 'E', 'Q', 'W'],
+        description: 'Flash + R al carry enemigo, combo completo dentro de tu reino.',
+        difficulty: 'Avanzado',
+      },
+    ],
+    summonerSpells: ['Flash', 'Teleport', 'Ignite'],
   },
   {
     id: 'morgana',
@@ -5146,6 +5288,8 @@ export const championsData: Champion[] = [
     difficulty: 'Fácil',
     damageType: 'AP',
     description: 'Morgana tiene el root más largo del juego y escudo anti-CC.',
+    lore: 'Morgana y su hermana Kayle fueron bendecidas con alas celestiales por su madre, el Aspecto de la Justicia. Mientras Kayle abrazó una justicia implacable, Morgana eligió la compasión y arrancó sus propias alas, atándolas con cadenas. Ahora defiende a los marginados y caídos, creyendo en la redención sobre el castigo.',
+    region: 'Demacia',
     abilities: {
       passive: { name: 'Absorción del Alma', description: 'Se cura con daño a campeones.' },
       q: { name: 'Tormento Oscuro', description: 'Dispara raíz muy larga que enraíza hasta 3 segundos.' },
@@ -5154,6 +5298,24 @@ export const championsData: Champion[] = [
       r: { name: 'Cadenas del Alma', description: 'Cadenas a enemigos cercanos. Tras tiempo, aturde si no escapan.' },
     },
     build: ['Botas de hechicero', 'Tormento de Liandry', 'Reloj de arena de Zhonya', 'Sombrero mortal de Rabadon', 'Bastón del Vacío'],
+    builds: [
+      {
+        name: 'AP Mid',
+        description: 'Build de daño para mid lane',
+        items: ['Botas de hechicero', 'Ecos de Luden', 'Reloj de arena de Zhonya', 'Sombrero mortal de Rabadon', 'Bastón del Vacío'],
+      },
+      {
+        name: 'Soporte Utilidad',
+        description: 'Build de soporte con utilidad',
+        items: ['Botas de movilidad', 'Mandato Imperial', 'Reloj de arena de Zhonya', 'Redención', 'Crepúsculo de Umbral'],
+      },
+      {
+        name: 'Tanque Soporte',
+        description: 'Cuando necesitas ser más resistente',
+        items: ['Botas de mercurio', 'Reloj de arena de Zhonya', 'Locket de Solari de Hierro', 'Redención', 'Guantelete de hielo'],
+        situational: true,
+      },
+    ],
     runes: {
       primary: 'Cometa Arcano (Brujería)',
       secondary: 'Sabor a sangre + Cazador de tesoros (Dominación)',
@@ -5165,6 +5327,57 @@ export const championsData: Champion[] = [
       'W + Q combo para poke',
       'Protege a tu ADC con E',
     ],
+    matchups: {
+      easy: [
+        {
+          championId: 'leona',
+          championName: 'Leona',
+          difficulty: 'Fácil',
+          tip: 'Tu E bloquea todo su CC. Es inútil contra ti.',
+        },
+        {
+          championId: 'nautilus',
+          championName: 'Nautilus',
+          difficulty: 'Fácil',
+          tip: 'Tu E bloquea su engage. Counterea su kit completo.',
+        },
+      ],
+      hard: [
+        {
+          championId: 'xerath',
+          championName: 'Xerath',
+          difficulty: 'Difícil',
+          tip: 'Te pokea desde muy lejos. Tu E no bloquea su daño, solo CC.',
+        },
+        {
+          championId: 'brand',
+          championName: 'Brand',
+          difficulty: 'Difícil',
+          tip: 'Su daño es muy alto y puede pokear a través de minions.',
+        },
+      ],
+    },
+    combos: [
+      {
+        name: 'Poke Básico',
+        keys: ['Q', 'W'],
+        description: 'Q para enraizar, W debajo para daño garantizado.',
+        difficulty: 'Básico',
+      },
+      {
+        name: 'Zhonya Combo',
+        keys: ['R', 'Zhonya'],
+        description: 'R para encadenar, Zhonya mientras esperan el stun.',
+        difficulty: 'Intermedio',
+      },
+      {
+        name: 'Full Combo',
+        keys: ['Flash', 'R', 'Zhonya', 'Q', 'W'],
+        description: 'Flash R sobre varios enemigos, Zhonya, Q al prioritario, W.',
+        difficulty: 'Avanzado',
+      },
+    ],
+    summonerSpells: ['Flash', 'Ignite', 'Exhaust'],
   },
   {
     id: 'naafiri',
@@ -5174,6 +5387,8 @@ export const championsData: Champion[] = [
     difficulty: 'Fácil',
     damageType: 'AD',
     description: 'Naafiri es una asesina AD simple con perros que ayudan.',
+    lore: 'Naafiri es un Darkin, un guerrero ascendido corrompido, cuya esencia está atrapada en una daga. A diferencia de otros Darkin que buscan un solo huésped, Naafiri habita una manada de perros del desierto de Shurima, usándolos como extensiones de su voluntad. Es la más bestial de los Darkin, pura sed de caza.',
+    region: 'Shurima',
     abilities: {
       passive: { name: 'Nos Acompañan', description: 'Genera perros que atacan con ella. Más perros = más daño.' },
       q: { name: 'Cuchilla del Perro', description: 'Dispara cuchilla. Recógela para reducir CD.' },
@@ -5182,6 +5397,24 @@ export const championsData: Champion[] = [
       r: { name: 'Llamada de la Cacería', description: 'Gana visión, velocidad, perros máximos. Próximo W tiene más rango.' },
     },
     build: ['Botas de movilidad', 'Eclipse', 'Youmuu', 'Danzarina del Filo', 'Filo del Coleccionista'],
+    builds: [
+      {
+        name: 'Lethality Puro',
+        description: 'Maximiza el burst y el roaming',
+        items: ['Botas de movilidad', 'Eclipse', 'Youmuu', 'Oportunidad', 'Danzarina del Filo'],
+      },
+      {
+        name: 'Bruiser',
+        description: 'Cuando necesitas más sustain',
+        items: ['Botas de rapidez', 'Eclipse', 'Cuchilla negra', 'Calibrador de Sterak', 'Baile de la muerte'],
+      },
+      {
+        name: 'Snowball',
+        description: 'Cuando estás muy adelantada',
+        items: ['Botas de movilidad', 'Youmuu', 'Eclipse', 'Filo del Coleccionista', 'Señor de la muerte'],
+        situational: true,
+      },
+    ],
     runes: {
       primary: 'Cosecha Oscura (Dominación)',
       secondary: 'Triunfo + Leyenda: Tenacidad (Precisión)',
@@ -5193,6 +5426,57 @@ export const championsData: Champion[] = [
       'W + E para entrar a objetivos',
       'Eres asesina AD, mata carries',
     ],
+    matchups: {
+      easy: [
+        {
+          championId: 'veigar',
+          championName: 'Veigar',
+          difficulty: 'Fácil',
+          tip: 'Tu W atraviesa su jaula. Es kill fácil pre-6.',
+        },
+        {
+          championId: 'lux',
+          championName: 'Lux',
+          difficulty: 'Fácil',
+          tip: 'Esquiva su Q y es tuya. Tu movilidad la destruye.',
+        },
+      ],
+      hard: [
+        {
+          championId: 'ahri',
+          championName: 'Ahri',
+          difficulty: 'Difícil',
+          tip: 'Muy móvil y su E te cancela el engage. Respeta su charm.',
+        },
+        {
+          championId: 'vladimir',
+          championName: 'Vladimir',
+          difficulty: 'Difícil',
+          tip: 'Su pool esquiva tu burst y te outsustainea. Roamea.',
+        },
+      ],
+    },
+    combos: [
+      {
+        name: 'Trade Básico',
+        keys: ['W', 'E', 'Q'],
+        description: 'Dash al enemigo, E para daño, Q mientras huyen.',
+        difficulty: 'Básico',
+      },
+      {
+        name: 'All-in',
+        keys: ['R', 'W', 'E', 'Q', 'AA'],
+        description: 'R para buff completo, W engage largo, combo completo.',
+        difficulty: 'Intermedio',
+      },
+      {
+        name: 'Oneshot',
+        keys: ['R', 'W', 'E', 'Ignite', 'Q'],
+        description: 'Engage con R, burst completo con ignite para asegurar.',
+        difficulty: 'Avanzado',
+      },
+    ],
+    summonerSpells: ['Flash', 'Ignite'],
   },
   {
     id: 'nami',
@@ -5510,6 +5794,8 @@ export const championsData: Champion[] = [
     difficulty: 'Fácil',
     damageType: 'AD',
     description: 'Pantheon tiene engage global y daño temprano muy fuerte.',
+    lore: 'Atreus era un simple mortal que fue poseído por el Aspecto de la Guerra, Pantheon. Pero cuando el Aspecto fue destruido por el dios caído Aatrox, la voluntad indomable de Atreus tomó el control del poder celestial. Ahora es un guerrero que desafía a los dioses mismos, demostrando que la voluntad humana puede superar incluso a los seres divinos.',
+    region: 'Targon',
     abilities: {
       passive: { name: 'Voluntad de los Mortales', description: '5 ataques/habilidades potencian próxima habilidad.' },
       q: { name: 'Lanza Cometa', description: 'Tap: apuñala. Hold: lanza lanza. Potenciada: ejecuta.' },
@@ -5518,6 +5804,24 @@ export const championsData: Champion[] = [
       r: { name: 'Gran Cometa Estelar', description: 'Salta al cielo y cae en ubicación lejana.' },
     },
     build: ['Botas de movilidad', 'Eclipse', 'Youmuu', 'Cuchilla negra', 'Danzarina del Filo'],
+    builds: [
+      {
+        name: 'Asesino Lethality',
+        description: 'Maximiza el burst contra carries',
+        items: ['Botas de movilidad', 'Eclipse', 'Youmuu', 'Danzarina del Filo', 'Filo del Coleccionista'],
+      },
+      {
+        name: 'Bruiser',
+        description: 'Equilibrio entre daño y supervivencia',
+        items: ['Botas de rapidez', 'Eclipse', 'Cuchilla negra', 'Calibrador de Sterak', 'Baile de la muerte'],
+      },
+      {
+        name: 'Soporte Agresivo',
+        description: 'Build para rol de soporte',
+        items: ['Botas de movilidad', 'Crepúsculo de Umbral', 'Eclipse', 'Youmuu', 'Cuchilla negra'],
+        situational: true,
+      },
+    ],
     runes: {
       primary: 'Ataque presionante (Precisión)',
       secondary: 'Impacto repentino + Cazador de tesoros (Dominación)',
@@ -5529,6 +5833,57 @@ export const championsData: Champion[] = [
       'E bloquea TODO el daño frontal',
       'Eres muy fuerte temprano',
     ],
+    matchups: {
+      easy: [
+        {
+          championId: 'veigar',
+          championName: 'Veigar',
+          difficulty: 'Fácil',
+          tip: 'Tu W atraviesa su jaula y tu E bloquea su R. Presiona antes del nivel 6.',
+        },
+        {
+          championId: 'lux',
+          championName: 'Lux',
+          difficulty: 'Fácil',
+          tip: 'Tu W es un gap closer garantizado. Esquiva su Q y haz all-in.',
+        },
+      ],
+      hard: [
+        {
+          championId: 'anivia',
+          championName: 'Anivia',
+          difficulty: 'Difícil',
+          tip: 'Su pasiva hace difícil matarla. Su muro bloquea tu engage.',
+        },
+        {
+          championId: 'cassiopeia',
+          championName: 'Cassiopeia',
+          difficulty: 'Difícil',
+          tip: 'Te pokea muy fuerte y su R te stunea si la miras. Juega con tu jungla.',
+        },
+      ],
+    },
+    combos: [
+      {
+        name: 'Trade Básico',
+        keys: ['W', 'AA', 'Q'],
+        description: 'Salta con W, auto ataque y Q tap para daño rápido.',
+        difficulty: 'Básico',
+      },
+      {
+        name: 'All-in Potenciado',
+        keys: ['W', 'AA', 'AA', 'AA', 'Q'],
+        description: 'W potenciado da 3 ataques. Termina con Q potenciada.',
+        difficulty: 'Intermedio',
+      },
+      {
+        name: 'Engage Completo',
+        keys: ['R', 'W', 'AA', 'E', 'Q'],
+        description: 'Aterriza con R, inmediatamente W, bloquea con E y ejecuta con Q.',
+        difficulty: 'Avanzado',
+      },
+    ],
+    summonerSpells: ['Flash', 'Ignite', 'Teleport'],
   },
   {
     id: 'poppy',
@@ -5538,6 +5893,8 @@ export const championsData: Champion[] = [
     difficulty: 'Medio',
     damageType: 'Tanque',
     description: 'Poppy bloquea dashes y manda enemigos volando.',
+    lore: 'Poppy es una yordle guerrera que porta un martillo legendario que perteneció a un héroe demaciano. Ella cree que su misión es encontrar al verdadero heredero del martillo, sin darse cuenta de que el héroe destinado a empuñarlo es ella misma. Vaga por Demacia buscando a este héroe mientras defiende a los inocentes.',
+    region: 'Demacia',
     abilities: {
       passive: { name: 'Presencia de Hierro', description: 'Cada cierto tiempo lanza escudo. Recógelo para escudo.' },
       q: { name: 'Impacto de Martillo', description: 'Golpea frente dos veces. Segunda es más fuerte.' },
@@ -5546,6 +5903,24 @@ export const championsData: Champion[] = [
       r: { name: 'Veredicto del Guardián', description: 'Tap: knockea arriba. Charge: manda volando muy lejos.' },
     },
     build: ['Botas de rapidez', 'Égida de fuego solar', 'Corazón de hielo', 'Guantelete de hielo', 'Armadura de Warmog'],
+    builds: [
+      {
+        name: 'Tanque Estándar',
+        description: 'Build equilibrada para jungla y top',
+        items: ['Botas de rapidez', 'Égida de fuego solar', 'Corazón de hielo', 'Guantelete de hielo', 'Espíritu visionario'],
+      },
+      {
+        name: 'Anti-Movilidad',
+        description: 'Maximiza el control contra equipos con dashes',
+        items: ['Botas de rapidez', 'Égida de fuego solar', 'Guantelete de hielo', 'Piedra de gárgola', 'Capa de fuego solar'],
+      },
+      {
+        name: 'Daño Lethality',
+        description: 'Build de daño sorpresa',
+        items: ['Botas de movilidad', 'Eclipse', 'Youmuu', 'Cuchilla negra', 'Danzarina del Filo'],
+        situational: true,
+      },
+    ],
     runes: {
       primary: 'Garras del Inmortal (Valor)',
       secondary: 'Triunfo + Leyenda: Tenacidad (Precisión)',
@@ -5557,6 +5932,57 @@ export const championsData: Champion[] = [
       'Recoge tu pasiva para escudo',
       'Eres anti-movilidad',
     ],
+    matchups: {
+      easy: [
+        {
+          championId: 'yasuo',
+          championName: 'Yasuo',
+          difficulty: 'Fácil',
+          tip: 'Tu W bloquea todos sus dashes. Es incapaz de pelear contra ti.',
+        },
+        {
+          championId: 'irelia',
+          championName: 'Irelia',
+          difficulty: 'Fácil',
+          tip: 'Depende de dashes y tu W los cancela todos. Counter perfecto.',
+        },
+      ],
+      hard: [
+        {
+          championId: 'darius',
+          championName: 'Darius',
+          difficulty: 'Difícil',
+          tip: 'No dashea, así que tu W es inútil. Te gana en trades largos.',
+        },
+        {
+          championId: 'mordekaiser',
+          championName: 'Mordekaiser',
+          difficulty: 'Difícil',
+          tip: 'Su R te aísla y no puedes escapar. Evita peleas 1v1.',
+        },
+      ],
+    },
+    combos: [
+      {
+        name: 'Trade Básico',
+        keys: ['E', 'Q', 'AA'],
+        description: 'Embiste contra pared, Q mientras está stuneado, auto.',
+        difficulty: 'Básico',
+      },
+      {
+        name: 'Anti-Engage',
+        keys: ['W', 'E', 'R'],
+        description: 'W para bloquear dash, E para stunear, R para alejar.',
+        difficulty: 'Intermedio',
+      },
+      {
+        name: 'Kick de Línea',
+        keys: ['E', 'R', 'Q'],
+        description: 'Embiste hacia tu torre, R para mandarlo lejos, Q para daño.',
+        difficulty: 'Avanzado',
+      },
+    ],
+    summonerSpells: ['Flash', 'Smite', 'Teleport'],
   },
   {
     id: 'pyke',
@@ -5566,6 +5992,8 @@ export const championsData: Champion[] = [
     difficulty: 'Difícil',
     damageType: 'AD',
     description: 'Pyke es soporte asesino que comparte oro de kills.',
+    lore: 'Pyke fue un arponeador en un barco de caza de monstruos marinos de Aguas Estancadas. Fue traicionado por su capitán y abandonado para morir en las fauces de un monstruo abisal. Pero algo en las profundidades le devolvió la vida, y ahora vaga por los muelles de Aguas Estancadas con una lista de nombres que tachar, todos aquellos que lo traicionaron.',
+    region: 'Aguas Estancadas',
     abilities: {
       passive: { name: 'Regalo de los Ahogados', description: 'Convierte vida extra en AD. Se cura en niebla.' },
       q: { name: 'Arpón Óseo', description: 'Tap: apuñala. Hold: engancha y atrae enemigo.' },
@@ -5574,6 +6002,24 @@ export const championsData: Champion[] = [
       r: { name: 'Muerte desde Abajo', description: 'Ejecuta enemigos bajo umbral. Da oro completo a Pyke y al que asistió.' },
     },
     build: ['Botas de movilidad', 'Danzarina del Filo', 'Youmuu', 'Filo del Coleccionista', 'Eclipse'],
+    builds: [
+      {
+        name: 'Lethality Puro',
+        description: 'Maximiza el umbral de ejecución de tu R',
+        items: ['Botas de movilidad', 'Danzarina del Filo', 'Youmuu', 'Eclipse', 'Filo del Coleccionista'],
+      },
+      {
+        name: 'Utilidad',
+        description: 'Con visión para el equipo',
+        items: ['Botas de movilidad', 'Crepúsculo de Umbral', 'Danzarina del Filo', 'Youmuu', 'Eclipse'],
+      },
+      {
+        name: 'Roaming',
+        description: 'Máxima velocidad para presionar el mapa',
+        items: ['Botas de movilidad', 'Youmuu', 'Danzarina del Filo', 'Eclipse', 'Oportunidad'],
+        situational: true,
+      },
+    ],
     runes: {
       primary: 'Cosecha Oscura (Dominación)',
       secondary: 'Presencia de ánimo + Leyenda: Tenacidad (Precisión)',
@@ -5585,6 +6031,57 @@ export const championsData: Champion[] = [
       'Q hold para enganchar',
       'No puedes construir vida',
     ],
+    matchups: {
+      easy: [
+        {
+          championId: 'sona',
+          championName: 'Sona',
+          difficulty: 'Fácil',
+          tip: 'Es muy frágil. Un hook y está muerta. Presiona nivel 2.',
+        },
+        {
+          championId: 'yuumi',
+          championName: 'Yuumi',
+          difficulty: 'Fácil',
+          tip: 'Cuando está fuera del aliado, es kill gratis. Castiga sus posicionamientos.',
+        },
+      ],
+      hard: [
+        {
+          championId: 'nautilus',
+          championName: 'Nautilus',
+          difficulty: 'Difícil',
+          tip: 'Tiene más CC que tú y es más tanque. No tradees 1v1.',
+        },
+        {
+          championId: 'leona',
+          championName: 'Leona',
+          difficulty: 'Difícil',
+          tip: 'Su engage es más fuerte y su tanqueza te supera. Juega a contraengage.',
+        },
+      ],
+    },
+    combos: [
+      {
+        name: 'Hook Básico',
+        keys: ['Q', 'E', 'AA'],
+        description: 'Engancha, dashea a través y golpea mientras huyen.',
+        difficulty: 'Básico',
+      },
+      {
+        name: 'E + Flash',
+        keys: ['E', 'Flash', 'Q', 'R'],
+        description: 'Dashea, flashea para extender el stun, hook y ejecuta.',
+        difficulty: 'Avanzado',
+      },
+      {
+        name: 'Execute Chain',
+        keys: ['R', 'Flash', 'R'],
+        description: 'Ejecuta un enemigo, flashea al siguiente, R de nuevo.',
+        difficulty: 'Avanzado',
+      },
+    ],
+    summonerSpells: ['Flash', 'Ignite'],
   },
   {
     id: 'qiyana',
@@ -5594,6 +6091,8 @@ export const championsData: Champion[] = [
     difficulty: 'Difícil',
     damageType: 'AD',
     description: 'Qiyana usa elementos del terreno para diferentes efectos.',
+    lore: 'Qiyana es la hija menor y más talentosa de la familia real de Ixtal, una nación oculta en la selva. Domina los elementos con una maestría sin igual y cree que merece gobernar no solo Ixtal, sino el mundo entero. Su arrogancia solo es igualada por su habilidad letal con su arma anillada.',
+    region: 'Ixtal',
     abilities: {
       passive: { name: 'Privilegio Real', description: 'Primer ataque/habilidad a cada campeón hace daño extra.' },
       q: { name: 'Filo Elemental', description: 'Dispara elemento. Efecto según elemento activo.' },
@@ -5602,6 +6101,24 @@ export const championsData: Champion[] = [
       r: { name: 'Caída de la Realeza', description: 'Onda que explota al tocar paredes. Stun masivo.' },
     },
     build: ['Botas de movilidad', 'Eclipse', 'Youmuu', 'Danzarina del Filo', 'Filo del Coleccionista'],
+    builds: [
+      {
+        name: 'Lethality Puro',
+        description: 'Maximiza el burst contra carries',
+        items: ['Botas de movilidad', 'Eclipse', 'Youmuu', 'Danzarina del Filo', 'Filo del Coleccionista'],
+      },
+      {
+        name: 'Bruiser',
+        description: 'Cuando necesitas sobrevivir más',
+        items: ['Botas de rapidez', 'Eclipse', 'Cuchilla negra', 'Calibrador de Sterak', 'Baile de la muerte'],
+      },
+      {
+        name: 'Snowball',
+        description: 'Cuando estás muy adelantada',
+        items: ['Botas de movilidad', 'Youmuu', 'Danzarina del Filo', 'Eclipse', 'Señor de la muerte'],
+        situational: true,
+      },
+    ],
     runes: {
       primary: 'Electrocutar (Dominación)',
       secondary: 'Triunfo + Leyenda: Tenacidad (Precisión)',
@@ -5613,6 +6130,57 @@ export const championsData: Champion[] = [
       'Pared = daño extra',
       'R explota en paredes, posiciona bien',
     ],
+    matchups: {
+      easy: [
+        {
+          championId: 'veigar',
+          championName: 'Veigar',
+          difficulty: 'Fácil',
+          tip: 'Muy inmóvil. Tu movilidad lo destruye antes de que escale.',
+        },
+        {
+          championId: 'lux',
+          championName: 'Lux',
+          difficulty: 'Fácil',
+          tip: 'Esquiva su Q y es kill gratis. Tu E atraviesa su combo.',
+        },
+      ],
+      hard: [
+        {
+          championId: 'akali',
+          championName: 'Akali',
+          difficulty: 'Difícil',
+          tip: 'Muy móvil y su shroud la hace difícil de matar. Respeta su nivel 6.',
+        },
+        {
+          championId: 'diana',
+          championName: 'Diana',
+          difficulty: 'Difícil',
+          tip: 'Más tanque que tú y su escudo absorbe tu burst. Juega a pokear.',
+        },
+      ],
+    },
+    combos: [
+      {
+        name: 'Trade Básico',
+        keys: ['W', 'E', 'Q'],
+        description: 'Recoge elemento, dash al enemigo, Q para daño.',
+        difficulty: 'Básico',
+      },
+      {
+        name: 'Full Combo',
+        keys: ['W', 'E', 'Q', 'W', 'Q'],
+        description: 'Elemento, E+Q, recoge nuevo elemento, Q de nuevo.',
+        difficulty: 'Intermedio',
+      },
+      {
+        name: 'Oneshot Completo',
+        keys: ['W', 'E', 'Q', 'R', 'W', 'Q'],
+        description: 'Combo con R incluida contra paredes para stun y kill.',
+        difficulty: 'Avanzado',
+      },
+    ],
+    summonerSpells: ['Flash', 'Ignite'],
   },
   {
     id: 'quinn',
@@ -5650,6 +6218,8 @@ export const championsData: Champion[] = [
     difficulty: 'Medio',
     damageType: 'AP',
     description: 'Rakan es soporte con engage y disengage muy fuertes.',
+    lore: 'Rakan es un vastaya de la tribu Lhotlan, conocido por su vanidad y su carisma irresistible. Es el compañero y amor de Xayah, y juntos luchan por los derechos de los vastaya contra los humanos que destruyen su magia. Aunque parece frívolo, su devoción hacia Xayah y su pueblo es absoluta.',
+    region: 'Ionia',
     abilities: {
       passive: { name: 'Pluma Encantada', description: 'Genera escudo. Xayah puede darle escudo y viceversa.' },
       q: { name: 'Pluma Resonante', description: 'Dispara pluma que cura si impacta campeón.' },
@@ -5658,6 +6228,24 @@ export const championsData: Champion[] = [
       r: { name: 'La Rapidez', description: 'Corre encantando enemigos que toque. Gana velocidad.' },
     },
     build: ['Botas de movilidad', 'Locket de Solari de Hierro', 'Guantelete de hielo', 'Redención', 'Caballero del Voto'],
+    builds: [
+      {
+        name: 'Tanque Soporte',
+        description: 'Build estándar para proteger al equipo',
+        items: ['Botas de movilidad', 'Locket de Solari de Hierro', 'Guantelete de hielo', 'Redención', 'Caballero del Voto'],
+      },
+      {
+        name: 'Encantador',
+        description: 'Maximiza escudos y curación',
+        items: ['Botas de movilidad', 'Bendición del Susurro', 'Incensario Ardiente', 'Redención', 'Báculo de agua de flujo'],
+      },
+      {
+        name: 'AP Engage',
+        description: 'Más daño para lanes dominantes',
+        items: ['Botas de movilidad', 'Cohete Hextech', 'Sombrero mortal de Rabadon', 'Reloj de arena de Zhonya', 'Vacío'],
+        situational: true,
+      },
+    ],
     runes: {
       primary: 'Guardian (Valor)',
       secondary: 'Presencia de ánimo + Leyenda: Tenacidad (Precisión)',
@@ -5669,6 +6257,57 @@ export const championsData: Champion[] = [
       'Con Xayah tienes más rango en E',
       'Eres muy móvil, entra y sal',
     ],
+    matchups: {
+      easy: [
+        {
+          championId: 'sona',
+          championName: 'Sona',
+          difficulty: 'Fácil',
+          tip: 'Tu engage la destruye antes de que pueda reaccionar.',
+        },
+        {
+          championId: 'soraka',
+          championName: 'Soraka',
+          difficulty: 'Fácil',
+          tip: 'Muy frágil. Un W bien colocado y está muerta.',
+        },
+      ],
+      hard: [
+        {
+          championId: 'morgana',
+          championName: 'Morgana',
+          difficulty: 'Difícil',
+          tip: 'Su escudo negro bloquea tu W y R. Espera a que lo use o báitalo.',
+        },
+        {
+          championId: 'alistar',
+          championName: 'Alistar',
+          difficulty: 'Difícil',
+          tip: 'Puede interrumpir tu W con su combo. Ten cuidado con su engage.',
+        },
+      ],
+    },
+    combos: [
+      {
+        name: 'Engage Básico',
+        keys: ['W', 'E'],
+        description: 'W para knockear, E a aliado para salir.',
+        difficulty: 'Básico',
+      },
+      {
+        name: 'Full Engage',
+        keys: ['R', 'Flash', 'W', 'E'],
+        description: 'R para velocidad, Flash W para sorprender, E para salir.',
+        difficulty: 'Intermedio',
+      },
+      {
+        name: 'Xayah Combo',
+        keys: ['E', 'W', 'R', 'E'],
+        description: 'E a Xayah para acercarte, W engage, R encanta, E de vuelta.',
+        difficulty: 'Avanzado',
+      },
+    ],
+    summonerSpells: ['Flash', 'Ignite', 'Exhaust'],
   },
   {
     id: 'rammus',
@@ -5678,6 +6317,8 @@ export const championsData: Champion[] = [
     difficulty: 'Fácil',
     damageType: 'Tanque',
     description: 'Rammus es anti-AD con engage muy rápido.',
+    lore: 'Rammus es una criatura enigmática del desierto de Shurima. Nadie sabe exactamente qué es ni de dónde vino. Algunos lo consideran un semidiós, otros un simple animal. Lo único cierto es que rueda por el desierto a velocidades imposibles y que cuando habla, solo dice una palabra: "Ok".',
+    region: 'Shurima',
     abilities: {
       passive: { name: 'Conchas Filosas', description: 'Ataques básicos hacen daño mágico extra basado en armadura.' },
       q: { name: 'Bola de Poder', description: 'Rueda ganando velocidad. Impactar enemigos los knockea.' },
@@ -5686,6 +6327,24 @@ export const championsData: Champion[] = [
       r: { name: 'Terremoto', description: 'Salta y crea temblores que ralentizan y dañan.' },
     },
     build: ['Botas de rapidez', 'Égida de fuego solar', 'Cota de espinas', 'Corazón de hielo', 'Armadura de Warmog'],
+    builds: [
+      {
+        name: 'Full Armadura',
+        description: 'Contra equipos full AD',
+        items: ['Botas de rapidez', 'Égida de fuego solar', 'Cota de espinas', 'Corazón de hielo', 'Armadura de Randuin'],
+      },
+      {
+        name: 'Equilibrado',
+        description: 'Contra equipos mixtos',
+        items: ['Botas de mercurio', 'Égida de fuego solar', 'Espíritu visionario', 'Cota de espinas', 'Armadura de Warmog'],
+      },
+      {
+        name: 'Daño AP',
+        description: 'Build ofensiva sorpresa',
+        items: ['Botas de hechicero', 'Cinturón cohete Hextech', 'Sombrero mortal de Rabadon', 'Máscara abisal', 'Reloj de arena de Zhonya'],
+        situational: true,
+      },
+    ],
     runes: {
       primary: 'Posvida (Valor)',
       secondary: 'Triunfo + Leyenda: Tenacidad (Precisión)',
@@ -5697,6 +6356,57 @@ export const championsData: Champion[] = [
       'Contra AD eres imbatible',
       'Tu R ralentiza zona grande',
     ],
+    matchups: {
+      easy: [
+        {
+          championId: 'master-yi',
+          championName: 'Maestro Yi',
+          difficulty: 'Fácil',
+          tip: 'Tu E lo taunea y tu W lo destruye. Es literalmente tu counter perfecto.',
+        },
+        {
+          championId: 'tryndamere',
+          championName: 'Tryndamere',
+          difficulty: 'Fácil',
+          tip: 'Depende de autos y tú devuelves todo ese daño. Fácil.',
+        },
+      ],
+      hard: [
+        {
+          championId: 'lillia',
+          championName: 'Lillia',
+          difficulty: 'Difícil',
+          tip: 'Hace daño mágico y te kitea eternamente. Difícil de alcanzar.',
+        },
+        {
+          championId: 'morgana',
+          championName: 'Morgana',
+          difficulty: 'Difícil',
+          tip: 'Su escudo negro bloquea tu taunt. Espera a que lo use.',
+        },
+      ],
+    },
+    combos: [
+      {
+        name: 'Gank Básico',
+        keys: ['Q', 'E', 'W'],
+        description: 'Rueda hacia el enemigo, taunea y activa W para devolver daño.',
+        difficulty: 'Básico',
+      },
+      {
+        name: 'Engage Completo',
+        keys: ['Q', 'R', 'E', 'W'],
+        description: 'Rueda, aterriza con R, taunea y activa W.',
+        difficulty: 'Básico',
+      },
+      {
+        name: 'Flash Taunt',
+        keys: ['Flash', 'E', 'W'],
+        description: 'Flashea encima del carry enemigo y taunea inmediatamente.',
+        difficulty: 'Intermedio',
+      },
+    ],
+    summonerSpells: ['Flash', 'Smite'],
   },
   {
     id: 'reksai',
