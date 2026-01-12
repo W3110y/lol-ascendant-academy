@@ -465,6 +465,8 @@ export const championsData: Champion[] = [
     difficulty: 'Medio',
     damageType: 'AD',
     description: 'Maestro Yi es un campeón de alto daño que se especializa en limpiar la jungla rápido y escalar al late game. Su habilidad W lo hace muy sostenible.',
+    lore: 'Maestro Yi es el último practicante del arte Wuju, un estilo de espada legendario de Ionia. Cuando Noxus invadió su tierra, Yi usó sus habilidades para defender su hogar, pero llegó demasiado tarde para salvar su aldea. Ahora vaga por el mundo, buscando estudiantes dignos para preservar el legado del Wuju.',
+    region: 'Ionia',
     abilities: {
       passive: { name: 'Golpe Doble', description: 'Cada pocos ataques, Maestro Yi golpea dos veces.' },
       q: { name: 'Estilo Alfa', description: 'Se vuelve intocable y ataca a varios enemigos rápidamente.' },
@@ -473,6 +475,24 @@ export const championsData: Champion[] = [
       r: { name: 'Highlander', description: 'Gana velocidad de ataque y movimiento. Las kills resetean las cooldowns.' },
     },
     build: ['Botas de berserker', 'Kraken Slayer', 'Cuchilla de furia de Guinsoo', 'Baile de la muerte', 'Hoja del rey arruinado'],
+    builds: [
+      {
+        name: 'On-Hit Estándar',
+        description: 'Build clásica de velocidad de ataque',
+        items: ['Botas de berserker', 'Kraken Slayer', 'Cuchilla de furia de Guinsoo', 'Hoja del rey arruinado', 'Ingenio maligno'],
+      },
+      {
+        name: 'Crítico',
+        description: 'Oneshots explosivos',
+        items: ['Botas de berserker', 'Kraken Slayer', 'Filo del infinito', 'Baile de la muerte', 'Señor de la muerte'],
+      },
+      {
+        name: 'Bruiser',
+        description: 'Más resistencia para peleas largas',
+        items: ['Botas de berserker', 'Quimiopunka divino', 'Hoja del rey arruinado', 'Calibrador de Sterak', 'Baile de la muerte'],
+        situational: true,
+      },
+    ],
     runes: {
       primary: 'Ataque presionante (Precisión)',
       secondary: 'Cosecha oscura (Dominación)',
@@ -484,6 +504,57 @@ export const championsData: Champion[] = [
       'Farmea la jungla y escala al late game, no necesitas gankar mucho temprano',
       'Las kills y asistencias resetean tus habilidades, persigue enemigos con poca vida',
     ],
+    matchups: {
+      easy: [
+        {
+          championId: 'karthus',
+          championName: 'Karthus',
+          difficulty: 'Fácil',
+          tip: 'Tu Q esquiva su R. Invádelo temprano, es muy débil 1v1.',
+        },
+        {
+          championId: 'amumu',
+          championName: 'Amumu',
+          difficulty: 'Fácil',
+          tip: 'Ganas todos los 1v1. Tu W reduce su daño y luego lo destruyes.',
+        },
+      ],
+      hard: [
+        {
+          championId: 'rammus',
+          championName: 'Rammus',
+          difficulty: 'Difícil',
+          tip: 'Su taunt y armadura te destruyen. Evítalo completamente.',
+        },
+        {
+          championId: 'jax',
+          championName: 'Jax',
+          difficulty: 'Difícil',
+          tip: 'Su E bloquea tus autos. Espera a que lo use antes de pelear.',
+        },
+      ],
+    },
+    combos: [
+      {
+        name: 'Engage Básico',
+        keys: ['R', 'Q', 'E', 'AA'],
+        description: 'Activa R para velocidad, Q para entrar, E y auto-ataques.',
+        difficulty: 'Básico',
+      },
+      {
+        name: 'W Reset',
+        keys: ['Q', 'E', 'AA', 'W', 'AA', 'Q'],
+        description: 'Usa W para resetear el auto-ataque y sobrevivir burst.',
+        difficulty: 'Intermedio',
+      },
+      {
+        name: 'Pentakill Chain',
+        keys: ['R', 'Q', 'E', 'AA', 'Q', 'AA', 'Q'],
+        description: 'Con cada kill tu Q se resetea. Encadena saltos infinitos.',
+        difficulty: 'Avanzado',
+      },
+    ],
+    summonerSpells: ['Flash', 'Smite'],
   },
   {
     id: 'amumu',
@@ -1449,6 +1520,8 @@ export const championsData: Champion[] = [
     difficulty: 'Fácil',
     damageType: 'Tanque',
     description: 'Nautilus es un tanque con mucho control de masas. Su gancho, pasiva y ultimate todos pueden lockear enemigos.',
+    lore: 'Nautilus fue una vez un marinero que fue traicionado por su tripulación y abandonado en las profundidades del océano. Arrastrado hacia las tinieblas por algo misterioso, emergió como una figura colosal de metal y venganza. Ahora vaga por las costas de Aguas Estancadas, buscando a quienes lo abandonaron.',
+    region: 'Aguas Estancadas',
     abilities: {
       passive: { name: 'Golpe demoledor', description: 'El primer ataque básico contra un enemigo lo enraíza.' },
       q: { name: 'Ancla a la deriva', description: 'Lanza un ancla. Si golpea un enemigo, lo atrae. Si golpea terreno, se lanza hacia allí.' },
@@ -1457,6 +1530,24 @@ export const championsData: Champion[] = [
       r: { name: 'Carga abisal', description: 'Dispara una onda que noquea a todos los enemigos en su camino hacia el objetivo y aturde al objetivo.' },
     },
     build: ['Botas de movilidad', 'Medallón férreo solari', 'Armadura de caballero', 'Convergencia de Zeke', 'Corazón de hielo'],
+    builds: [
+      {
+        name: 'Tanque Estándar',
+        description: 'Build de resistencia y utilidad',
+        items: ['Botas de movilidad', 'Locket de Solari de Hierro', 'Caballero del Voto', 'Corazón de hielo', 'Piedra de gárgola'],
+      },
+      {
+        name: 'Engage Pesado',
+        description: 'Máximo CC y supervivencia',
+        items: ['Botas de rapidez', 'Égida de fuego solar', 'Guantelete de hielo', 'Armadura de Warmog', 'Piedra de gárgola'],
+      },
+      {
+        name: 'Soporte Agresivo',
+        description: 'Más daño en lane',
+        items: ['Botas de rapidez', 'Égida de fuego solar', 'Máscara abisal', 'Corazón de hielo', 'Redención'],
+        situational: true,
+      },
+    ],
     runes: {
       primary: 'Reverberación (Brujería)',
       secondary: 'Demoler + Fuente de vida (Valor)',
@@ -1468,6 +1559,57 @@ export const championsData: Champion[] = [
       'Activa W antes de pelear para tener el escudo',
       'Tu E ralentiza en área, úsala para ayudar a tu equipo a perseguir',
     ],
+    matchups: {
+      easy: [
+        {
+          championId: 'yuumi',
+          championName: 'Yuumi',
+          difficulty: 'Fácil',
+          tip: 'No puede escapar de tu engage. Un hook y está muerta.',
+        },
+        {
+          championId: 'sona',
+          championName: 'Sona',
+          difficulty: 'Fácil',
+          tip: 'Muy frágil. Tu combo la mata instantáneamente.',
+        },
+      ],
+      hard: [
+        {
+          championId: 'morgana',
+          championName: 'Morgana',
+          difficulty: 'Difícil',
+          tip: 'Su escudo negro bloquea todo tu CC. Espera a que lo use.',
+        },
+        {
+          championId: 'janna',
+          championName: 'Janna',
+          difficulty: 'Difícil',
+          tip: 'Su Q y R cancelan tus engages. Muy frustrante.',
+        },
+      ],
+    },
+    combos: [
+      {
+        name: 'Engage Básico',
+        keys: ['Q', 'W', 'AA', 'E'],
+        description: 'Hook, escudo, auto para enraizar, E para daño.',
+        difficulty: 'Básico',
+      },
+      {
+        name: 'All-in con R',
+        keys: ['R', 'Q', 'AA', 'E'],
+        description: 'R garantiza el CC, Q mientras están noqueados.',
+        difficulty: 'Intermedio',
+      },
+      {
+        name: 'Flash Hook',
+        keys: ['Flash', 'Q', 'AA', 'R', 'E'],
+        description: 'Flash para extender rango del Q, lockear con todo.',
+        difficulty: 'Avanzado',
+      },
+    ],
+    summonerSpells: ['Flash', 'Ignite', 'Exhaust'],
   },
   {
     id: 'braum',
@@ -1477,6 +1619,8 @@ export const championsData: Champion[] = [
     difficulty: 'Medio',
     damageType: 'Tanque',
     description: 'Braum es un tanque protector que puede bloquear proyectiles con su escudo. Su pasiva permite a todo el equipo aturdirán enemigos.',
+    lore: 'Braum es un héroe legendario del Freljord, famoso por su corazón cálido y su fuerza sobrehumana. Se dice que arrancó una puerta de bóveda de hielo verdadero para salvar a un niño troll atrapado. Ahora vaga por el Freljord ayudando a los necesitados con una sonrisa y su escudo indestructible.',
+    region: 'Freljord',
     abilities: {
       passive: { name: 'Golpes de concusión', description: 'Los ataques de Braum aplican marcas. Después de 4 marcas, el enemigo queda aturdido.' },
       q: { name: 'Mordisco del invierno', description: 'Lanza hielo que daña, ralentiza y aplica una marca de pasiva.' },
@@ -1485,9 +1629,27 @@ export const championsData: Champion[] = [
       r: { name: 'Fisura glacial', description: 'Golpea el suelo creando un campo de hielo que noquea y ralentiza enemigos.' },
     },
     build: ['Botas de movilidad', 'Medallón férreo solari', 'Corazón de hielo', 'Promesa del caballero', 'Armadura de caballero'],
+    builds: [
+      {
+        name: 'Protector',
+        description: 'Máxima protección para tu carry',
+        items: ['Botas de movilidad', 'Locket de Solari de Hierro', 'Caballero del Voto', 'Redención', 'Piedra de gárgola'],
+      },
+      {
+        name: 'Tanque Puro',
+        description: 'Cuando necesitas aguantar mucho daño',
+        items: ['Botas de rapidez', 'Égida de fuego solar', 'Corazón de hielo', 'Armadura de Warmog', 'Piedra de gárgola'],
+      },
+      {
+        name: 'Anti-AP',
+        description: 'Contra equipos con mucho daño mágico',
+        items: ['Botas de mercurio', 'Locket de Solari de Hierro', 'Espíritu visionario', 'Abrazo de Mikael', 'Redención'],
+        situational: true,
+      },
+    ],
     runes: {
-      primary: 'Reverberación (Brujería)',
-      secondary: 'Demoler + Fuente de vida (Valor)',
+      primary: 'Guardian (Valor)',
+      secondary: 'Presencia de ánimo + Leyenda: Tenacidad (Precisión)',
     },
     tips: [
       'Usa E para bloquear habilidades importantes como Ashe R o Lux Q',
@@ -1496,6 +1658,57 @@ export const championsData: Champion[] = [
       'Tu R puede usarse para iniciar peleas o para dividir al equipo enemigo',
       'Posiciónate entre el enemigo y tu ADC para protegerlo',
     ],
+    matchups: {
+      easy: [
+        {
+          championId: 'ashe',
+          championName: 'Ashe',
+          difficulty: 'Fácil',
+          tip: 'Tu E bloquea su R. Protege a tu ADC fácilmente.',
+        },
+        {
+          championId: 'jinx',
+          championName: 'Jinx',
+          difficulty: 'Fácil',
+          tip: 'Bloqueas su W y R con E. Sin movilidad para escapar de tu pasiva.',
+        },
+      ],
+      hard: [
+        {
+          championId: 'vayne',
+          championName: 'Vayne',
+          difficulty: 'Difícil',
+          tip: 'Su daño verdadero ignora tu tankez. No puedes bloquear sus autos.',
+        },
+        {
+          championId: 'zyra',
+          championName: 'Zyra',
+          difficulty: 'Difícil',
+          tip: 'Te pokea desde lejos. Su R te impide proteger a tu ADC.',
+        },
+      ],
+    },
+    combos: [
+      {
+        name: 'Trade Básico',
+        keys: ['Q', 'AA', 'AA', 'AA'],
+        description: 'Q para aplicar marca, autos con tu ADC para stun.',
+        difficulty: 'Básico',
+      },
+      {
+        name: 'Engage con R',
+        keys: ['R', 'Q', 'AA', 'E'],
+        description: 'R para iniciar, Q mientras noqueados, E para proteger.',
+        difficulty: 'Intermedio',
+      },
+      {
+        name: 'Protección Reactiva',
+        keys: ['W', 'E', 'Q'],
+        description: 'W a aliado en peligro, E inmediato, Q para counter.',
+        difficulty: 'Avanzado',
+      },
+    ],
+    summonerSpells: ['Flash', 'Ignite', 'Exhaust'],
   },
   // MÁS CAMPEONES TOP
   {
@@ -1506,6 +1719,8 @@ export const championsData: Champion[] = [
     difficulty: 'Fácil',
     damageType: 'AD',
     description: 'Nasus escala infinitamente con su Q. Cuanto más tiempo dure la partida y más farmee, más fuerte se vuelve.',
+    lore: 'Nasus fue el gran bibliotecario de Shurima, un ser Ascendido con la sabiduría de milenios. Cuando el imperio cayó por la traición de Xerath, Nasus se culpó por no haber actuado antes. Ahora vaga por el desierto, guardando el conocimiento antiguo y buscando una forma de restaurar su tierra.',
+    region: 'Shurima',
     abilities: {
       passive: { name: 'Devorar alma', description: 'Nasus drena vida con cada golpe.' },
       q: { name: 'Golpe aniquilador', description: 'Su próximo ataque hace más daño. Si mata con Q, gana acumulaciones permanentes.' },
@@ -1514,6 +1729,24 @@ export const championsData: Champion[] = [
       r: { name: 'Furia de las Arenas', description: 'Se transforma, ganando vida y dañando enemigos cercanos constantemente.' },
     },
     build: ['Botas de rapidez', 'Fuerza de Trinidad', 'Corazón de hielo', 'Calibrador de Sterak', 'Danza de la muerte'],
+    builds: [
+      {
+        name: 'Bruiser Estándar',
+        description: 'Equilibrio entre daño y resistencia',
+        items: ['Botas de rapidez', 'Fuerza de Trinidad', 'Calibrador de Sterak', 'Espíritu visionario', 'Armadura de Warmog'],
+      },
+      {
+        name: 'Full Tanque',
+        description: 'Máxima resistencia para late game',
+        items: ['Botas de acero', 'Corazón de hielo', 'Espíritu visionario', 'Armadura de Warmog', 'Piedra de gárgola'],
+      },
+      {
+        name: 'Split Push',
+        description: 'Para destruir torres rápidamente',
+        items: ['Botas de rapidez', 'Fuerza de Trinidad', 'Hidra titánica', 'Demoledor', 'Baile de la muerte'],
+        situational: true,
+      },
+    ],
     runes: {
       primary: 'Garras del inmortal (Valor)',
       secondary: 'Triunfo + Leyenda: Tenacidad (Precisión)',
@@ -1525,6 +1758,57 @@ export const championsData: Champion[] = [
       'Usa R cuando necesites tanquear mucho daño o hacer más daño',
       'Con suficiente farmeo, puedes destruir torres en segundos con Q',
     ],
+    matchups: {
+      easy: [
+        {
+          championId: 'kayle',
+          championName: 'Kayle',
+          difficulty: 'Fácil',
+          tip: 'Es débil temprano. Farmea tranquilo, tú escalas mejor.',
+        },
+        {
+          championId: 'malphite',
+          championName: 'Malphite',
+          difficulty: 'Fácil',
+          tip: 'No puede matarte. Farmea sin problemas y escala.',
+        },
+      ],
+      hard: [
+        {
+          championId: 'darius',
+          championName: 'Darius',
+          difficulty: 'Difícil',
+          tip: 'Te domina completamente temprano. Farmea bajo torre.',
+        },
+        {
+          championId: 'vayne',
+          championName: 'Vayne',
+          difficulty: 'Difícil',
+          tip: 'Te kitea infinitamente. Nunca puedes alcanzarla.',
+        },
+      ],
+    },
+    combos: [
+      {
+        name: 'Trade Básico',
+        keys: ['Q', 'W', 'E'],
+        description: 'Q para daño, W para ralentizar si intentan huir.',
+        difficulty: 'Básico',
+      },
+      {
+        name: 'All-in',
+        keys: ['R', 'W', 'E', 'Q', 'AA', 'Q'],
+        description: 'R para potenciarte, W para que no escape, E para reducir armadura.',
+        difficulty: 'Intermedio',
+      },
+      {
+        name: 'Tower Dive',
+        keys: ['R', 'Flash', 'E', 'Q', 'W'],
+        description: 'R te da vida para tanquear torre, Flash para alcanzar.',
+        difficulty: 'Avanzado',
+      },
+    ],
+    summonerSpells: ['Flash', 'Teleport', 'Ghost'],
   },
   {
     id: 'teemo',
@@ -1534,6 +1818,8 @@ export const championsData: Champion[] = [
     difficulty: 'Fácil',
     damageType: 'AP',
     description: 'Teemo es un campeón molesto que ciega enemigos y coloca trampas de hongos por todo el mapa.',
+    lore: 'Teemo es un explorador yordle de Bandle City, conocido por su actitud alegre y su letalidad silenciosa. Aunque parece adorable, es un asesino experto que usa dardos venenosos y trampas mortales. Trabaja solo en las líneas del frente, protegiendo su hogar con una sonrisa.',
+    region: 'Bandle',
     abilities: {
       passive: { name: 'Sigilo de guerrilla', description: 'Si se queda quieto, Teemo se vuelve invisible.' },
       q: { name: 'Dardo cegador', description: 'Dispara un dardo que daña y ciega al enemigo.' },
@@ -1542,6 +1828,24 @@ export const championsData: Champion[] = [
       r: { name: 'Trampa de hongos venenosos', description: 'Coloca hongos invisibles que explotan al pisarlos, envenenando y ralentizando.' },
     },
     build: ['Botas de hechicero', 'Tormento de Liandry', 'Sombrero mortal de Rabadon', 'Máscara abisal', 'Bastón del Vacío'],
+    builds: [
+      {
+        name: 'Burst AP',
+        description: 'Máximo daño con autos y habilidades',
+        items: ['Botas de hechicero', 'Fuego fatuo', 'Sombrero mortal de Rabadon', 'Bastón del Vacío', 'Eco de Luden'],
+      },
+      {
+        name: 'Liandry Poke',
+        description: 'Daño sostenido con hongos',
+        items: ['Botas de hechicero', 'Quemadura de Liandry', 'Sombrero mortal de Rabadon', 'Bastón del Vacío', 'Morellonomicon'],
+      },
+      {
+        name: 'On-Hit',
+        description: 'Build de velocidad de ataque',
+        items: ['Botas de berserker', 'Fuego fatuo', 'Hoja del rey arruinado', 'Cuchilla de furia de Guinsoo', 'Filo de Navori'],
+        situational: true,
+      },
+    ],
     runes: {
       primary: 'Cometa Arcano (Brujería)',
       secondary: 'Sabor a sangre + Cazador definitivo (Dominación)',
@@ -1553,6 +1857,57 @@ export const championsData: Champion[] = [
       'Tu pasiva te hace invisible si no te mueves, úsala para emboscar',
       'Los hongos hacen mucho daño en late game, úsalos estratégicamente',
     ],
+    matchups: {
+      easy: [
+        {
+          championId: 'tryndamere',
+          championName: 'Tryndamere',
+          difficulty: 'Fácil',
+          tip: 'Tu Q lo ciega cuando quiere tradear. Kitealo eternamente.',
+        },
+        {
+          championId: 'nasus',
+          championName: 'Nasus',
+          difficulty: 'Fácil',
+          tip: 'Lo zonas completamente. No puede farmear su Q.',
+        },
+      ],
+      hard: [
+        {
+          championId: 'irelia',
+          championName: 'Irelia',
+          difficulty: 'Difícil',
+          tip: 'Tiene mucha movilidad para alcanzarte. Tu Q no bloquea su daño.',
+        },
+        {
+          championId: 'yorick',
+          championName: 'Yorick',
+          difficulty: 'Difícil',
+          tip: 'Sus ghouls te destruyen y la jaula te atrapa.',
+        },
+      ],
+    },
+    combos: [
+      {
+        name: 'Poke Básico',
+        keys: ['AA', 'AA', 'Q', 'AA'],
+        description: 'Autos envenenados, Q para cegar cuando tradeen.',
+        difficulty: 'Básico',
+      },
+      {
+        name: 'Emboscada',
+        keys: ['Pasiva', 'Q', 'AA', 'W', 'AA'],
+        description: 'Invisible hasta que se acerquen, burst sorpresa.',
+        difficulty: 'Intermedio',
+      },
+      {
+        name: 'Zone Control',
+        keys: ['R', 'R', 'R', 'Q', 'W'],
+        description: 'Prepara hongos, cuando pisen baiteaun Q y huye.',
+        difficulty: 'Avanzado',
+      },
+    ],
+    summonerSpells: ['Flash', 'Ignite', 'Teleport'],
   },
   {
     id: 'cho-gath',
@@ -1562,6 +1917,8 @@ export const championsData: Champion[] = [
     difficulty: 'Fácil',
     damageType: 'AP',
     description: 'Cho\'Gath crece en tamaño y vida cada vez que usa su R. Puede volverse enorme y tankear mucho.',
+    lore: 'Cho\'Gath es una criatura del Vacío con un hambre insaciable de destruir y consumir todo lo que existe. Cada ser que devora lo hace más grande y poderoso. Su objetivo final es consumir todo Runaterra hasta que no quede nada más que el vacío eterno.',
+    region: 'El Vacío',
     abilities: {
       passive: { name: 'Carnivoría', description: 'Mata súbditos o monstruos para recuperar vida y maná.' },
       q: { name: 'Ruptura', description: 'Rompe el suelo, lanzando por los aires y dañando enemigos en un área.' },
@@ -1570,6 +1927,24 @@ export const championsData: Champion[] = [
       r: { name: 'Festín', description: 'Muerde a un enemigo causando daño verdadero. Si mata, gana vida y tamaño permanente.' },
     },
     build: ['Botas de mercurio', 'Égida de fuego solar', 'Armadura de Warmog', 'Corazón de hielo', 'Máscara abisal'],
+    builds: [
+      {
+        name: 'Tanque Puro',
+        description: 'Máxima resistencia y vida',
+        items: ['Botas de mercurio', 'Égida de fuego solar', 'Armadura de Warmog', 'Corazón de hielo', 'Piedra de gárgola'],
+      },
+      {
+        name: 'AP Bruiser',
+        description: 'Daño con algo de resistencia',
+        items: ['Botas de hechicero', 'Quemadura de Liandry', 'Máscara abisal', 'Sombrero mortal de Rabadon', 'Armadura de Warmog'],
+      },
+      {
+        name: 'Full AP',
+        description: 'Para oneshot con R',
+        items: ['Botas de hechicero', 'Eco de Luden', 'Sombrero mortal de Rabadon', 'Bastón del Vacío', 'Reloj de arena de Zhonya'],
+        situational: true,
+      },
+    ],
     runes: {
       primary: 'Garras del inmortal (Valor)',
       secondary: 'Banda de maná + Trascendencia (Brujería)',
@@ -1581,6 +1956,57 @@ export const championsData: Champion[] = [
       'Cuanto más grande seas, más vida tienes y más tanque eres',
       'Tu R hace daño verdadero, perfecta para ejecutar enemigos',
     ],
+    matchups: {
+      easy: [
+        {
+          championId: 'nasus',
+          championName: 'Nasus',
+          difficulty: 'Fácil',
+          tip: 'Tu Q interrumpe su farmeo. Tu R lo ejecuta aunque tenga R.',
+        },
+        {
+          championId: 'garen',
+          championName: 'Garen',
+          difficulty: 'Fácil',
+          tip: 'Tu silencio cancela su Q. Ganas trades con E + autos.',
+        },
+      ],
+      hard: [
+        {
+          championId: 'vayne',
+          championName: 'Vayne',
+          difficulty: 'Difícil',
+          tip: 'Su daño verdadero escala con tu vida. Evítala.',
+        },
+        {
+          championId: 'fiora',
+          championName: 'Fiora',
+          difficulty: 'Difícil',
+          tip: 'Parry tu Q o R es devastador. No seas predecible.',
+        },
+      ],
+    },
+    combos: [
+      {
+        name: 'Trade Básico',
+        keys: ['E', 'AA', 'AA', 'W'],
+        description: 'E para rango extra, autos, W para silenciar respuesta.',
+        difficulty: 'Básico',
+      },
+      {
+        name: 'All-in',
+        keys: ['Q', 'W', 'E', 'AA', 'R'],
+        description: 'Q para CC, W silencio, E daño, R para ejecutar.',
+        difficulty: 'Intermedio',
+      },
+      {
+        name: 'Flash Feast',
+        keys: ['Flash', 'R'],
+        description: 'Flash para alcanzar enemigos y ejecutar con R.',
+        difficulty: 'Avanzado',
+      },
+    ],
+    summonerSpells: ['Flash', 'Teleport', 'Ignite'],
   },
   {
     id: 'sett',
@@ -1590,6 +2016,8 @@ export const championsData: Champion[] = [
     difficulty: 'Medio',
     damageType: 'AD',
     description: 'Sett es un luchador brutal que absorbe daño con su W y puede lanzar enemigos con su R.',
+    lore: 'Sett es un híbrido vastaya que creció en los suburbios de Ionia. Abandonado por su padre noxiano, canalizó su rabia en las arenas de pelea clandestinas hasta convertirse en el jefe de todas ellas. Ahora dirige su propio imperio de peleas, buscando eventualmente encontrar al padre que lo abandonó.',
+    region: 'Ionia',
     abilities: {
       passive: { name: 'Embestida', description: 'Sus ataques alternan golpes, con la mano derecha haciendo daño adicional.' },
       q: { name: 'Puñetazo engañoso', description: 'Sus próximos dos ataques son más rápidos y gana velocidad de movimiento.' },
@@ -1598,6 +2026,24 @@ export const championsData: Champion[] = [
       r: { name: 'La Exhibición', description: 'Agarra a un enemigo y lo lanza, dañando donde aterriza.' },
     },
     build: ['Botas de rapidez', 'Cuchilla negra', 'Calibrador de Sterak', 'Hidra titánica', 'Baile de la muerte'],
+    builds: [
+      {
+        name: 'Bruiser Estándar',
+        description: 'Equilibrio entre daño y resistencia',
+        items: ['Botas de rapidez', 'Fuerza de Trinidad', 'Calibrador de Sterak', 'Hidra titánica', 'Baile de la muerte'],
+      },
+      {
+        name: 'Full Tanque',
+        description: 'Cuando necesitas frontliner puro',
+        items: ['Botas de acero', 'Égida de fuego solar', 'Calibrador de Sterak', 'Armadura de Warmog', 'Piedra de gárgola'],
+      },
+      {
+        name: 'Lethality',
+        description: 'Oneshot con W',
+        items: ['Botas de movilidad', 'Eclipse', 'Youmuu', 'Filo del Coleccionista', 'Señor de la muerte'],
+        situational: true,
+      },
+    ],
     runes: {
       primary: 'Conquistador (Precisión)',
       secondary: 'Demoler + Revestimiento de huesos (Valor)',
@@ -1609,6 +2055,57 @@ export const championsData: Champion[] = [
       'Tu pasiva hace que cada segundo ataque sea más fuerte, aprovéchala',
       'Eres muy fuerte en peleas prolongadas gracias a tu regeneración',
     ],
+    matchups: {
+      easy: [
+        {
+          championId: 'ornn',
+          championName: 'Ornn',
+          difficulty: 'Fácil',
+          tip: 'Lo dominas en trades. Tu W lo destruye.',
+        },
+        {
+          championId: 'malphite',
+          championName: 'Malphite',
+          difficulty: 'Fácil',
+          tip: 'No tiene daño suficiente para matarte. Lo atropellas.',
+        },
+      ],
+      hard: [
+        {
+          championId: 'vayne',
+          championName: 'Vayne',
+          difficulty: 'Difícil',
+          tip: 'Te kitea eternamente. Su daño verdadero ignora tu W.',
+        },
+        {
+          championId: 'quinn',
+          championName: 'Quinn',
+          difficulty: 'Difícil',
+          tip: 'Te pokea sin parar. Su E cancela tu engage.',
+        },
+      ],
+    },
+    combos: [
+      {
+        name: 'Trade Básico',
+        keys: ['E', 'AA', 'Q', 'AA', 'AA'],
+        description: 'E para atraer, autos rápidos con Q.',
+        difficulty: 'Básico',
+      },
+      {
+        name: 'W Max Daño',
+        keys: ['E', 'AA', 'Q', 'AA', 'W'],
+        description: 'Acumula grit con autos, W cuando esté lleno.',
+        difficulty: 'Intermedio',
+      },
+      {
+        name: 'R Teamfight',
+        keys: ['Flash', 'R', 'E', 'W'],
+        description: 'Flash R al tanque enemigo, lánzalo a su equipo.',
+        difficulty: 'Avanzado',
+      },
+    ],
+    summonerSpells: ['Flash', 'Teleport', 'Ignite'],
   },
   {
     id: 'mordekaiser',
