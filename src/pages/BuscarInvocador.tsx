@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Search, User, Trophy, Star, Shield, Loader2 } from "lucide-react";
+import { Search, User, Trophy, Star, Shield, Loader2, Clock, Swords, CheckCircle, XCircle } from "lucide-react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import Breadcrumbs from "@/components/Breadcrumbs";
@@ -44,6 +44,33 @@ const TIER_COLORS: Record<string, string> = {
   'CHALLENGER': 'bg-amber-400',
 };
 
+const GAME_MODE_NAMES: Record<string, string> = {
+  'CLASSIC': 'Clásica',
+  'ARAM': 'ARAM',
+  'URF': 'URF',
+  'ONEFORALL': 'Uno para todos',
+  'NEXUSBLITZ': 'Nexus Blitz',
+  'ULTBOOK': 'Libro de hechizos',
+  'CHERRY': 'Arena',
+};
+
+interface MatchData {
+  matchId: string;
+  gameMode: string;
+  gameDuration: number;
+  gameEndTimestamp: number;
+  championId: number;
+  championName: string;
+  kills: number;
+  deaths: number;
+  assists: number;
+  win: boolean;
+  cs: number;
+  visionScore: number;
+  role: string;
+  items: number[];
+}
+
 interface SummonerData {
   account: {
     gameName: string;
@@ -66,6 +93,7 @@ interface SummonerData {
     championLevel: number;
     championPoints: number;
   }>;
+  matchHistory: MatchData[];
   region: string;
   regionName: string;
 }
@@ -82,21 +110,26 @@ const BuscarInvocador = () => {
   const { getProfileIcon } = useDDragonUrls();
   const { champions: championsData } = useChampions('es_MX');
 
-  const getChampionName = (championId: number): string => {
+  const getChampionName = (championId: number | string): string => {
     if (!championsData) return `Campeón ${championId}`;
     const champion = Object.values(championsData).find(
-      (c: any) => parseInt(c.key) === championId
+      (c: any) => parseInt(c.key) === Number(championId)
     );
     return champion ? (champion as any).name : `Campeón ${championId}`;
   };
 
-  const getChampionSquare = (championId: number): string | null => {
+  const getChampionSquare = (championId: number | string): string | null => {
     if (!championsData || !version) return null;
     const champion = Object.values(championsData).find(
-      (c: any) => parseInt(c.key) === championId
+      (c: any) => parseInt(c.key) === Number(championId)
     );
     if (!champion) return null;
     return `https://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${(champion as any).id}.png`;
+  };
+
+  const getChampionSquareByName = (championName: string): string | null => {
+    if (!version) return null;
+    return `https://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${championName}.png`;
   };
 
   const handleSearch = async (e: React.FormEvent) => {
@@ -141,6 +174,28 @@ const BuscarInvocador = () => {
     const total = wins + losses;
     if (total === 0) return '0%';
     return `${((wins / total) * 100).toFixed(1)}%`;
+  };
+
+  const formatDuration = (seconds: number): string => {
+    const mins = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    return `${mins}:${secs.toString().padStart(2, '0')}`;
+  };
+
+  const formatTimeAgo = (timestamp: number): string => {
+    const now = Date.now();
+    const diff = now - timestamp;
+    const hours = Math.floor(diff / (1000 * 60 * 60));
+    const days = Math.floor(hours / 24);
+    
+    if (days > 0) return `hace ${days}d`;
+    if (hours > 0) return `hace ${hours}h`;
+    return 'hace poco';
+  };
+
+  const calculateKDA = (kills: number, deaths: number, assists: number): string => {
+    if (deaths === 0) return 'Perfect';
+    return ((kills + assists) / deaths).toFixed(2);
   };
 
   return (
@@ -339,6 +394,105 @@ const BuscarInvocador = () => {
                             <p className="text-xs text-muted-foreground">
                               {formatNumber(m.championPoints)} pts
                             </p>
+                          </div>
+                        ))}
+                      </div>
+                    </CardContent>
+                  </Card>
+                )}
+
+                {/* Match History */}
+                {summonerData.matchHistory && summonerData.matchHistory.length > 0 && (
+                  <Card>
+                    <CardHeader>
+                      <CardTitle className="flex items-center gap-2">
+                        <Swords className="w-5 h-5 text-primary" />
+                        Partidas Recientes
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="space-y-3">
+                        {summonerData.matchHistory.map((match) => (
+                          <div 
+                            key={match.matchId}
+                            className={`p-4 rounded-lg border ${
+                              match.win 
+                                ? 'bg-green-500/10 border-green-500/30' 
+                                : 'bg-red-500/10 border-red-500/30'
+                            }`}
+                          >
+                            <div className="flex flex-col md:flex-row md:items-center gap-4">
+                              {/* Champion & Result */}
+                              <div className="flex items-center gap-3">
+                                <div className="relative">
+                                  {getChampionSquareByName(match.championName) ? (
+                                    <img
+                                      src={getChampionSquareByName(match.championName)!}
+                                      alt={match.championName}
+                                      className="w-12 h-12 rounded-lg"
+                                    />
+                                  ) : (
+                                    <div className="w-12 h-12 rounded-lg bg-muted flex items-center justify-center">
+                                      <User className="w-6 h-6 text-muted-foreground" />
+                                    </div>
+                                  )}
+                                </div>
+                                <div>
+                                  <p className="font-medium">{match.championName}</p>
+                                  <div className="flex items-center gap-2 text-sm">
+                                    {match.win ? (
+                                      <span className="text-green-500 flex items-center gap-1">
+                                        <CheckCircle className="w-3 h-3" />
+                                        Victoria
+                                      </span>
+                                    ) : (
+                                      <span className="text-red-500 flex items-center gap-1">
+                                        <XCircle className="w-3 h-3" />
+                                        Derrota
+                                      </span>
+                                    )}
+                                  </div>
+                                </div>
+                              </div>
+
+                              {/* KDA */}
+                              <div className="flex-1">
+                                <div className="text-lg font-bold">
+                                  <span className="text-foreground">{match.kills}</span>
+                                  <span className="text-muted-foreground"> / </span>
+                                  <span className="text-red-400">{match.deaths}</span>
+                                  <span className="text-muted-foreground"> / </span>
+                                  <span className="text-foreground">{match.assists}</span>
+                                </div>
+                                <p className="text-sm text-muted-foreground">
+                                  {calculateKDA(match.kills, match.deaths, match.assists)} KDA
+                                </p>
+                              </div>
+
+                              {/* Stats */}
+                              <div className="flex items-center gap-4 text-sm text-muted-foreground">
+                                <div className="text-center">
+                                  <p className="font-medium text-foreground">{match.cs}</p>
+                                  <p className="text-xs">CS</p>
+                                </div>
+                                <div className="text-center">
+                                  <p className="font-medium text-foreground">{match.visionScore}</p>
+                                  <p className="text-xs">Visión</p>
+                                </div>
+                              </div>
+
+                              {/* Game Info */}
+                              <div className="text-right text-sm text-muted-foreground">
+                                <p className="flex items-center justify-end gap-1">
+                                  <Clock className="w-3 h-3" />
+                                  {formatDuration(match.gameDuration)}
+                                </p>
+                                <p>{formatTimeAgo(match.gameEndTimestamp)}</p>
+                                <Badge variant="outline" className="mt-1">
+                                  {GAME_MODE_NAMES[match.gameMode] || match.gameMode}
+                                </Badge>
+                              </div>
+                            </div>
                           </div>
                         ))}
                       </div>
