@@ -1,1 +1,4 @@
 project_id = "nhesjpkvrpwmzodgdpns"
+
+[functions.riot-summoner]
+verify_jwt = false
