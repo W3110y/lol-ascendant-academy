@@ -27,6 +27,8 @@ const Breadcrumbs = () => {
     fases: "Fases de la Partida",
     teamfights: "Peleas de Equipo",
     blog: "Blog",
+    herramientas: "Herramientas",
+    "buscar-invocador": "Buscar Invocador",
   };
 
   if (pathnames.length === 0) return null;

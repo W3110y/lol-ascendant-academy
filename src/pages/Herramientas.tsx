@@ -17,7 +17,8 @@ import {
   ChevronRight,
   Star,
   Zap,
-  Users
+  Users,
+  Search
 } from "lucide-react";
 
 const tools = [
@@ -60,6 +61,14 @@ const tools = [
     link: "/herramientas/rutas-jungla",
     gradient: "from-red-500 to-rose-500",
     badge: null
+  },
+  {
+    title: "Buscar Invocador",
+    description: "Busca el perfil de cualquier jugador y descubre sus estadísticas, rango y campeones favoritos.",
+    icon: Search,
+    link: "/herramientas/buscar-invocador",
+    gradient: "from-cyan-500 to-blue-500",
+    badge: "Nuevo"
   },
   {
     title: "Quiz de Campeones",
@@ -135,7 +144,7 @@ const Herramientas = () => {
               {/* Stats */}
               <div className="flex flex-wrap justify-center gap-8 mb-10">
                 <div className="text-center">
-                  <div className="text-3xl font-bold text-primary">6</div>
+                  <div className="text-3xl font-bold text-primary">7</div>
                   <div className="text-sm text-muted-foreground">Herramientas</div>
                 </div>
                 <div className="text-center">
