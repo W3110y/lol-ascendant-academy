@@ -169,6 +169,73 @@ serve(async (req) => {
       console.log('Mastery entries:', masteryData.length);
     }
 
+    // Step 5: Get match history (last 10 matches)
+    const matchIdsUrl = `https://${routingRegion}.api.riotgames.com/lol/match/v5/matches/by-puuid/${accountData.puuid}/ids?start=0&count=10`;
+    console.log(`Fetching match IDs from: ${matchIdsUrl}`);
+    
+    const matchIdsResponse = await fetch(matchIdsUrl, {
+      headers: { 'X-Riot-Token': RIOT_API_KEY }
+    });
+
+    let matchHistory: any[] = [];
+    if (matchIdsResponse.ok) {
+      const matchIds = await matchIdsResponse.json();
+      console.log('Match IDs found:', matchIds.length);
+      
+      // Fetch details for each match (limit to 5 to avoid rate limits)
+      const matchDetailsPromises = matchIds.slice(0, 5).map(async (matchId: string) => {
+        try {
+          const matchUrl = `https://${routingRegion}.api.riotgames.com/lol/match/v5/matches/${matchId}`;
+          const matchResponse = await fetch(matchUrl, {
+            headers: { 'X-Riot-Token': RIOT_API_KEY }
+          });
+          
+          if (matchResponse.ok) {
+            const matchData = await matchResponse.json();
+            // Find the player's data in the match
+            const playerData = matchData.info.participants.find(
+              (p: any) => p.puuid === accountData.puuid
+            );
+            
+            if (playerData) {
+              return {
+                matchId: matchId,
+                gameMode: matchData.info.gameMode,
+                gameDuration: matchData.info.gameDuration,
+                gameEndTimestamp: matchData.info.gameEndTimestamp,
+                championId: playerData.championId,
+                championName: playerData.championName,
+                kills: playerData.kills,
+                deaths: playerData.deaths,
+                assists: playerData.assists,
+                win: playerData.win,
+                cs: playerData.totalMinionsKilled + playerData.neutralMinionsKilled,
+                visionScore: playerData.visionScore,
+                role: playerData.teamPosition || playerData.role,
+                items: [
+                  playerData.item0,
+                  playerData.item1,
+                  playerData.item2,
+                  playerData.item3,
+                  playerData.item4,
+                  playerData.item5,
+                  playerData.item6,
+                ].filter((item: number) => item > 0),
+              };
+            }
+          }
+          return null;
+        } catch (e) {
+          console.error(`Error fetching match ${matchId}:`, e);
+          return null;
+        }
+      });
+      
+      const matchResults = await Promise.all(matchDetailsPromises);
+      matchHistory = matchResults.filter((m) => m !== null);
+      console.log('Match details fetched:', matchHistory.length);
+    }
+
     // Return combined data (positive experience focus - no shaming metrics)
     const result = {
       account: {
@@ -192,6 +259,7 @@ serve(async (req) => {
         championLevel: m.championLevel,
         championPoints: m.championPoints,
       })),
+      matchHistory: matchHistory,
       region: region,
       regionName: REGION_NAMES[region] || region,
     };
